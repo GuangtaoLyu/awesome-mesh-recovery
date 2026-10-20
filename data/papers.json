@@ -1702,6 +1702,22 @@
    "source": "crossref",
    "category": "Full-Body Human Mesh Recovery",
    "added": "2026-10-20"
+  },
+  {
+   "title": "EgoRayFormer: Ray-Space Stereo Refinement for Egocentric 3D Human Pose Estimation",
+   "authors": [
+    "Haozhe Wang",
+    "Songyuan Wu",
+    "Jihai Xu",
+    "Jie Zhao"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "http://arxiv.org/abs/2610.26641v1",
+   "arxiv_id": "2610.26641",
+   "source": "arxiv",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
   }
  ]
 }
