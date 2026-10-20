@@ -1,0 +1,40 @@
+name: arXiv Scan
+
+# Lightweight discovery for small awesome-lists.
+# Runs monthly + on manual dispatch. Queries arXiv for recent papers on the
+# topic, skips ones already listed in README.md, and opens an Issue listing the
+# new candidates for the maintainer to review & add (the curated README stays
+# the source of truth — no auto-edits, no JSON pipeline, no site deploy).
+#
+# Per-repo setup: copy this whole .github/ folder into the target repo, then
+# change the QUERY value below to that repo's topic. Nothing else to edit.
+on:
+  schedule:
+    - cron: "0 9 1 * *"      # monthly, 09:00 UTC (= 17:00 Beijing)
+  workflow_dispatch:        # allows a manual run from the Actions tab
+
+permissions:
+  issues: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # ---- EDIT THIS LINE PER REPO ----
+      # Use | to combine several related topics (arXiv OR).
+      # e.g. style-transfer -> "motion style transfer"
+      #      motion-prediction -> "human motion prediction"
+      #      text-motion-retrieval -> "text motion retrieval"|"motion grounding"|"text-to-motion retrieval"
+      - name: Scan arXiv & open issue with new candidates
+        env:
+          QUERY: "human mesh recovery"|"3D human mesh recovery"|"human pose and shape estimation"|"monocular human mesh recovery"
+          WINDOW_DAYS: "45"     # only papers published in the last N days
+          MAX_RESULTS: "100"
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python .github/scripts/arxiv_scan.py
