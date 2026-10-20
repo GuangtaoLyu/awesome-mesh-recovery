@@ -5,7 +5,54 @@ Groups papers by category (in the taxonomy's order), numbers them within each
 category (so adding a paper never forces a global renumber), and sorts by year
 desc then title. This is the auto-reorganized view the user asked for.
 """
+import re
 import datetime
+
+# Long container-title (as returned by Crossref) -> short acronym.
+_VENUE_ACR = [
+    ("computer vision and pattern recognition", "CVPR"),
+    ("international conference on computer vision", "ICCV"),
+    ("european conference on computer vision", "ECCV"),
+    ("neural information processing systems", "NeurIPS"),
+    ("international conference on learning representations", "ICLR"),
+    ("international conference on machine learning", "ICML"),
+    ("association for the advancement of artificial intelligence", "AAAI"),
+    ("acm multimedia", "ACM MM"),
+    ("international conference on image processing", "ICIP"),
+    ("applications of computer vision", "WACV"),
+    ("3d vision", "3DV"),
+    ("virtual reality", "ICVR"),
+    ("robotics and automation", "ICRA"),
+    ("intelligent robots and systems", "IROS"),
+    ("siggraph", "SIGGRAPH"),
+    ("pattern analysis and machine intelligence", "TPAMI"),
+    ("audio, speech", "ICASSP"),
+    ("multimedia", "ACM MM"),
+    ("graphics", "Eurographics"),
+]
+
+
+def _short_venue(v):
+    """Turn a verbose container-title into a compact label.
+
+    Crossref returns things like "2026 IEEE/CVF Conference on Computer Vision
+    and Pattern Recognition- FINDINGS Track (CVPRF)"; we want "CVPRF".
+    """
+    if not v:
+        return ""
+    s = " ".join(str(v).split())
+    # Drop a leading / trailing bare year so it is not shown twice.
+    s = re.sub(r"^(19|20)\d{2}\s+", "", s)
+    s = re.sub(r"\s+(19|20)\d{2}$", "", s)
+    # Prefer a trailing parenthesized acronym, e.g. "... (ICRAS)" -> ICRAS.
+    m = re.search(r"\(([A-Z][A-Za-z0-9\-]{1,14})\)\s*$", s)
+    if m:
+        return m.group(1)
+    low = s.lower()
+    for kw, acr in _VENUE_ACR:
+        if kw in low:
+            return acr
+    return s if len(s) <= 30 else s[:28].rstrip() + "..."
 
 
 def _anchor(cat):
@@ -20,15 +67,28 @@ def format_entry(idx, p):
         auth = f"{first} et al." if len(authors) > 1 else authors[0]
     else:
         auth = ""
+    raw_venue = p.get("venue") or ""
+    venue = _short_venue(raw_venue)
+    year = p.get("year")
     link = ""
     if p.get("arxiv_id"):
         link = f"[arXiv](https://arxiv.org/abs/{p['arxiv_id']})"
     elif p.get("url"):
-        label = p.get("venue") or "Paper"
+        label = venue or "Paper"
         link = f"[{label}]({p['url']})"
     parts = [f"{idx}. **{title}**"]
     if auth:
         parts.append(f", {auth}")
+    # Venue + year. arXiv preprints have no real venue, so show the year only.
+    # _short_venue() strips a year embedded in the container-title, so it is
+    # never printed twice.
+    if "arxiv" in raw_venue.lower():
+        # "arXiv" / "arXiv.org" / "arXiv preprint" -> no real venue, year only.
+        meta = str(year) if year else ""
+    else:
+        meta = " ".join(str(x) for x in [venue, year] if x)
+    if meta:
+        parts.append(f", {meta}")
     if link:
         parts.append(f", {link}")
     return "".join(parts)
