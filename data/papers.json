@@ -1,0 +1,160 @@
+{
+ "papers": [
+  {
+   "title": "SAM 3D Body: Robust Full-Body Human Mesh Recovery",
+   "authors": [
+    "Yang"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2602.15989",
+   "arxiv_id": "2602.15989",
+   "source": "seed",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "RAM: Recover Any 3D Human Motion in-the-Wild",
+   "authors": [
+    "Jia"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2603.19929",
+   "arxiv_id": "2603.19929",
+   "source": "seed",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Masked Modeling for Human Motion Recovery Under Occlusions",
+   "authors": [
+    "Qian"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2601.16079",
+   "arxiv_id": "2601.16079",
+   "source": "seed",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Fast SAM 3D Body: Accelerating SAM 3D Body for Real-Time Full-Body Human Mesh Recovery",
+   "authors": [
+    "Yang"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2603.15603",
+   "arxiv_id": "2603.15603",
+   "source": "seed",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "VQ-HPS: Human Pose and Shape Estimation in a Vector-Quantized Latent Space",
+   "authors": [
+    "Fiche"
+   ],
+   "year": 2025,
+   "venue": "Springer",
+   "url": "https://link.springer.com/10.1007/978-3-031-72943-0_27",
+   "arxiv_id": null,
+   "source": "seed",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "VOccl3D: A Video Benchmark Dataset for 3D Human Pose and Shape Estimation under real Occlusions",
+   "authors": [
+    "Garg"
+   ],
+   "year": 2025,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2508.06757",
+   "arxiv_id": "2508.06757",
+   "source": "seed",
+   "category": "Datasets & Benchmarks",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "PromptHMR: Promptable Human Mesh Recovery",
+   "authors": [
+    "Wang"
+   ],
+   "year": 2025,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2504.06397",
+   "arxiv_id": "2504.06397",
+   "source": "seed",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "OpenMoCap: Rethinking Optical Motion Capture under Real-world Occlusion",
+   "authors": [
+    "Qian"
+   ],
+   "year": 2025,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2508.12610",
+   "arxiv_id": "2508.12610",
+   "source": "seed",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "MEGA: Masked Generative Autoencoder for Human Mesh Recovery",
+   "authors": [
+    "Fiche"
+   ],
+   "year": 2025,
+   "venue": "CVPR",
+   "url": "https://openaccess.thecvf.com/content/CVPR2025/papers/Fiche_MEGA_Masked_Generative_Autoencoder_for_Human_Mesh_Recovery_CVPR_2025_paper.pdf",
+   "arxiv_id": null,
+   "source": "seed",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "LieHMR: Autoregressive Human Mesh Recovery with $SO(3)$ Diffusion",
+   "authors": [
+    "Kim"
+   ],
+   "year": 2025,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2509.25739",
+   "arxiv_id": "2509.25739",
+   "source": "seed",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "KASportsFormer: Kinematic Anatomy Enhanced Transformer for 3D Human Pose Estimation on Short Sports Scene Video",
+   "authors": [
+    "Yin"
+   ],
+   "year": 2025,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2507.20763",
+   "arxiv_id": "2507.20763",
+   "source": "seed",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "TokenHMR: Advancing Human Mesh Recovery with a Tokenized Pose Representation",
+   "authors": [
+    "Dwivedi"
+   ],
+   "year": 2024,
+   "venue": "IEEE",
+   "url": "https://ieeexplore.ieee.org/document/10655502/",
+   "arxiv_id": null,
+   "source": "seed",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  }
+ ]
+}

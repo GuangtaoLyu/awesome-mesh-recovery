@@ -1,0 +1,45 @@
+{
+  "display_name": "Awesome Mesh Recovery",
+  "description": "A curated, auto-updated list of 3D human mesh recovery / pose-and-shape estimation papers.",
+  "year_from": 2015,
+  "must_include": [
+    "mesh recovery",
+    "human mesh",
+    "pose and shape",
+    "human shape",
+    "body mesh",
+    "3d human"
+  ],
+  "queries": {
+    "arxiv": [
+      "human mesh recovery",
+      "3D human mesh recovery",
+      "human pose and shape estimation",
+      "monocular human mesh recovery"
+    ],
+    "dblp": [
+      "human mesh recovery",
+      "3D human mesh recovery",
+      "human pose and shape estimation"
+    ],
+    "s2": [
+      "human mesh recovery",
+      "human pose and shape estimation",
+      "3D human shape estimation"
+    ],
+    "crossref": [
+      "human mesh recovery",
+      "human pose and shape estimation",
+      "3D human mesh"
+    ]
+  },
+  "taxonomy": [
+    "Full-Body Human Mesh Recovery",
+    "Occlusion & In-the-Wild Recovery",
+    "Hand, Face & Expressive Mesh",
+    "Motion & Temporal Recovery",
+    "Datasets & Benchmarks",
+    "Surveys"
+  ],
+  "default_category": "Full-Body Human Mesh Recovery"
+}
