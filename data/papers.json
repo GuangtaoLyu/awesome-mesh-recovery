@@ -112,7 +112,7 @@
    "year": 2025,
    "venue": "CVPR",
    "url": "https://openaccess.thecvf.com/content/CVPR2025/papers/Fiche_MEGA_Masked_Generative_Autoencoder_for_Human_Mesh_Recovery_CVPR_2025_paper.pdf",
-   "arxiv_id": null,
+   "arxiv_id": "2405.18839",
    "source": "seed",
    "category": "Full-Body Human Mesh Recovery",
    "added": "2026-10-20"
@@ -151,8 +151,1555 @@
    "year": 2024,
    "venue": "IEEE",
    "url": "https://ieeexplore.ieee.org/document/10655502/",
-   "arxiv_id": null,
+   "arxiv_id": "2404.16752",
    "source": "seed",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Multi-HMR: Multi-Person Whole-Body Human Mesh Recovery in a Single Shot",
+   "authors": [
+    "Fabien Baradel",
+    "M. Armando",
+    "Salma Galaaoui",
+    "Romain Br'egier",
+    "Philippe Weinzaepfel",
+    "Grégory Rogez",
+    "Thomas Lucas"
+   ],
+   "year": 2024,
+   "venue": "European Conference on Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/4b7074f542f829a586267e160dcb8b3421b4abe5",
+   "arxiv_id": "2402.14654",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Cross-Attention of Disentangled Modalities for 3D Human Mesh Recovery with Transformers",
+   "authors": [
+    "Junhyeong Cho",
+    "Youwang Kim",
+    "Tae-Hyun Oh"
+   ],
+   "year": 2022,
+   "venue": "European Conference on Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/d81052a7f94b6e732ff482eb145ca32de57e638f",
+   "arxiv_id": "2207.13820",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "GLAMR: Global Occlusion-Aware Human Mesh Recovery with Dynamic Cameras",
+   "authors": [
+    "Ye Yuan",
+    "Umar Iqbal",
+    "Pavlo Molchanov",
+    "Kris Kitani",
+    "Jan Kautz"
+   ],
+   "year": 2021,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/535b38b41e726b4f3d0d3d60411f72c8f52fd594",
+   "arxiv_id": "2112.01524",
+   "source": "s2",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "ADHMR: Aligning Diffusion-based Human Mesh Recovery via Direct Preference Optimization",
+   "authors": [
+    "Wen-Hao Shen",
+    "Wan-Qi Yin",
+    "Xiaofeng Yang",
+    "Cheng Chen",
+    "Chaoyue Song",
+    "Zhongang Cai",
+    "Lei Yang",
+    "Hao Wang",
+    "Guosheng Lin"
+   ],
+   "year": 2025,
+   "venue": "International Conference on Machine Learning",
+   "url": "https://www.semanticscholar.org/paper/2dbf3173556f22ed881b652fc12867f392eef3c0",
+   "arxiv_id": "2505.10250",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "DiSRT-In-Bed: Diffusion-Based Sim-To-Real Transfer Framework for In-Bed Human Mesh Recovery",
+   "authors": [
+    "Jing-Nan Gao",
+    "Ce Zheng",
+    "László A. Jeni",
+    "Zackory Erickson"
+   ],
+   "year": 2025,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/9df0dc603c69656712d3d420efbfceca8549facf",
+   "arxiv_id": "2504.03006",
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Probabilistic Modeling for Human Mesh Recovery",
+   "authors": [
+    "Nikos Kolotouros",
+    "G. Pavlakos",
+    "Dinesh Jayaraman",
+    "Kostas Daniilidis"
+   ],
+   "year": 2021,
+   "venue": "IEEE International Conference on Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/f7a3dd2bac90224148032ea04ef3f3e0d981dcb4",
+   "arxiv_id": "2108.11944",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Human Mesh Recovery From Monocular Images via a Skeleton-Disentangled Representation",
+   "authors": [
+    "Yu Sun",
+    "Yun Ye",
+    "Wu Liu",
+    "Wenpeng Gao",
+    "Yili Fu",
+    "Tao Mei"
+   ],
+   "year": 2019,
+   "venue": "IEEE International Conference on Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/6ddeef767ac7efb3c59f77ace7ae097500110574",
+   "arxiv_id": "1908.07172",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "AJAHR: Amputated Joint Aware 3D Human Mesh Recovery",
+   "authors": [
+    "Hyunjin Cho",
+    "Giyun Choi",
+    "Jongwon Choi"
+   ],
+   "year": 2025,
+   "venue": "IEEE International Conference on Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/0523a6989101afac501e73e5325d6c7f559d4fe0",
+   "arxiv_id": "2509.19939",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "DPMesh: Exploiting Diffusion Prior for Occluded Human Mesh Recovery",
+   "authors": [
+    "Yixuan Zhu",
+    "Ao Li",
+    "Yansong Tang",
+    "Wen-Liang Zhao",
+    "Jie Zhou",
+    "Ji-Wen Lu"
+   ],
+   "year": 2024,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/edf1056827c7fdbf3b6b203910f18e6562de210f",
+   "arxiv_id": "2404.01424",
+   "source": "s2",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Fish2Mesh Transformer: 3D Human Mesh Recovery from Egocentric Vision",
+   "authors": [
+    "Tian-Ma Shen",
+    "Aditya Puranik",
+    "James Vong",
+    "Vrushabh Abhijit Deogirikar",
+    "Ryan Fell",
+    "J. Dietrich",
+    "Maria Kyrarini",
+    "Christopher A. Kitts",
+    "David C. Jeong"
+   ],
+   "year": 2025,
+   "venue": "IEEE International Conference on Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/3fd4e3890a9e8325f1ad4305514872deb8b14ddb",
+   "arxiv_id": "2503.06089",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "FastHMR: Accelerating Human Mesh Recovery via Token and Layer Merging with Diffusion Decoding",
+   "authors": [
+    "Soroush Mehraban",
+    "Andrea Iaboni",
+    "Babak Taati"
+   ],
+   "year": 2025,
+   "venue": "IEEE Workshop/Winter Conference on Applications of Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/1ed0230f055d88933ca5e8f7da2014a6884845b2",
+   "arxiv_id": "2510.10868",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Validation of Human Pose Estimation and Human Mesh Recovery for Extracting Clinically Relevant Motion Data from Videos",
+   "authors": [
+    "Kai Armstrong",
+    "A. Rodrigues",
+    "Alexander P. Willmott",
+    "Lei Zhang",
+    "Xu-Jiong Ye"
+   ],
+   "year": 2025,
+   "venue": "arXiv.org",
+   "url": "https://www.semanticscholar.org/paper/e075d79b41b6ca86c470881016da2384a4096463",
+   "arxiv_id": "2503.14760",
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Occluded Human Mesh Recovery",
+   "authors": [
+    "Rawal Khirodkar",
+    "Shashank Tripathi",
+    "Kris Kitani"
+   ],
+   "year": 2022,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/d38fd9675b0320a5d1c3bef593df7bdcaa8832cb",
+   "arxiv_id": "2203.13349",
+   "source": "s2",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "DiffMesh: A Motion-Aware Diffusion Framework for Human Mesh Recovery from Videos",
+   "authors": [
+    "Ce Zheng",
+    "Xianpeng Liu",
+    "Qu-Cheng Peng",
+    "Tian-Fu Wu",
+    "Pu Wang",
+    "Chen Chen"
+   ],
+   "year": 2025,
+   "venue": "IEEE Workshop/Winter Conference on Applications of Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/aca64443a371b2540868bb1cbfccd3d00a613f00",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Adapting Human Mesh Recovery with Vision-Language Feedback",
+   "authors": [
+    "Chong-Yang Xu",
+    "Bu-Zhen Huang",
+    "Cheng-Fang Zhang",
+    "Zi-Liang Feng",
+    "Yan-Gang Wang"
+   ],
+   "year": 2025,
+   "venue": "arXiv.org",
+   "url": "https://www.semanticscholar.org/paper/b77b9f1e34a33e630cbe88d0dd4397030129cf00",
+   "arxiv_id": "2502.03836",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "DeforHMR: Vision Transformer with Deformable Cross-Attention for 3D Human Mesh Recovery",
+   "authors": [
+    "Jaewoo Heo",
+    "George Hu",
+    "Zeyu Wang",
+    "S. Yeung-Levy"
+   ],
+   "year": 2025,
+   "venue": "International Conference on 3D Vision",
+   "url": "https://www.semanticscholar.org/paper/cd68517b81a9c2da6e1df24bb6429ba8d6a4b20d",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "A Twist Representation and Shape Refinement Method for Human Mesh Recovery",
+   "authors": [
+    "Xiaoyang Hao",
+    "Han Li",
+    "Jing Sun",
+    "Lei Wang",
+    "Jianping Fan"
+   ],
+   "year": 2025,
+   "venue": "IEEE transactions on multimedia",
+   "url": "https://www.semanticscholar.org/paper/cfeaa39b0db9adbd862b63b6a88ab49ee12dfdcb",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "STAF: 3D Human Mesh Recovery From Video With Spatio-Temporal Alignment Fusion",
+   "authors": [
+    "Wei Yao",
+    "Hongwen Zhang",
+    "Yunlian Sun",
+    "Jin-Hui Tang"
+   ],
+   "year": 2024,
+   "venue": "IEEE transactions on circuits and systems for video technology (Print)",
+   "url": "https://www.semanticscholar.org/paper/6dfaca1e2627b4cbef18c2ed71f919f936d7cccf",
+   "arxiv_id": "2401.01730",
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Latent-Info and Low-Dimensional Learning for Human Mesh Recovery and Parallel Optimization",
+   "authors": [
+    "Xiang Zhang",
+    "Suping Wu",
+    "Sheng Yang"
+   ],
+   "year": 2025,
+   "venue": "IEEE International Conference on Multimedia and Expo",
+   "url": "https://www.semanticscholar.org/paper/f7661c78c5c3b01fbc1bd766b6951da7e31f47e4",
+   "arxiv_id": "2510.18267",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Self-Supervised Human Mesh Recovery from Partial Point Cloud via a Self-Improving Loop",
+   "authors": [
+    "C. Su",
+    "Bei-Hong Jin",
+    "Fu-Sang Zhang",
+    "Siheng Li",
+    "Zhi Wang"
+   ],
+   "year": 2025,
+   "venue": "ACM Multimedia",
+   "url": "https://www.semanticscholar.org/paper/0e8dea972d3d9165663bd8c2853218c22c3b0c08",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Short-Term 3D Human Mesh Recovery with Virtual Markers Disentanglement",
+   "authors": [
+    "Xiyuan Kang",
+    "Yi Yuan",
+    "Xu Dong",
+    "Muhammed Awais",
+    "Li-Lian Tang",
+    "Josef Kittler",
+    "Zhenhua Feng"
+   ],
+   "year": 2025,
+   "venue": "2025 IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)",
+   "url": "https://www.semanticscholar.org/paper/ae510aa82b08846720e759ba27d9a2e818297566",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Generating Multi-View Action Data from a Monocular Camera Video by Fusing Human Mesh Recovery and 3D Scene Reconstruction",
+   "authors": [
+    "Hyunsu Kim",
+    "Yunsik Son"
+   ],
+   "year": 2025,
+   "venue": "Applied Sciences",
+   "url": "https://www.semanticscholar.org/paper/6ad1d0f6972ef9a19319a55f8fa4c268105efa2d",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Hyperbolic Space Learning Method Leveraging Temporal Motion Priors for Human Mesh Recovery",
+   "authors": [
+    "Xiang Zhang",
+    "Suping Wu",
+    "Weibin Qiu",
+    "Zhao Jin",
+    "Sheng Yang"
+   ],
+   "year": 2025,
+   "venue": "IEEE International Conference on Multimedia and Expo",
+   "url": "https://www.semanticscholar.org/paper/9a85acb8c38ca120d428b0092370a25d09b83a06",
+   "arxiv_id": "2510.18256",
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "POTTER: Pooling Attention Transformer for Efficient Human Mesh Recovery",
+   "authors": [
+    "Ce Zheng",
+    "Xianpeng Liu",
+    "Guo-Jun Qi",
+    "Chen Chen"
+   ],
+   "year": 2023,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/e81149e7a7aa66848790e72dec70ed08e0216254",
+   "arxiv_id": "2303.13357",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Deformable Mesh Transformer for 3D Human Mesh Recovery",
+   "authors": [
+    "Y. Yoshiyasu"
+   ],
+   "year": 2023,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/4a566208c7592c9c085f1512f39f552c3e9a8526",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "HMR-Adapter: A Lightweight Adapter with Dual-Path Cross Augmentation for Expressive Human Mesh Recovery",
+   "authors": [
+    "Wen-Hao Shen",
+    "Wan-Qi Yin",
+    "Hao Wang",
+    "Chen Wei",
+    "Zhongang Cai",
+    "Lei Yang",
+    "Guosheng Lin"
+   ],
+   "year": 2024,
+   "venue": "ACM Multimedia",
+   "url": "https://www.semanticscholar.org/paper/76689f0fd7f6fbd55f7706f969f038beceecb657",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "A Progressive Quadric Graph Convolutional Network for 3D Human Mesh Recovery",
+   "authors": [
+    "Lei Wang",
+    "X. Liu",
+    "Xiaoliang Ma",
+    "Jia-Ji Wu",
+    "Junlu Cheng",
+    "Mengchu Zhou"
+   ],
+   "year": 2023,
+   "venue": "IEEE transactions on circuits and systems for video technology (Print)",
+   "url": "https://www.semanticscholar.org/paper/5fe15759ee0f1234ee5ba7aeb632540068a2a6f2",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Distribution-Aligned Diffusion for Human Mesh Recovery",
+   "authors": [
+    "Lin Geng Foo",
+    "Jia Gong",
+    "H. Rahmani",
+    "J. Liu"
+   ],
+   "year": 2023,
+   "venue": "IEEE International Conference on Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/b049e9e339f62bc3aa78abe6493b47070112ac7d",
+   "arxiv_id": "2308.13369",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Learning Analytical Posterior Probability for Human Mesh Recovery",
+   "authors": [
+    "Qi Fang",
+    "Kang Chen",
+    "Yinghui Fan",
+    "Qing Shuai",
+    "Jiefeng Li",
+    "Wei-Dong Zhang"
+   ],
+   "year": 2023,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/ae704793fc170a8df3a328994b7da54f5a9e64f3",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "PostureHMR: Posture Transformation for 3D Human Mesh Recovery",
+   "authors": [
+    "Yuping Song",
+    "Xiao Wu",
+    "Zhaoquan Yuanl",
+    "Jianwang Qiao",
+    "Qiang Peng"
+   ],
+   "year": 2024,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/b3f2e12a4dad49a72a9f34639c7e4165456c8d88",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "In-bed Pressure Image-supported Diffusion for 3D Human Mesh Recovery",
+   "authors": [
+    "Quan Wan",
+    "Ziyu Wu",
+    "Fangting Xie",
+    "Mengting Niu",
+    "Xiaohui Cai"
+   ],
+   "year": 2025,
+   "venue": "Annual IEEE International Conference on Pervasive Computing and Communications",
+   "url": "https://www.semanticscholar.org/paper/2c38599eac87d615b0ef1fd0fb397a9836e82fbd",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "GenHMR: Generative Human Mesh Recovery",
+   "authors": [
+    "Muhammad Usama Saleem",
+    "Ekkasit Pinyoanuntapong",
+    "Pu Wang",
+    "Hong-Fei Xue",
+    "Srijan Das",
+    "Chen Chen"
+   ],
+   "year": 2024,
+   "venue": "AAAI Conference on Artificial Intelligence",
+   "url": "https://www.semanticscholar.org/paper/c22fc5a47f7d861b7f7a0a0eac753bd447a816ac",
+   "arxiv_id": "2412.14444",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "JFG-HMR: 3D joint feature-guided human mesh recovery with global-local feature fusion",
+   "authors": [
+    "Xin Yao",
+    "Junyi He",
+    "Chang Li",
+    "Yang Xie",
+    "Haotian Luo",
+    "Wei Zheng",
+    "Hongxing Qin",
+    "Yiqun Wang"
+   ],
+   "year": 2025,
+   "venue": "Computers & graphics",
+   "url": "https://www.semanticscholar.org/paper/614ae23b6180f7a277cbdac417e20a1ee6045f54",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "OnlineHMR: Video-based Online World-Grounded Human Mesh Recovery",
+   "authors": [
+    "Yiwen Zhao",
+    "Ce Zheng",
+    "Yufu Wang",
+    "Hsu-Han Yang",
+    "Liting Wen",
+    "László A. Jeni"
+   ],
+   "year": 2026,
+   "venue": "arXiv.org",
+   "url": "https://www.semanticscholar.org/paper/33bf26fc8447f066e24822ec3bbb2f8a75ec298f",
+   "arxiv_id": "2603.17355",
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "SMPL-IKS: A Mixed Analytical-Neural Inverse Kinematics Solver for 3D Human Mesh Recovery",
+   "authors": [
+    "Zijian Zhang",
+    "Mu-Qing Wu",
+    "Honghao Qi",
+    "Tianyi Ma",
+    "Min Zhao"
+   ],
+   "year": 2025,
+   "venue": "International Journal of Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/14998f09f40001c144bce30e290bdd786507270f",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "JOTR: 3D Joint Contrastive Learning with Transformers for Occluded Human Mesh Recovery",
+   "authors": [
+    "Jia-Hao Li",
+    "Zongxin Yang",
+    "Xiaohan Wang",
+    "Jian-Xin Ma",
+    "Chang-Jian Zhou",
+    "Yi Yang"
+   ],
+   "year": 2023,
+   "venue": "IEEE International Conference on Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/7467a65d7d5f5de00aa9a3bf0dd53e90d750d96e",
+   "arxiv_id": "2307.16377",
+   "source": "s2",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Learning Human Mesh Recovery in 3D Scenes",
+   "authors": [
+    "Zehong Shen",
+    "Zhi Cen",
+    "Si-Da Peng",
+    "Qing Shuai",
+    "H. Bao",
+    "Xiao-Wei Zhou"
+   ],
+   "year": 2023,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/040e0a3ce2096bb7061888e71a98951f30b78ec9",
+   "arxiv_id": "2306.03847",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "TORE: Token Reduction for Efficient Human Mesh Recovery with Transformer",
+   "authors": [
+    "Zhiyang Dou",
+    "Qingxuan Wu",
+    "Chu-Hsing Lin",
+    "Zeyu Cao",
+    "Qiangqiang Wu",
+    "Weilin Wan",
+    "T. Komura",
+    "Wen-Ping Wang"
+   ],
+   "year": 2022,
+   "venue": "IEEE International Conference on Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/2b97ee6d48f3293862ea185c8524807fce81fa03",
+   "arxiv_id": "2211.10705",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "ARTS: Semi-Analytical Regressor using Disentangled Skeletal Representations for Human Mesh Recovery from Videos",
+   "authors": [
+    "Tao Tang",
+    "Hong Liu",
+    "Ying-Xuan You",
+    "Ti Wang",
+    "Wen-Hao Li"
+   ],
+   "year": 2024,
+   "venue": "ACM Multimedia",
+   "url": "https://www.semanticscholar.org/paper/df39f71ac61c34fd523151d19a3b1bfb002c87ea",
+   "arxiv_id": "2410.15582",
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Human Mesh Recovery from Arbitrary Multi-view Images",
+   "authors": [
+    "Xiao-Ben Li",
+    "Mancheng Meng",
+    "Zi-Yan Wu",
+    "Terrence Chen",
+    "Fan Yang",
+    "Dinggang Shen"
+   ],
+   "year": 2024,
+   "venue": "arXiv.org",
+   "url": "https://www.semanticscholar.org/paper/6357253ad2ae3d1ffd0ee9b882123f0665962484",
+   "arxiv_id": "2403.12434",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Distribution and Depth-Aware Transformers for 3D Human Mesh Recovery",
+   "authors": [
+    "Jerrin Bright",
+    "Bavesh Balaji",
+    "Harish Prakash",
+    "Yu-Hao Chen",
+    "David A Clausi",
+    "John S. Zelek"
+   ],
+   "year": 2024,
+   "venue": "Proceedings of the 21st Conference on Robots and Vision",
+   "url": "https://www.semanticscholar.org/paper/13022c23540d389c3ad76faa50cfe135963859d2",
+   "arxiv_id": "2403.09063",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "LiDAR-HMR: 3D Human Mesh Recovery From LiDAR",
+   "authors": [
+    "Bo-Hao Fan",
+    "Wen-Zhao Zheng",
+    "Jian-Jiang Feng",
+    "Jie Zhou"
+   ],
+   "year": 2023,
+   "venue": "IEEE transactions on multimedia",
+   "url": "https://www.semanticscholar.org/paper/3a2e26f59dc0ddcaece9a244b5b5c01bdaa9dbdd",
+   "arxiv_id": "2311.11971",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "VITA: ViT Acceleration for Efficient 3D Human Mesh Recovery via Hardware-Algorithm Co-Design",
+   "authors": [
+    "Shilin Tian",
+    "Chase Szafranski",
+    "Ce Zheng",
+    "Fan Yao",
+    "A. Louri",
+    "Chen Chen",
+    "Hao Zheng"
+   ],
+   "year": 2024,
+   "venue": "Design Automation Conference",
+   "url": "https://www.semanticscholar.org/paper/a67db3519c29d667cefb1bf919af079472e3156f",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Delving Deep into Pixel Alignment Feature for Accurate Multi-view Human Mesh Recovery",
+   "authors": [
+    "Kai Jia",
+    "Hongwen Zhang",
+    "Liang An",
+    "Ye-Bin Liu"
+   ],
+   "year": 2023,
+   "venue": "AAAI Conference on Artificial Intelligence",
+   "url": "https://www.semanticscholar.org/paper/b5a878716aa4ab11e84ba0973d58ab35c68711a1",
+   "arxiv_id": "2301.06020",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "3D Human Mesh Recovery with Learned Gradient",
+   "authors": [
+    "Yuanyuan Song",
+    "Hui Zhou"
+   ],
+   "year": 2024,
+   "venue": "",
+   "url": "https://doi.org/10.21203/rs.3.rs-4603978/v1",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "All-Age Human Mesh Recovery",
+   "authors": [],
+   "year": 2026,
+   "venue": "2026 IEEE/CVF Conference on Computer Vision and Pattern Recognition- FINDINGS Track (CVPRF)",
+   "url": "https://doi.org/10.1109/cvprf71909.2026.00356",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "PostoMETRO: Pose Token Enhanced Mesh Transformer for Robust 3D Human Mesh Recovery",
+   "authors": [
+    "Wendi Yang",
+    "Zihang Jiang",
+    "Shang Zhao",
+    "S. Kevin Zhou"
+   ],
+   "year": 2025,
+   "venue": "2025 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)",
+   "url": "https://doi.org/10.1109/wacv61041.2025.00465",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "MuNet: A Mutualistic Network for Joint 3D Human Mesh Recovery and 3D Clothed Human Reconstruction from Single Images",
+   "authors": [
+    "Yunqi Gao",
+    "Leyuan Liu",
+    "Yuhan Li",
+    "Changxin Gao",
+    "Jingying Chen"
+   ],
+   "year": 2026,
+   "venue": "",
+   "url": "https://doi.org/10.2139/ssrn.6021739",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Human Mesh Recovery from Multiple Shots",
+   "authors": [
+    "Georgios Pavlakos",
+    "Jitendra Malik",
+    "Angjoo Kanazawa"
+   ],
+   "year": 2022,
+   "venue": "2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+   "url": "https://doi.org/10.1109/cvpr52688.2022.00154",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Everybody Is Unique: Towards Unbiased Human Mesh Recovery",
+   "authors": [
+    "Ren Li",
+    "Srikrishna Karanam",
+    "Meng Zheng",
+    "Terrence Chen",
+    "Ziyan Wu"
+   ],
+   "year": 2021,
+   "venue": "Proceedings of the British Machine Vision Conference 2021",
+   "url": "https://doi.org/10.5244/c.35.140",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Generative Approach for Probabilistic Human Mesh Recovery using Diffusion Models",
+   "authors": [
+    "Hanbyel Cho",
+    "Junmo Kim"
+   ],
+   "year": 2023,
+   "venue": "2023 IEEE/CVF International Conference on Computer Vision Workshops (ICCVW)",
+   "url": "https://doi.org/10.1109/iccvw60793.2023.00452",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "HeatFormer: A Neural Optimizer for Multiview Human Mesh Recovery",
+   "authors": [
+    "Yuto Matsubara",
+    "Ko Nishino"
+   ],
+   "year": 2025,
+   "venue": "2025 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+   "url": "https://doi.org/10.1109/cvpr52734.2025.00601",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Deep learning for 3D human pose estimation and mesh recovery: A survey",
+   "authors": [
+    "Yang Liu",
+    "Changzhen Qiu",
+    "Zhiyong Zhang"
+   ],
+   "year": 2024,
+   "venue": "Neurocomputing",
+   "url": "https://doi.org/10.1016/j.neucom.2024.128049",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Surveys",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Multi-Depth Cross-Transformer for 3D Human Mesh Recovery",
+   "authors": [
+    "Zheng Wei",
+    "Siyu Xia"
+   ],
+   "year": 2025,
+   "venue": "2025 International Conference on Mechatronics, Robotics, and Artificial Intelligence (MRAI)",
+   "url": "https://doi.org/10.1109/mrai65197.2025.11135718",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "3D Human Mesh Recovery with Sequentially Global Rotation Estimation",
+   "authors": [
+    "Dongkai Wang",
+    "Shiliang Zhang"
+   ],
+   "year": 2023,
+   "venue": "2023 IEEE/CVF International Conference on Computer Vision (ICCV)",
+   "url": "https://doi.org/10.1109/iccv51070.2023.01373",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Unsupervised camera pose estimation through human mesh recovery",
+   "authors": [
+    "Nicola Garau",
+    "Nicola Conci"
+   ],
+   "year": 2019,
+   "venue": "Proceedings of the 13th International Conference on Distributed Smart Cameras",
+   "url": "https://doi.org/10.1145/3349801.3357138",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Egocentric Whole-Body Human Mesh Recovery with Prior-Guided Learning",
+   "authors": [
+    "Soyeon Na",
+    "Seung Young Noh",
+    "Ju Yong Chang"
+   ],
+   "year": 2026,
+   "venue": "2026 IEEE International Conference on Image Processing (ICIP)",
+   "url": "https://doi.org/10.1109/icip61757.2026.11630020",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "A Geometric Feedback-Driven Depth Correction Method for Monocular Human Mesh Recovery",
+   "authors": [
+    "Dejia Zeng",
+    "Qingdu Li"
+   ],
+   "year": 2026,
+   "venue": "2026 10th International Conference on Robotics and Automation Sciences (ICRAS)",
+   "url": "https://doi.org/10.1109/icras70064.2026.11717916",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Leveraging MoCap Data for Human Mesh Recovery",
+   "authors": [
+    "Fabien Baradel",
+    "Thibault Groueix",
+    "Philippe Weinzaepfel",
+    "Romain Bregier",
+    "Yannis Kalantidis",
+    "Gregory Rogez"
+   ],
+   "year": 2021,
+   "venue": "2021 International Conference on 3D Vision (3DV)",
+   "url": "https://doi.org/10.1109/3dv53792.2021.00068",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Robust 3D Human Mesh Recovery with Silhouette-Assisted Joint Attention Network",
+   "authors": [
+    "Yiwen Zeng",
+    "Yihua Tan"
+   ],
+   "year": 2025,
+   "venue": "2025 6th International Conference on Computer Vision, Image and Deep Learning (CVIDL)",
+   "url": "https://doi.org/10.1109/cvidl65390.2025.11085519",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Learning Local Recurrent Models for Human Mesh Recovery",
+   "authors": [
+    "Runze Li",
+    "Srikrishna Karanam",
+    "Ren Li",
+    "Terrence Chen",
+    "Bir Bhanu",
+    "Ziyan Wu"
+   ],
+   "year": 2021,
+   "venue": "2021 International Conference on 3D Vision (3DV)",
+   "url": "https://doi.org/10.1109/3dv53792.2021.00065",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Unsupervised continuous camera network pose estimation through human mesh recovery",
+   "authors": [
+    "Nicola Garau",
+    "Nicola Conci"
+   ],
+   "year": 2019,
+   "venue": "Proceedings of the 13th International Conference on Distributed Smart Cameras",
+   "url": "https://doi.org/10.1145/3349801.3349803",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Domain Adaptive 3D Pose Augmentation for In-the-Wild Human Mesh Recovery",
+   "authors": [
+    "Zhenzhen Weng",
+    "Kuan-Chieh Wang",
+    "Angjoo Kanazawa",
+    "Serena Yeung"
+   ],
+   "year": 2022,
+   "venue": "2022 International Conference on 3D Vision (3DV)",
+   "url": "https://doi.org/10.1109/3dv57658.2022.00038",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Video Inference for Human Mesh Recovery with Vision Transformer",
+   "authors": [
+    "Hanbyel Cho",
+    "Jaesung Ahn",
+    "Yooshin Cho",
+    "Junmo Kim"
+   ],
+   "year": 2023,
+   "venue": "2023 IEEE 17th International Conference on Automatic Face and Gesture Recognition (FG)",
+   "url": "https://doi.org/10.1109/fg57933.2023.10042731",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Template based Human Pose and Shape Estimation from a Single RGB-D Image",
+   "authors": [
+    "Zhongguo Li",
+    "Anders Heyden",
+    "Magnus Oskarsson"
+   ],
+   "year": 2019,
+   "venue": "Proceedings of the 8th International Conference on Pattern Recognition Applications and Methods",
+   "url": "https://doi.org/10.5220/0007383605740581",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Hierarchical Neural Network for 3d Human Pose and Shape Estimation with Deep Shape Optimizer as Supervisor",
+   "authors": [
+    "Wenzhang Sun",
+    "Qinwei Ma",
+    "Shaopeng Ma"
+   ],
+   "year": 2021,
+   "venue": "",
+   "url": "https://doi.org/10.2139/ssrn.3988166",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "DUAL STREAM NETWORKS FOR 3D HUMAN POSE AND SHAPE ESTIMATION",
+   "authors": [
+    "Ioannis Pastaltzidis",
+    "Nikolaos Dimitriou",
+    "Stelios Krinidis",
+    "Dimitrios Tzovaras"
+   ],
+   "year": 2025,
+   "venue": "",
+   "url": "https://doi.org/10.36227/techrxiv.174889324.44902778/v1",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Adaptive Tokens for 3D Human Pose and Shape Estimation",
+   "authors": [
+    "Ioannis Pastaltzidis",
+    "Nikolaos Dimitriou",
+    "Stelios Krinidis",
+    "Dimitrios Tzovaras"
+   ],
+   "year": 2026,
+   "venue": "",
+   "url": "https://doi.org/10.2139/ssrn.6072135",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Efficient 3D Human Pose and Shape Estimation Using Group-Mix Attention in Transformer Models",
+   "authors": [
+    "Yushan Wang",
+    "Shuhei Tarashima",
+    "Norio Tagawa"
+   ],
+   "year": 2025,
+   "venue": "Proceedings of the 20th International Joint Conference on Computer Vision, Imaging and Computer Graphics Theory and Applications",
+   "url": "https://doi.org/10.5220/0013306400003912",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "D-PoSE: Depth as an Intermediate Representation for 3D Human Pose and Shape Estimation",
+   "authors": [
+    "Nikolaos Vasilikopoulos",
+    "Drosakis Drosakis",
+    "Antonis Argyros"
+   ],
+   "year": 2026,
+   "venue": "2026 12th International Conference on Virtual Reality (ICVR)",
+   "url": "https://doi.org/10.1109/icvr70658.2026.11672577",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Occlusion-Aware 3D Human Pose Estimation with Body-Shape Adaptive Parametric Modeling for Adolescent Physical Health Monitoring in School Sports Scenarios",
+   "authors": [
+    "Ming Lei"
+   ],
+   "year": 2026,
+   "venue": "",
+   "url": "https://doi.org/10.2139/ssrn.7196751",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Interaction with Virtual Objects using Human Pose and Shape Estimation",
+   "authors": [
+    "Hong Son Nguyen",
+    "DaEun Cheong",
+    "Andrew Chalmers",
+    "Myoung Gon Kim",
+    "Taehyun Rhee",
+    "JungHyun Han"
+   ],
+   "year": 2025,
+   "venue": "",
+   "url": "https://doi.org/10.22541/au.174625404.45775198/v1",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Neural Localizer Fields for Continuous 3D Human Pose and Shape Estimation",
+   "authors": [
+    "István Sárándi",
+    "Gerard Pons-Moll"
+   ],
+   "year": 2024,
+   "venue": "Advances in Neural Information Processing Systems 37",
+   "url": "https://doi.org/10.52202/079017-4444",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Synthetic Training for Accurate 3D Human Pose and Shape Estimation in the Wild",
+   "authors": [
+    "Akash Sengupta",
+    "Roberto Cipolla",
+    "Ignas Budvytis"
+   ],
+   "year": 2020,
+   "venue": "Proceedings of the British Machine Vision Conference 2020",
+   "url": "https://doi.org/10.5244/c.34.20",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Rebar: Reference-Based Reasoning for Robust Human Pose and Shape Estimation from Monocular Images",
+   "authors": [
+    "Yongkang Cheng",
+    "Mingjiang Liang",
+    "Jifeng Ning",
+    "Gaoge Han",
+    "Wei Liu",
+    "Shaoli Huang"
+   ],
+   "year": 2024,
+   "venue": "",
+   "url": "https://doi.org/10.2139/ssrn.4993426",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Collaborative Network Based on Motion Recognition for Human Pose and Shape Estimation from Video",
+   "authors": [
+    "Jiaxuan Wang"
+   ],
+   "year": 2025,
+   "venue": "2025 4th International Conference on Electronic Information Technology (EIT)",
+   "url": "https://doi.org/10.1109/eit67313.2025.11232206",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Learnable Human Mesh Triangulation for 3D Human Pose and Shape Estimation",
+   "authors": [
+    "Sungho Chun",
+    "Sungbum Park",
+    "Ju Yong Chang"
+   ],
+   "year": 2023,
+   "venue": "2023 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)",
+   "url": "https://doi.org/10.1109/wacv56688.2023.00287",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Multi-scale Feature Injection for Occluded 3D Human Pose and Shape Estimation",
+   "authors": [
+    "Yunhui Shi",
+    "Yangyang Ge",
+    "Jin Wang"
+   ],
+   "year": 2023,
+   "venue": "2023 35th Chinese Control and Decision Conference (CCDC)",
+   "url": "https://doi.org/10.1109/ccdc58219.2023.10327150",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Probabilistic Estimation of 3D Human Shape and Pose with a Semantic Local Parametric Model",
+   "authors": [
+    "Akash Sengupta",
+    "Ignas Budvytis",
+    "Roberto Cipolla"
+   ],
+   "year": 2021,
+   "venue": "Proceedings of the British Machine Vision Conference 2021",
+   "url": "https://doi.org/10.5244/c.35.366",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Temporally Consistent 3D Human Pose and Shape Estimation from Video",
+   "authors": [
+    "Aurel Shehaj",
+    "Nikolaos Vasilikopoulos",
+    "Iason Oikonomidis",
+    "Antonis A. Argyros"
+   ],
+   "year": 2026,
+   "venue": "2026 12th International Conference on Virtual Reality (ICVR)",
+   "url": "https://doi.org/10.1109/icvr70658.2026.11672574",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "A Diffusion-Based Framework for 3D Human Pose and Shape Estimation from Monocular Videos",
+   "authors": [
+    "Ni Zhao",
+    "Na Lv"
+   ],
+   "year": 2024,
+   "venue": "2024 International Conference on Virtual Reality and Visualization (ICVRV)",
+   "url": "https://doi.org/10.1109/icvrv62410.2024.00053",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "VIBE: Video Inference for Human Body Pose and Shape Estimation",
+   "authors": [
+    "Muhammed Kocabas",
+    "Nikos Athanasiou",
+    "Michael J. Black"
+   ],
+   "year": 2020,
+   "venue": "2020 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+   "url": "https://doi.org/10.1109/cvpr42600.2020.00530",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Object-Occluded Human Shape and Pose Estimation From a Single Color Image",
+   "authors": [
+    "Tianshu Zhang",
+    "Buzhen Huang",
+    "Yangang Wang"
+   ],
+   "year": 2020,
+   "venue": "2020 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+   "url": "https://doi.org/10.1109/cvpr42600.2020.00740",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Multi-Candidate Motion Modeling for 3D Human Pose and Shape Estimation from Monocular Video",
+   "authors": [
+    "Wen-Li Wei",
+    "Jen-Chun Lin"
+   ],
+   "year": 2024,
+   "venue": "2024 IEEE International Conference on Multimedia and Expo (ICME)",
+   "url": "https://doi.org/10.1109/icme57554.2024.10687476",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Joint 3D Human Shape Recovery and Pose Estimation from a Single Image with Bilayer Graph",
+   "authors": [
+    "Xin Yu",
+    "Jeroen van Baar",
+    "Siheng Chen"
+   ],
+   "year": 2021,
+   "venue": "2021 International Conference on 3D Vision (3DV)",
+   "url": "https://doi.org/10.1109/3dv53792.2021.00060",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Posegu: 3d Human Pose Estimation with Novel Human Pose Generator and Unbiased Learning",
+   "authors": [
+    "Shannan GUAN",
+    "Haiyan LU",
+    "Linchao ZHU",
+    "Gengfa FANG"
+   ],
+   "year": 2022,
+   "venue": "",
+   "url": "https://doi.org/10.2139/ssrn.4248596",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "3D Human Pose Estimation = 2D Pose Estimation + Matching",
+   "authors": [
+    "Ching-Hang Chen",
+    "Deva Ramanan"
+   ],
+   "year": 2017,
+   "venue": "2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+   "url": "https://doi.org/10.1109/cvpr.2017.610",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Benchmarking and Analyzing 3D Human Pose and Shape Estimation Beyond Algorithms",
+   "authors": [
+    "Hui En Pang",
+    "Zhongang Cai",
+    "Lei Yang",
+    "Tianwei Zhang",
+    "Ziwei Liu"
+   ],
+   "year": 2022,
+   "venue": "Advances in Neural Information Processing Systems 35",
+   "url": "https://doi.org/10.52202/068431-1888",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Datasets & Benchmarks",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Creating 3D Human Character Mesh Prototypes from a Single Front-view Sketch",
+   "authors": [
+    "Shaikah Bakerman",
+    "Rufino R. Ansara",
+    "Chris Joslin"
+   ],
+   "year": 2018,
+   "venue": "Proceedings of the 13th International Joint Conference on Computer Vision, Imaging and Computer Graphics Theory and Applications",
+   "url": "https://doi.org/10.5220/0006623702480255",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Accurate 3D Hand Pose Estimation for Whole-Body 3D Human Mesh Estimation",
+   "authors": [
+    "Gyeongsik Moon",
+    "Hongsuk Choi",
+    "Kyoung Mu Lee"
+   ],
+   "year": 2022,
+   "venue": "2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)",
+   "url": "https://doi.org/10.1109/cvprw56347.2022.00257",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Dual Mesh Convolutional Networks for Human Shape Correspondence",
+   "authors": [
+    "Nitika Verma",
+    "Adnane Boukhayma",
+    "Edmond Boyer",
+    "Jakob Verbeek"
+   ],
+   "year": 2021,
+   "venue": "2021 International Conference on 3D Vision (3DV)",
+   "url": "https://doi.org/10.1109/3dv53792.2021.00039",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Adaptive and Robust Mmwave-Based 3D Human Mesh Estimation for Diverse Poses",
+   "authors": [
+    "Kotaro Amaya",
+    "Mariko Isogawa"
+   ],
+   "year": 2023,
+   "venue": "2023 IEEE International Conference on Image Processing (ICIP)",
+   "url": "https://doi.org/10.1109/icip49359.2023.10222059",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Video-Based Multi-Stage 3D Human Mesh Reconstruction",
+   "authors": [
+    "Zhiwen Qiu",
+    "Muqing Wu",
+    "Qihui Su",
+    "Chengzhang Yin"
+   ],
+   "year": 2024,
+   "venue": "2024 10th International Conference on Computer and Communications (ICCC)",
+   "url": "https://doi.org/10.1109/iccc62609.2024.10941935",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "LINK: A Lightweight Inverse Kinematics Network for 3D Human Mesh Reconstruction from Videos",
+   "authors": [
+    "Yingxuan You",
+    "Hong Liu",
+    "Mengyuan Liu",
+    "Wenhao Li",
+    "Ti Wang",
+    "Bin Ren",
+    "Nicu Sebe"
+   ],
+   "year": 2025,
+   "venue": "",
+   "url": "https://doi.org/10.2139/ssrn.5782862",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Three Recipes for Better 3D Pseudo-GTs of 3D Human Mesh Estimation in the Wild",
+   "authors": [
+    "Gyeongsik Moon",
+    "Hongsuk Choi",
+    "Sanghyuk Chun",
+    "Jiyoung Lee",
+    "Sangdoo Yun"
+   ],
+   "year": 2023,
+   "venue": "2023 IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)",
+   "url": "https://doi.org/10.1109/cvprw59228.2023.00276",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-10-20"
+  },
+  {
+   "title": "Locally Aware Piecewise Transformation Fields for 3D Human Mesh Registration",
+   "authors": [
+    "Shaofei Wang",
+    "Andreas Geiger",
+    "Siyu Tang"
+   ],
+   "year": 2021,
+   "venue": "2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+   "url": "https://doi.org/10.1109/cvpr46437.2021.00755",
+   "arxiv_id": null,
+   "source": "crossref",
    "category": "Full-Body Human Mesh Recovery",
    "added": "2026-10-20"
   }
