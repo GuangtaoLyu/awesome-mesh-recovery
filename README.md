@@ -2,7 +2,7 @@
 
 A curated, auto-updated list of 3D human mesh recovery / pose-and-shape estimation papers.
 
-*Last updated: 2026-10-20 | Total papers: 109*
+*Last updated: 2026-10-26 | Total papers: 110*
 
 > 🤖 Auto-updated weekly by GitHub Actions (multi-source: arXiv + DBLP + Semantic Scholar + Crossref). Entries are auto-categorized by topic.
 
@@ -130,7 +130,8 @@ A curated, auto-updated list of 3D human mesh recovery / pose-and-shape estimati
 16. **Video-Based Multi-Stage 3D Human Mesh Reconstruction**, Qiu et al., ICCC 2024, [ICCC](https://doi.org/10.1109/iccc62609.2024.10941935)
 17. **A Progressive Quadric Graph Convolutional Network for 3D Human Mesh Recovery**, Wang et al., Print 2023, [Print](https://www.semanticscholar.org/paper/5fe15759ee0f1234ee5ba7aeb632540068a2a6f2)
 18. **Video Inference for Human Mesh Recovery with Vision Transformer**, Cho et al., FG 2023, [FG](https://doi.org/10.1109/fg57933.2023.10042731)
-19. **VIBE: Video Inference for Human Body Pose and Shape Estimation**, Kocabas et al., CVPR 2020, [CVPR](https://doi.org/10.1109/cvpr42600.2020.00530)
+19. **Uncertainty-Aware Human Mesh Recovery from Video by Learning Part-Based 3D Dynamics**, Lee et al., ICCV 2021, [ICCV](https://doi.org/10.1109/iccv48922.2021.01215)
+20. **VIBE: Video Inference for Human Body Pose and Shape Estimation**, Kocabas et al., CVPR 2020, [CVPR](https://doi.org/10.1109/cvpr42600.2020.00530)
 
 ## Datasets & Benchmarks
 

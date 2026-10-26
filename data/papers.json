@@ -1718,6 +1718,20 @@
    "source": "arxiv",
    "category": "Full-Body Human Mesh Recovery",
    "added": "2026-10-20"
+  },
+  {
+   "title": "Uncertainty-Aware Human Mesh Recovery from Video by Learning Part-Based 3D Dynamics",
+   "authors": [
+    "Gun-Hee Lee",
+    "Seong-Whan Lee"
+   ],
+   "year": 2021,
+   "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+   "url": "https://doi.org/10.1109/iccv48922.2021.01215",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-10-26"
   }
  ]
 }
