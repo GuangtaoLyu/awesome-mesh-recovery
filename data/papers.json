@@ -1732,6 +1732,40 @@
    "source": "crossref",
    "category": "Motion & Temporal Recovery",
    "added": "2026-10-26"
+  },
+  {
+   "title": "Anthropometric Prior for Human Mesh Recovery - APHMR",
+   "authors": [
+    "Florent Cheyron",
+    "Corentin Hardy",
+    "Benoit Augier",
+    "Charles Pontonnier",
+    "Pierre Hellier"
+   ],
+   "year": 2026,
+   "venue": "Multidisciplinary Biomechanics Journal",
+   "url": "https://doi.org/10.46298/mbj.19190",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-02"
+  },
+  {
+   "title": "Comparative Analysis of Bottom-Up 2D Pose Estimation Methods for 3D Human Pose Estimation in Real-World Rugby Impact Scenarios",
+   "authors": [
+    "Shi Yuchen",
+    "Ozeki Nobutake",
+    "Inaji Motoki",
+    "Yagishita Kazuyoshi",
+    "Miyazaki Yusuke"
+   ],
+   "year": 2026,
+   "venue": "Proceedings of the 14th International Congress on Sport Sciences Research and Technology Support",
+   "url": "https://doi.org/10.5220/0015286400004981",
+   "arxiv_id": null,
+   "source": "crossref",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-11-02"
   }
  ]
 }
