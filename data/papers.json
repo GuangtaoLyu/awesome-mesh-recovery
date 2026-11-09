@@ -1766,6 +1766,678 @@
    "source": "crossref",
    "category": "Occlusion & In-the-Wild Recovery",
    "added": "2026-11-02"
+  },
+  {
+   "title": "CLIFF: Carrying Location Information in Full Frames into Human Pose and Shape Estimation",
+   "authors": [
+    "Zhihao Li",
+    "Jian-Zhuang Liu",
+    "Zhen-Song Zhang",
+    "Songcen Xu",
+    "You-Liang Yan"
+   ],
+   "year": 2022,
+   "venue": "European Conference on Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/718f7cf0a671779605dee3e03789b2172aaf889a",
+   "arxiv_id": "2208.00571",
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "SMPLest-X: Ultimate Scaling for Expressive Human Pose and Shape Estimation",
+   "authors": [
+    "Wan-Qi Yin",
+    "Zhongang Cai",
+    "Rui-Si Wang",
+    "Ai-Ling Zeng",
+    "Chen Wei",
+    "Qing-Ping Sun",
+    "Haiyi Mei",
+    "Yanjun Wang",
+    "Hui Pang",
+    "Mingyuan Zhang",
+    "Lei Zhang",
+    "C. Loy",
+    "Atsushi Yamashita",
+    "Lei Yang",
+    "Zi-Wei Liu"
+   ],
+   "year": 2025,
+   "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+   "url": "https://www.semanticscholar.org/paper/1f1ccdd2d0a9561b377ca11f1acf6fff62c18115",
+   "arxiv_id": "2501.09782",
+   "source": "s2",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "SMPLer-X: Scaling Up Expressive Human Pose and Shape Estimation",
+   "authors": [
+    "Zhongang Cai",
+    "Wan-Qi Yin",
+    "Ai-Ling Zeng",
+    "Chen Wei",
+    "Qing-Ping Sun",
+    "Yanjun Wang",
+    "Hui Pang",
+    "Haiyi Mei",
+    "Mingyuan Zhang",
+    "Lei Zhang",
+    "Chen Change Loy",
+    "Lei Yang",
+    "Zi-Wei Liu"
+   ],
+   "year": 2023,
+   "venue": "Neural Information Processing Systems",
+   "url": "https://www.semanticscholar.org/paper/f17105593312305a66f994735437f4b744760aef",
+   "arxiv_id": "2309.17448",
+   "source": "s2",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "HybrIK: A Hybrid Analytical-Neural Inverse Kinematics Solution for 3D Human Pose and Shape Estimation",
+   "authors": [
+    "Jiefeng Li",
+    "Chao Xu",
+    "Zhicun Chen",
+    "Siyuan Bian",
+    "Lixin Yang",
+    "Ce-Wu Lu"
+   ],
+   "year": 2020,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/e000b443c1999ea941d36108fbd6463d8f621a42",
+   "arxiv_id": "2011.14672",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "AiOS: All-in-One-Stage Expressive Human Pose and Shape Estimation",
+   "authors": [
+    "Qing-Ping Sun",
+    "Yanjun Wang",
+    "Ai-Ling Zeng",
+    "Wan-Qi Yin",
+    "Chen Wei",
+    "Wen-Jia Wang",
+    "Haiyi Mei",
+    "Chi-Sing Leung",
+    "Zi-Wei Liu",
+    "Lei Yang",
+    "Zhongang Cai"
+   ],
+   "year": 2024,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/75c07a53e2a310123337a0a45c2cb739d483f5f2",
+   "arxiv_id": "2403.17934",
+   "source": "s2",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Neural Body Fitting: Unifying Deep Learning and Model Based Human Pose and Shape Estimation",
+   "authors": [
+    "Mohamed Omran",
+    "Christoph Lassner",
+    "G. Pons-Moll",
+    "Peter Gehler",
+    "B. Schiele"
+   ],
+   "year": 2018,
+   "venue": "International Conference on 3D Vision",
+   "url": "https://www.semanticscholar.org/paper/ed48b221b81bc43b4ded24c20bf16c571e682ba6",
+   "arxiv_id": "1808.05942",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Capturing Humans in Motion: Temporal-Attentive 3D Human Pose and Shape Estimation from Monocular Video",
+   "authors": [
+    "Wen-Li Wei",
+    "Jen-Chun Lin",
+    "Tyng-Luh Liu",
+    "H. Liao"
+   ],
+   "year": 2022,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/45de580d0150bb081091c80bb3397b89fe26f840",
+   "arxiv_id": "2203.08534",
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "LiveHPS: LiDAR-Based Scene-Level Human Pose and Shape Estimation in Free Environment",
+   "authors": [
+    "Yi-Ming Ren",
+    "Xiao Han",
+    "Chengfeng Zhao",
+    "Jing-Ya Wang",
+    "Lan Xu",
+    "Jing-Yi Yu",
+    "Yue-Xin Ma"
+   ],
+   "year": 2024,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/e72cb6b5a855446a03accf9585abcd339d472383",
+   "arxiv_id": "2402.17171",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Global-to-Local Modeling for Video-Based 3D Human Pose and Shape Estimation",
+   "authors": [
+    "Xiao-Long Shen",
+    "Zongxin Yang",
+    "Xiaohan Wang",
+    "Jian-Xin Ma",
+    "Chang-Jian Zhou",
+    "Yezhou Yang"
+   ],
+   "year": 2023,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/6b2c913fff59a48393c018ece8249874b2e66313",
+   "arxiv_id": "2303.14747",
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "NIKI: Neural Inverse Kinematics with Invertible Neural Networks for 3D Human Pose and Shape Estimation",
+   "authors": [
+    "Jiefeng Li",
+    "Siyuan Bian",
+    "Qi Liu",
+    "Jiasheng Tang",
+    "Fan Wang",
+    "Ce-Wu Lu"
+   ],
+   "year": 2023,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/c3883397cce39a4c6079368973a4a82e5debb658",
+   "arxiv_id": "2305.08590",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "MTFT: Multimodal Temporal Fusion Transformer for 3D Human Pose and Shape Estimation",
+   "authors": [
+    "Ke Song",
+    "Yun-He Wu",
+    "Hui-Yuan Xiong",
+    "Qingtang Zhu",
+    "Fan-Bin Gu",
+    "Jing-Yuan Fan"
+   ],
+   "year": 2025,
+   "venue": "Signal, Image and Video Processing",
+   "url": "https://www.semanticscholar.org/paper/4ab78a6ae243011dce73e7ca57f9f6e9b8c86e7f",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Personalized Graph Generation for Monocular 3D Human Pose and Shape Estimation",
+   "authors": [
+    "Junxing Hu",
+    "Hongwen Zhang",
+    "Yun-Long Wang",
+    "Min Ren",
+    "Zhe Sun"
+   ],
+   "year": 2024,
+   "venue": "IEEE transactions on circuits and systems for video technology (Print)",
+   "url": "https://www.semanticscholar.org/paper/1dca727027fbae9911422d71c798b01f7eb236d5",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "EventHPE: Event-based 3D Human Pose and Shape Estimation",
+   "authors": [
+    "Shi-Hao Zou",
+    "Chuan Guo",
+    "Xin-Xin Zuo",
+    "Sen Wang",
+    "Pengyuan Wang",
+    "Xiao-Qin Hu",
+    "Shou-Shun Chen",
+    "Ming-Lun Gong",
+    "Li Cheng"
+   ],
+   "year": 2021,
+   "venue": "IEEE International Conference on Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/a84ca51c66d7b6649ff93cada6a389c1c17fbd2b",
+   "arxiv_id": "2108.06819",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "3D Human Pose and Shape Estimation from LiDAR Point Clouds: A Review",
+   "authors": [
+    "Salma Galaaoui",
+    "Eduardo Valle",
+    "David Picard",
+    "Nermin Samet"
+   ],
+   "year": 2025,
+   "venue": "arXiv.org",
+   "url": "https://www.semanticscholar.org/paper/2c6b1dd7dd89970fd92372e54703ed1f1ab3cfd5",
+   "arxiv_id": "2509.12197",
+   "source": "s2",
+   "category": "Surveys",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Bodies at Rest: 3D Human Pose and Shape Estimation From a Pressure Image Using Synthetic Data",
+   "authors": [
+    "Henry M. Clever",
+    "Zackory Erickson",
+    "Ariel Kapusta",
+    "G. Turk",
+    "C. Liu",
+    "C. Kemp"
+   ],
+   "year": 2020,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/8fe998c60c495fa345580910301ae441985e510e",
+   "arxiv_id": "2004.01166",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "CoEvoer: Collaborative Evolution Transformer for Upper-Body Expressive Human Pose and Shape Estimation",
+   "authors": [
+    "Yuxiang Zhao",
+    "Wei Huang",
+    "Yu-Jie Song",
+    "Liu Wang",
+    "Huan Zhao"
+   ],
+   "year": 2026,
+   "venue": "AAAI Conference on Artificial Intelligence",
+   "url": "https://www.semanticscholar.org/paper/37352146d25a591d030475bdc1bcc572e92d80ab",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Keep It SMPL: Automatic Estimation of 3D Human Pose and Shape from a Single Image",
+   "authors": [
+    "Federica Bogo",
+    "Angjoo Kanazawa",
+    "Christoph Lassner",
+    "Peter Gehler",
+    "J. Romero",
+    "Michael J. Black"
+   ],
+   "year": 2016,
+   "venue": "European Conference on Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/4233b07033a1ef8af188383f30602a5fd0aa2181",
+   "arxiv_id": "1607.08128",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "UNSPAT: Uncertainty-Guided SpatioTemporal Transformer for 3D Human Pose and Shape Estimation on Videos",
+   "authors": [
+    "Minsoo Lee",
+    "Hyunmin Lee",
+    "Bumsoo Kim",
+    "Seung-Hwan Kim"
+   ],
+   "year": 2024,
+   "venue": "IEEE Workshop/Winter Conference on Applications of Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/5b69c1b91e009979a45f6f3ad5167b93ad9b74c2",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "HYRE: Hybrid Regressor for 3D Human Pose and Shape Estimation",
+   "authors": [
+    "Wen-Hao Li",
+    "Meng-Yuan Liu",
+    "Hong Liu",
+    "Bin Ren",
+    "Xia Li",
+    "Ying-Xuan You",
+    "N. Sebe"
+   ],
+   "year": 2024,
+   "venue": "IEEE Transactions on Image Processing",
+   "url": "https://www.semanticscholar.org/paper/a58e1145a620203139cca702960d0528d3f01f13",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "LPSNet: End-to-End Human Pose and Shape Estimation with Lensless Imaging",
+   "authors": [
+    "Hao-Yang Ge",
+    "Qiao Feng",
+    "Hailong Jia",
+    "Xiong-Zheng Li",
+    "Xiangjun Yin",
+    "You Zhou",
+    "Jing-Yu Yang",
+    "Kun Li"
+   ],
+   "year": 2024,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/0b9099967de952c0d567d71eb7c7d6d287fb301b",
+   "arxiv_id": "2404.01941",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "IKOL: Inverse kinematics optimization layer for 3D human pose and shape estimation via Gauss-Newton differentiation",
+   "authors": [
+    "Ju-Ze Zhang",
+    "Ye Shi",
+    "Yue-Xin Ma",
+    "Lan Xu",
+    "Jing-Yi Yu",
+    "Jing-Ya Wang"
+   ],
+   "year": 2023,
+   "venue": "AAAI Conference on Artificial Intelligence",
+   "url": "https://www.semanticscholar.org/paper/aa5262e4d46f8565de1d6049d1f85e8e2033601a",
+   "arxiv_id": "2302.01058",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Towards Robust and Expressive Whole-body Human Pose and Shape Estimation",
+   "authors": [
+    "Hui Pang",
+    "Zhongang Cai",
+    "Lei Yang",
+    "Qi Tao",
+    "Zhong-Hua Wu",
+    "Tianwei Zhang",
+    "Zi-Wei Liu"
+   ],
+   "year": 2023,
+   "venue": "Neural Information Processing Systems",
+   "url": "https://www.semanticscholar.org/paper/bf78a3ef490de1c3463cdc7efe9ab5f17c40afce",
+   "arxiv_id": "2312.08730",
+   "source": "s2",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "PoseExaminer: Automated Testing of Out-of-Distribution Robustness in Human Pose and Shape Estimation",
+   "authors": [
+    "Qihao Liu",
+    "Adam Kortylewski",
+    "A. Yuille"
+   ],
+   "year": 2023,
+   "venue": "Computer Vision and Pattern Recognition",
+   "url": "https://www.semanticscholar.org/paper/85fcce7ef6f5eec2d5e5bce82fc7246e8a90696c",
+   "arxiv_id": "2303.07337",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Capturing the motion of every joint: 3D human pose and shape estimation with independent tokens",
+   "authors": [
+    "Sen Yang",
+    "Wen Heng",
+    "Gang Liu",
+    "Guozhong Luo",
+    "Wan-Kou Yang",
+    "Gang Yu"
+   ],
+   "year": 2023,
+   "venue": "International Conference on Learning Representations",
+   "url": "https://www.semanticscholar.org/paper/79139657e26e4dca31405b36ac79ba69823c836a",
+   "arxiv_id": "2303.00298",
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "PointHPS: Cascaded 3D Human Pose and Shape Estimation from Point Clouds",
+   "authors": [
+    "Zhongang Cai",
+    "Liang Pan",
+    "Wan-Qi Yin",
+    "Chen Wei",
+    "Fangzhou Hong",
+    "Mingyuan Zhang",
+    "Atsushi Yamashita",
+    "Chen Change Loy",
+    "Lei Yang",
+    "Zi-Wei Liu"
+   ],
+   "year": 2023,
+   "venue": "International Journal of Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/4d0726825ae23fe88c9c47688bcb3d0affad6cc9",
+   "arxiv_id": "2308.14492",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Dense depth alignment for human pose and shape estimation",
+   "authors": [
+    "Batuhan Karagöz",
+    "Ozhan Suat",
+    "Bedirhan Uguz",
+    "Emre Akbas"
+   ],
+   "year": 2024,
+   "venue": "Signal, Image and Video Processing",
+   "url": "https://www.semanticscholar.org/paper/f8e6b9dd9cc81898f8a1bd8603976aca1592bbdd",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "AirPose: Multi-View Fusion Network for Aerial 3D Human Pose and Shape Estimation",
+   "authors": [
+    "Nitin Saini",
+    "Elia Bonetto",
+    "E. Price",
+    "Aamir Ahmad",
+    "Michael J. Black"
+   ],
+   "year": 2022,
+   "venue": "IEEE Robotics and Automation Letters",
+   "url": "https://www.semanticscholar.org/paper/cf784a4ba0f1ac076db63305063b15bde12c2dc7",
+   "arxiv_id": "2201.08093",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Selective sampling and temporal positional encoding for monocular video-based 3D human pose and shape estimation",
+   "authors": [
+    "Yupeng Hou",
+    "Han Wen",
+    "Guangping Zeng"
+   ],
+   "year": 2025,
+   "venue": "International Conference on Signal Processing and Computer Science",
+   "url": "https://www.semanticscholar.org/paper/c8f6c4a5793827b0f91b663cf7c225575c41a697",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Decoupled Depth-guided Coordinate-aware Network for 3D Human Pose and Shape Estimation",
+   "authors": [
+    "Ming-Yu Mao",
+    "Shuxian Li",
+    "Yu-Hao Cheng",
+    "Long Chen",
+    "Dan-Dan Sun",
+    "Hongda Li",
+    "Xin-Yue Fan"
+   ],
+   "year": 2025,
+   "venue": "2025 IEEE International Conference on Multimedia and Expo Workshops (ICMEW)",
+   "url": "https://www.semanticscholar.org/paper/5e2acae96ff85f50e8ece2761aaf154164954e79",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Bidirectional temporal feature for 3D human pose and shape estimation from a video",
+   "authors": [
+    "Li-Bo Sun",
+    "Ting-Ao Tang",
+    "Yuke Qu",
+    "Wen-Hu Qin"
+   ],
+   "year": 2023,
+   "venue": "Comput. Animat. Virtual Worlds",
+   "url": "https://www.semanticscholar.org/paper/a2e45883a2f2a9e43d64704e2f8e0e6c1f88c30b",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Pseudo View Representation Learning for Monocular RGB-D Human Pose and Shape Estimation",
+   "authors": [
+    "Armando Zhu",
+    "Jie-Feng Li",
+    "Cewu Lu"
+   ],
+   "year": 2022,
+   "venue": "IEEE Signal Processing Letters",
+   "url": "https://www.semanticscholar.org/paper/a68cbe27ba3c15092b23a2b7a2833d8be2ca2bb7",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Multi-view human pose and shape estimation via mesh-aligned voxel interpolation",
+   "authors": [
+    "Yi-Xuan Zhang",
+    "Ji-Guang Zhang",
+    "Shi-Biao Xu",
+    "Jun Xiao"
+   ],
+   "year": 2024,
+   "venue": "Information Fusion",
+   "url": "https://www.semanticscholar.org/paper/c3aab7081582d74cf3eb67dbd47530be58e01baf",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "3D Human Pose and Shape Estimation Through Collaborative Learning and Multi-view Model-fitting",
+   "authors": [
+    "Zhong-Guo Li",
+    "Magnus Oskarsson",
+    "A. Heyden"
+   ],
+   "year": 2021,
+   "venue": "IEEE Workshop/Winter Conference on Applications of Computer Vision",
+   "url": "https://www.semanticscholar.org/paper/4d864009ab8a388e67f1db3b99a22f1d00d57958",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "3D human pose and shape estimation via de-occlusion multi-task learning",
+   "authors": [
+    "Hang Ran",
+    "X. Ning",
+    "Weijun Li",
+    "Mei-Lan Hao",
+    "P. Tiwari"
+   ],
+   "year": 2023,
+   "venue": "Neurocomputing",
+   "url": "https://www.semanticscholar.org/paper/c7758d3bc2caba0182be8f44e45ae76ebbca8e72",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "LEAPSE: Learning Environment Affordances for 3D Human Pose and Shape Estimation",
+   "authors": [
+    "Fang-Zheng Tian",
+    "Sungchan Kim"
+   ],
+   "year": 2024,
+   "venue": "IEEE Transactions on Image Processing",
+   "url": "https://www.semanticscholar.org/paper/ec0d0f8d3c7c5a792b19024f67beba8f13ee952d",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Joint Path Alignment Framework for 3D Human Pose and Shape Estimation From Video",
+   "authors": [
+    "Jia-Jing Hong",
+    "Sunjae Yoon",
+    "Junyeong Kim",
+    "Changdong Yoo"
+   ],
+   "year": 2023,
+   "venue": "IEEE Access",
+   "url": "https://www.semanticscholar.org/paper/b7d02320539a4650e67192a6c08d913a724fe1af",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": ": Neural Inverse Kinematics with Invertible Neural Networks for 3D Human Pose and Shape Estimation”",
+   "authors": [],
+   "year": 2023,
+   "venue": "",
+   "url": "https://www.semanticscholar.org/paper/89d9179edc2494b0e0f69da3f04c54d2049e76ef",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-09"
+  },
+  {
+   "title": "Action-conditioned contrastive learning for 3D human pose and shape estimation in videos",
+   "authors": [
+    "Inpyo Song",
+    "Moonwook Ryu",
+    "Jangwon Lee"
+   ],
+   "year": 2024,
+   "venue": "Computer Vision and Image Understanding",
+   "url": "https://www.semanticscholar.org/paper/c5f1de15332c8dedf864312ff55655b0c890e082",
+   "arxiv_id": null,
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-09"
   }
  ]
 }
