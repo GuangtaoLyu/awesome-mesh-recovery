@@ -21,10 +21,10 @@ From human/hand recovery to robot retargeting, teleoperation and tracking. **arX
 
 ### Whole-Body Recovery → Humanoid Robots
 
-- **ExMR: Extremity Motion Refinement for Monocular Human Motion Capture** (arXiv preprint (2026)) — [Paper](https://arxiv.org/abs/2610.26213) · [Code (demo only)](https://github.com/twehrbein/ExMR)
+- **ExMR: Extremity Motion Refinement for Monocular Human Motion Capture** (arXiv 2026) — [Paper](https://arxiv.org/abs/2610.26213) · [Code (demo only)](https://github.com/twehrbein/ExMR)
 - **GMR: General Motion Retargeting** (ICRA 2026) — [Paper](https://arxiv.org/abs/2510.02252) · [Code](https://github.com/YanjieZe/GMR)
 - **GVHMR: World-Grounded Human Motion Recovery via Gravity-View Coordinates** (SIGGRAPH Asia 2024 / TPAMI 2026) — [Paper](https://arxiv.org/abs/2409.06662) · [Code](https://github.com/zju3dv/GVHMR)
-- **MoViC: Real-Time Humanoid Whole-Body Control from Monocular Video Streams** (arXiv preprint (2026)) — [Paper](https://arxiv.org/abs/2611.19998) · [Project](https://movicproject.github.io/)
+- **MoViC: Real-Time Humanoid Whole-Body Control from Monocular Video Streams** (arXiv 2026) — [Paper](https://arxiv.org/abs/2611.19998) · [Project](https://movicproject.github.io/)
 - **OnlineHMR: Video-based Online World-Grounded Human Mesh Recovery** (CVPR 2026) — [Paper](https://arxiv.org/abs/2603.17355) · [Code](https://github.com/Tsukasane/Video-OnlineHMR)
 - **SONIC: Supersizing Motion Tracking for Natural Humanoid Whole-Body Control** (Science Robotics 2026) — [Paper](https://arxiv.org/abs/2511.07820) · [Project](https://nvlabs.github.io/GEAR-SONIC/) · [Models](https://huggingface.co/nvidia/GEAR-SONIC)
 - **TWIST2: Scalable, Portable, and Holistic Humanoid Data Collection System** (ICRA 2026) — [Paper](https://arxiv.org/abs/2511.02832) · [Code](https://github.com/amazon-far/TWIST2)
@@ -35,12 +35,12 @@ From human/hand recovery to robot retargeting, teleoperation and tracking. **arX
 ### Hand-Object Recovery → Dexterous Robots
 
 - **AdaDexTrack: Dynamic Modulation for Adaptive and Generalizable Dexterous Manipulation Tracking** (CVPR 2026) — [Paper](https://arxiv.org/abs/2610.33852) · [Code](https://github.com/Janebek/AdaDexTrack)
-- **Do as I Do: Dexterous Manipulation Data from Everyday Human Videos** (arXiv preprint (2026)) — [Paper](https://arxiv.org/abs/2606.19333) · [Code](https://github.com/malik-group/do-as-i-do)
-- **Hand2Robot: Object-Centric 4D Hand Reconstruction from Human Demonstrations for Robotics** (arXiv preprint (2026)) — [Paper](https://arxiv.org/abs/2610.15769)
-- **MINT: A Unified Model for World-Space Camera and Hand Motion Estimation from Scalable Egocentric Pipeline Supervision** (arXiv preprint (2026)) — [Paper](https://arxiv.org/abs/2609.04958) · [Code](https://github.com/wuji-technology/wuji-ego-mint)
-- **OmniHOI: Dexterous Hand-Object Interaction from Monocular Human Video** (arXiv preprint (2026)) — [Paper](https://arxiv.org/abs/2610.10855)
+- **Do as I Do: Dexterous Manipulation Data from Everyday Human Videos** (arXiv 2026) — [Paper](https://arxiv.org/abs/2606.19333) · [Code](https://github.com/malik-group/do-as-i-do)
+- **Hand2Robot: Object-Centric 4D Hand Reconstruction from Human Demonstrations for Robotics** (arXiv 2026) — [Paper](https://arxiv.org/abs/2610.15769)
+- **MINT: A Unified Model for World-Space Camera and Hand Motion Estimation from Scalable Egocentric Pipeline Supervision** (arXiv 2026) — [Paper](https://arxiv.org/abs/2609.04958) · [Code](https://github.com/wuji-technology/wuji-ego-mint)
+- **OmniHOI: Dexterous Hand-Object Interaction from Monocular Human Video** (arXiv 2026) — [Paper](https://arxiv.org/abs/2610.10855)
 - **UniDex: A Robot Foundation Suite for Universal Dexterous Hand Control from Egocentric Human Videos** (CVPR 2026) — [Paper](https://arxiv.org/abs/2603.22264) · [Code](https://github.com/unidex-ai/UniDex)
-- **VideoManip: Dexterous Manipulation Policies from RGB Human Videos via 4D Hand-Object Trajectory Reconstruction** (arXiv preprint (2026)) — [Paper](https://arxiv.org/abs/2602.09013) · [Code (partial release)](https://github.com/hychen-naza/VideoManip)
+- **VideoManip: Dexterous Manipulation Policies from RGB Human Videos via 4D Hand-Object Trajectory Reconstruction** (arXiv 2026) — [Paper](https://arxiv.org/abs/2602.09013) · [Code (partial release)](https://github.com/hychen-naza/VideoManip)
 - **DexTrack: Towards Generalizable Neural Tracking Control for Dexterous Manipulation from Human References** (ICLR 2025) — [Paper](https://arxiv.org/abs/2502.09614) · [Code](https://github.com/Meowuu7/DexTrack)
 - **HaWoR: World-Space Hand Motion Reconstruction from Egocentric Videos** (CVPR 2025) — [Paper](https://arxiv.org/abs/2501.02973) · [Code](https://github.com/ThunderVVV/HaWoR)
 - **ManipTrans: Efficient Dexterous Bimanual Manipulation Transfer via Residual Learning** (CVPR 2025) — [Paper](https://arxiv.org/abs/2503.21860) · [Code](https://github.com/ManipTrans/ManipTrans)
