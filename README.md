@@ -11,7 +11,7 @@ A curated, auto-updated list of 3D human mesh recovery / pose-and-shape estimati
 - [Occlusion & In-the-Wild Recovery](#occlusion-and-in-the-wild-recovery)
 - [Hand, Face & Expressive Mesh](#hand,-face-and-expressive-mesh)
 - [Motion & Temporal Recovery](#motion-and-temporal-recovery)
-- [Embodied Motion Recovery & Robot Tracking](#embodied-motion-recovery-and-robot-tracking)
+- [Embodied Motion Recovery & Robot Tracking](#embodied-motion-recovery--robot-tracking)
 - [Datasets & Benchmarks](#datasets-and-benchmarks)
 - [Surveys](#surveys)
 

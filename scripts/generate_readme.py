@@ -138,7 +138,7 @@ def generate(papers, config, readme_path):
         if cats.get(c):
             lines.append(f"- [{c}](#{_anchor(c)})")
         if c == "Motion & Temporal Recovery" and embodied_lines:
-            lines.append("- [Embodied Motion Recovery & Robot Tracking](#embodied-motion-recovery-and-robot-tracking)")
+            lines.append("- [Embodied Motion Recovery & Robot Tracking](#embodied-motion-recovery--robot-tracking)")
     lines.append("")
 
     for c in taxonomy:
