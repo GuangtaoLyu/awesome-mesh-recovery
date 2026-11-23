@@ -37,7 +37,8 @@
    "arxiv_id": "2601.16079",
    "source": "seed",
    "category": "Occlusion & In-the-Wild Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "Human motion reconstruction from monocular videos is a fundamental challenge in computer vision, with broad applications in AR/VR, robotics, and digital content creation, but remains challenging under frequent occlusions in real-world settings. Existing regression-based methods are efficient but fragile to missing observations, while optimization- and diffusion-based approaches improve robustness at the cost of slow inference speed and heavy preprocessing steps. To address these limitations, we leverage recent advances in generative masked modeling and present MoRo: Masked Modeling for human motion Recovery under Occlusions. MoRo is an occlusion-robust, end-to-end generative framework that formulates motion reconstruction as a video-conditioned task, and efficiently recover human motion in a consistent global coordinate system from RGB videos. By masked modeling, MoRo naturally handles occlusions while enabling efficient, end-to-end inference. To overcome the scarcity of paired video-motion data, we design a cross-modality learning scheme that learns multi-modal priors from a set of heterogeneous datasets: (i) a trajectory-aware motion prior trained on MoCap datasets, (ii) an image-conditioned pose prior trained on image-pose datasets, capturing diverse per-frame poses, and (iii) a video-conditioned masked transformer that fuses motion and pose priors, finetuned on video-motion datasets to integrate visual cues with motion dynamics for robust inference. Extensive experiments on EgoBody and RICH demonstrate that MoRo substantially outperforms state-of-the-art methods in accuracy and motion realism under occlusions, while performing on-par in non-occluded scenarios. MoRo achieves real-time inference at 70 FPS on a single H200 GPU"
   },
   {
    "title": "Fast SAM 3D Body: Accelerating SAM 3D Body for Real-Time Full-Body Human Mesh Recovery",
@@ -76,7 +77,8 @@
    "arxiv_id": "2508.06757",
    "source": "seed",
    "category": "Datasets & Benchmarks",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "Human pose and shape (HPS) estimation methods have been extensively studied, with many demonstrating high zero-shot performance on in-the-wild images and videos. However, these methods often struggle in challenging scenarios involving complex human poses or significant occlusions. Although some studies address 3D human pose estimation under occlusion, they typically evaluate performance on datasets that lack realistic or substantial occlusions, e.g., most existing datasets introduce occlusions with random patches over the human or clipart-style overlays, which may not reflect real-world challenges. To bridge this gap in realistic occlusion datasets, we introduce a novel benchmark dataset, VOccl3D, a Video-based human Occlusion dataset with 3D body pose and shape annotations. Inspired by works such as AGORA and BEDLAM, we constructed this dataset using advanced computer graphics rendering techniques, incorporating diverse real-world occlusion scenarios, clothing textures, and human motions. Additionally, we fine-tuned recent HPS methods, CLIFF and BEDLAM-CLIFF, on our dataset, demonstrating significant qualitative and quantitative improvements across multiple public datasets, as well as on the test split of our dataset, while comparing its performance with other state-of-the-art methods. Furthermore, we leveraged our dataset to enhance human detection performance under occlusion by fine-tuning an existing object detector, YOLO11, thus leading to a robust end-to-end HPS estimation system under occlusions. Overall, this dataset serves as a valuable resource for future research aimed at benchmarking methods designed to handle occlusions, offering a more realistic alternative to existing occlusion datasets. See the Project page for code and dataset:https://yashgarg98.github.io/VOccl3D-dataset/"
   },
   {
    "title": "PromptHMR: Promptable Human Mesh Recovery",
@@ -173,7 +175,9 @@
    "arxiv_id": "2402.14654",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "doi": "10.48550/arXiv.2402.14654",
+   "abstract": "We present Multi-HMR, a strong sigle-shot model for multi-person 3D human mesh recovery from a single RGB image. Predictions encompass the whole body, i.e., including hands and facial expressions, using the SMPL-X parametric model and 3D location in the camera coordinate system. Our model detects people by predicting coarse 2D heatmaps of person locations, using features produced by a standard Vision Transformer (ViT) backbone. It then predicts their whole-body pose, shape and 3D location using a new cross-attention module called the Human Prediction Head (HPH), with one query attending to the entire set of features for each detected person. As direct prediction of fine-grained hands and facial poses in a single shot, i.e., without relying on explicit crops around body parts, is hard to learn from existing data, we introduce CUFFS, the Close-Up Frames of Full-Body Subjects dataset, containing humans close to the camera with diverse hand poses. We show that incorporating it into the training data further enhances predictions, particularly for hands. Multi-HMR also optionally accounts for camera intrinsics, if available, by encoding camera ray directions for each image token. This simple design achieves strong performance on whole-body and body-only benchmarks simultaneously: a ViT-S backbone on $448{\\times}448$ images already yields a fast and competitive model, while larger models and higher resolutions obtain state-of-the-art results"
   },
   {
    "title": "Cross-Attention of Disentangled Modalities for 3D Human Mesh Recovery with Transformers",
@@ -412,7 +416,8 @@
    "arxiv_id": "2502.03836",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "Human mesh recovery can be approached using either regression-based or optimization-based methods. Regression models achieve high pose accuracy but struggle with model-to-image alignment due to the lack of explicit 2D-3D correspondences. In contrast, optimization-based methods align 3D models to 2D observations but are prone to local minima and depth ambiguity. In this work, we leverage large vision-language models (VLMs) to generate interactive body part descriptions, which serve as implicit constraints to enhance 3D perception and limit the optimization space. Specifically, we formulate monocular human mesh recovery as a distribution adaptation task by integrating both 2D observations and language descriptions. To bridge the gap between text and 3D pose signals, we first train a text encoder and a pose VQ-VAE, aligning texts to body poses in a shared latent space using contrastive learning. Subsequently, we employ a diffusion-based framework to refine the initial parameters guided by gradients derived from both 2D observations and text descriptions. Finally, the model can produce poses with accurate 3D perception and image consistency. Experimental results on multiple benchmarks validate its effectiveness. The code will be made publicly available"
   },
   {
    "title": "DeforHMR: Vision Transformer with Deformable Cross-Attention for 3D Human Mesh Recovery",
@@ -461,7 +466,8 @@
    "arxiv_id": "2401.01730",
    "source": "s2",
    "category": "Motion & Temporal Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "The recovery of 3D human mesh from monocular images has significantly been developed in recent years. However, existing models usually ignore spatial and temporal information, which might lead to mesh and image misalignment and temporal discontinuity. For this reason, we propose a novel Spatio-Temporal Alignment Fusion (STAF) model. As a video-based model, it leverages coherence clues from human motion by an attention-based Temporal Coherence Fusion Module (TCFM). As for spatial mesh-alignment evidence, we extract fine-grained local information through predicted mesh projection on the feature maps. Based on the spatial features, we further introduce a multi-stage adjacent Spatial Alignment Fusion Module (SAFM) to enhance the feature representation of the target frame. In addition to the above, we propose an Average Pooling Module (APM) to allow the model to focus on the entire input sequence rather than just the target frame. This method can remarkably improve the smoothness of recovery results from video. Extensive experiments on 3DPW, MPII3D, and H36M demonstrate the superiority of STAF. We achieve a state-of-the-art trade-off between precision and smoothness. Our code and more video results are on the project page https://yw0208.github.io/staf/"
   },
   {
    "title": "Latent-Info and Low-Dimensional Learning for Human Mesh Recovery and Parallel Optimization",
@@ -476,7 +482,8 @@
    "arxiv_id": "2510.18267",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "Existing 3D human mesh recovery methods often fail to fully exploit the latent information (e.g., human motion, shape alignment), leading to issues with limb misalignment and insufficient local details in the reconstructed human mesh (especially in complex scenes). Furthermore, the performance improvement gained by modelling mesh vertices and pose node interactions using attention mechanisms comes at a high computational cost. To address these issues, we propose a two-stage network for human mesh recovery based on latent information and low dimensional learning. Specifically, the first stage of the network fully excavates global (e.g., the overall shape alignment) and local (e.g., textures, detail) information from the low and high-frequency components of image features and aggregates this information into a hybrid latent frequency domain feature. This strategy effectively extracts latent information. Subsequently, utilizing extracted hybrid latent frequency domain features collaborates to enhance 2D poses to 3D learning. In the second stage, with the assistance of hybrid latent features, we model the interaction learning between the rough 3D human mesh template and the 3D pose, optimizing the pose and shape of the human mesh. Unlike existing mesh pose interaction methods, we design a low-dimensional mesh pose interaction method through dimensionality reduction and parallel optimization that significantly reduces computational costs without sacrificing reconstruction accuracy. Extensive experimental results on large publicly available datasets indicate superiority compared to the most state-of-the-art"
   },
   {
    "title": "Self-Supervised Human Mesh Recovery from Partial Point Cloud via a Self-Improving Loop",
@@ -543,7 +550,8 @@
    "arxiv_id": "2510.18256",
    "source": "s2",
    "category": "Motion & Temporal Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "3D human meshes show a natural hierarchical structure (like torso-limbs-fingers). But existing video-based 3D human mesh recovery methods usually learn mesh features in Euclidean space. It's hard to catch this hierarchical structure accurately. So wrong human meshes are reconstructed. To solve this problem, we propose a hyperbolic space learning method leveraging temporal motion prior for recovering 3D human meshes from videos. First, we design a temporal motion prior extraction module. This module extracts the temporal motion features from the input 3D pose sequences and image feature sequences respectively. Then it combines them into the temporal motion prior. In this way, it can strengthen the ability to express features in the temporal motion dimension. Since data representation in non-Euclidean space has been proved to effectively capture hierarchical relationships in real-world datasets (especially in hyperbolic space), we further design a hyperbolic space optimization learning strategy. This strategy uses the temporal motion prior information to assist learning, and uses 3D pose and pose motion information respectively in the hyperbolic space to optimize and learn the mesh features. Then, we combine the optimized results to get an accurate and smooth human mesh. Besides, to make the optimization learning process of human meshes in hyperbolic space stable and effective, we propose a hyperbolic mesh optimization loss. Extensive experimental results on large publicly available datasets indicate superiority in comparison with most state-of-the-art"
   },
   {
    "title": "POTTER: Pooling Attention Transformer for Efficient Human Mesh Recovery",
@@ -559,7 +567,8 @@
    "arxiv_id": "2303.13357",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "Transformer architectures have achieved SOTA performance on the human mesh recovery (HMR) from monocular images. However, the performance gain has come at the cost of substantial memory and computational overhead. A lightweight and efficient model to reconstruct accurate human mesh is needed for real-world applications. In this paper, we propose a pure transformer architecture named POoling aTtention TransformER (POTTER) for the HMR task from single images. Observing that the conventional attention module is memory and computationally expensive, we propose an efficient pooling attention module, which significantly reduces the memory and computational cost without sacrificing performance. Furthermore, we design a new transformer architecture by integrating a High-Resolution (HR) stream for the HMR task. The high-resolution local and global features from the HR stream can be utilized for recovering more accurate human mesh. Our POTTER outperforms the SOTA method METRO by only requiring 7% of total parameters and 14% of the Multiply-Accumulate Operations on the Human3.6M (PA-MPJPE metric) and 3DPW (all three metrics) datasets. The project webpage is https://zczcwh.github.io/potter_page"
   },
   {
    "title": "Deformable Mesh Transformer for 3D Human Mesh Recovery",
@@ -591,7 +600,9 @@
    "arxiv_id": null,
    "source": "s2",
    "category": "Hand, Face & Expressive Mesh",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "doi": "10.1145/3664647.3681641",
+   "abstract": "Expressive Human Mesh Recovery (HMR) involves reconstructing the 3D human body, including hands and face, from RGB images. It is difficult because humans are highly deformable, and hands are small and frequently occluded. Recent approaches have attempted to mitigate these issues using large datasets and models, but these solutions remain imperfect. Specifically, whole-body estimation models often inaccurately estimate hand poses, while hand expert models struggle with severe occlusions. To overcome these limitations, we introduce a dual-path cross augmentation framework with a novel adaptation approach called HMR-Adapter that enhances existing large HMR models. HMR-Adapter significantly improves expressive HMR performance by injecting additional guidance from other body parts. This approach refines hand pose predictions by incorporating body pose information and uses additional hand features to enhance body pose estimation in whole-body models. Remarkably, an HMR-Adapter with about 30M parameters significantly improves expressive HMR results by combining the adapted large whole-body and hand expert models. We show extensive experiments and analysis to demonstrate the efficacy of our method"
   },
   {
    "title": "A Progressive Quadric Graph Convolutional Network for 3D Human Mesh Recovery",
@@ -625,7 +636,8 @@
    "arxiv_id": "2308.13369",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "Recovering a 3D human mesh from a single RGB image is a challenging task due to depth ambiguity and self-occlusion, resulting in a high degree of uncertainty. Meanwhile, diffusion models have recently seen much success in generating high-quality outputs by progressively denoising noisy inputs. Inspired by their capability, we explore a diffusion-based approach for human mesh recovery, and propose a Human Mesh Diffusion (HMDiff) framework which frames mesh recovery as a reverse diffusion process. We also propose a Distribution Alignment Technique (DAT) that infuses prior distribution information into the mesh distribution diffusion process, and provides useful prior knowledge to facilitate the mesh recovery task. Our method achieves state-of-the-art performance on three widely used datasets. Project page: https://gongjia0208.github.io/HMDiff/"
   },
   {
    "title": "Learning Analytical Posterior Probability for Human Mesh Recovery",
@@ -695,7 +707,8 @@
    "arxiv_id": "2412.14444",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "Human mesh recovery (HMR) is crucial in many computer vision applications; from health to arts and entertainment. HMR from monocular images has predominantly been addressed by deterministic methods that output a single prediction for a given 2D image. However, HMR from a single image is an ill-posed problem due to depth ambiguity and occlusions. Probabilistic methods have attempted to address this by generating and fusing multiple plausible 3D reconstructions, but their performance has often lagged behind deterministic approaches. In this paper, we introduce GenHMR, a novel generative framework that reformulates monocular HMR as an image-conditioned generative task, explicitly modeling and mitigating uncertainties in the 2D-to-3D mapping process. GenHMR comprises two key components: (1) a pose tokenizer to convert 3D human poses into a sequence of discrete tokens in a latent space, and (2) an image-conditional masked transformer to learn the probabilistic distributions of the pose tokens, conditioned on the input image prompt along with randomly masked token sequence. During inference, the model samples from the learned conditional distribution to iteratively decode high-confidence pose tokens, thereby reducing 3D reconstruction uncertainties. To further refine the reconstruction, a 2D pose-guided refinement technique is proposed to directly fine-tune the decoded pose tokens in the latent space, which forces the projected 3D body mesh to align with the 2D pose clues. Experiments on benchmark datasets demonstrate that GenHMR significantly outperforms state-of-the-art methods. Project website can be found at https://m-usamasaleem.github.io/publication/GenHMR/GenHMR.html"
   },
   {
    "title": "JFG-HMR: 3D joint feature-guided human mesh recovery with global-local feature fusion",
@@ -750,7 +763,8 @@
    "arxiv_id": null,
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "doi": "10.1007/s11263-025-02574-5"
   },
   {
    "title": "JOTR: 3D Joint Contrastive Learning with Transformers for Occluded Human Mesh Recovery",
@@ -768,7 +782,8 @@
    "arxiv_id": "2307.16377",
    "source": "s2",
    "category": "Occlusion & In-the-Wild Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "In this study, we focus on the problem of 3D human mesh recovery from a single image under obscured conditions. Most state-of-the-art methods aim to improve 2D alignment technologies, such as spatial averaging and 2D joint sampling. However, they tend to neglect the crucial aspect of 3D alignment by improving 3D representations. Furthermore, recent methods struggle to separate the target human from occlusion or background in crowded scenes as they optimize the 3D space of target human with 3D joint coordinates as local supervision. To address these issues, a desirable method would involve a framework for fusing 2D and 3D features and a strategy for optimizing the 3D space globally. Therefore, this paper presents 3D JOint contrastive learning with TRansformers (JOTR) framework for handling occluded 3D human mesh recovery. Our method includes an encoder-decoder transformer architecture to fuse 2D and 3D representations for achieving 2D$\\&$3D aligned results in a coarse-to-fine manner and a novel 3D joint contrastive learning approach for adding explicitly global supervision for the 3D feature space. The contrastive learning approach includes two contrastive losses: joint-to-joint contrast for enhancing the similarity of semantically similar voxels (i.e., human joints), and joint-to-non-joint contrast for ensuring discrimination from others (e.g., occlusions and background). Qualitative and quantitative analyses demonstrate that our method outperforms state-of-the-art competitors on both occlusion-specific and standard benchmarks, significantly improving the reconstruction of occluded humans"
   },
   {
    "title": "Learning Human Mesh Recovery in 3D Scenes",
@@ -786,7 +801,8 @@
    "arxiv_id": "2306.03847",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "We present a novel method for recovering the absolute pose and shape of a human in a pre-scanned scene given a single image. Unlike previous methods that perform sceneaware mesh optimization, we propose to first estimate absolute position and dense scene contacts with a sparse 3D CNN, and later enhance a pretrained human mesh recovery network by cross-attention with the derived 3D scene cues. Joint learning on images and scene geometry enables our method to reduce the ambiguity caused by depth and occlusion, resulting in more reasonable global postures and contacts. Encoding scene-aware cues in the network also allows the proposed method to be optimization-free, and opens up the opportunity for real-time applications. The experiments show that the proposed network is capable of recovering accurate and physically-plausible meshes by a single forward pass and outperforms state-of-the-art methods in terms of both accuracy and speed"
   },
   {
    "title": "TORE: Token Reduction for Efficient Human Mesh Recovery with Transformer",
@@ -806,7 +822,8 @@
    "arxiv_id": "2211.10705",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "In this paper, we introduce a set of simple yet effective TOken REduction (TORE) strategies for Transformer-based Human Mesh Recovery from monocular images. Current SOTA performance is achieved by Transformer-based structures. However, they suffer from high model complexity and computation cost caused by redundant tokens. We propose token reduction strategies based on two important aspects, i.e., the 3D geometry structure and 2D image feature, where we hierarchically recover the mesh geometry with priors from body structure and conduct token clustering to pass fewer but more discriminative image feature tokens to the Transformer. Our method massively reduces the number of tokens involved in high-complexity interactions in the Transformer. This leads to a significantly reduced computational cost while still achieving competitive or even higher accuracy in shape recovery. Extensive experiments across a wide range of benchmarks validate the superior effectiveness of the proposed method. We further demonstrate the generalizability of our method on hand mesh recovery. Visit our project page at https://frank-zy-dou.github.io/projects/Tore/index.html"
   },
   {
    "title": "ARTS: Semi-Analytical Regressor using Disentangled Skeletal Representations for Human Mesh Recovery from Videos",
@@ -823,7 +840,11 @@
    "arxiv_id": "2410.15582",
    "source": "s2",
    "category": "Motion & Temporal Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "Although existing video-based 3D human mesh recovery methods have made significant progress, simultaneously estimating human pose and shape from low-resolution image features limits their performance. These image features lack sufficient spatial information about the human body and contain various noises (e.g., background, lighting, and clothing), which often results in inaccurate pose and inconsistent motion. Inspired by the rapid advance in human pose estimation, we discover that compared to image features, skeletons inherently contain accurate human pose and motion. Therefore, we propose a novel semiAnalytical Regressor using disenTangled Skeletal representations for human mesh recovery from videos, called ARTS. Specifically, a skeleton estimation and disentanglement module is proposed to estimate the 3D skeletons from a video and decouple them into disentangled skeletal representations (i.e., joint position, bone length, and human motion). Then, to fully utilize these representations, we introduce a semi-analytical regressor to estimate the parameters of the human mesh model. The regressor consists of three modules: Temporal Inverse Kinematics (TIK), Bone-guided Shape Fitting (BSF), and Motion-Centric Refinement (MCR). TIK utilizes joint position to estimate initial pose parameters and BSF leverages bone length to regress bone-aligned shape parameters. Finally, MCR combines human motion representation with image features to refine the initial human model parameters. Extensive experiments demonstrate that our ARTS surpasses existing state-of-the-art video-based methods in both per-frame accuracy and temporal consistency on popular benchmarks: 3DPW, MPI-INF-3DHP, and Human3.6M. Code is available at https://github.com/TangTao-PKU/ARTS",
+   "code_url": "https://github.com/TangTao-PKU/ARTS",
+   "code_status": "repository",
+   "code_checked": "2026-11-23"
   },
   {
    "title": "Human Mesh Recovery from Arbitrary Multi-view Images",
@@ -841,7 +862,8 @@
    "arxiv_id": "2403.12434",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "Human mesh recovery from arbitrary multi-view images involves two characteristics: the arbitrary camera poses and arbitrary number of camera views. Because of the variability, designing a unified framework to tackle this task is challenging. The challenges can be summarized as the dilemma of being able to simultaneously estimate arbitrary camera poses and recover human mesh from arbitrary multi-view images while maintaining flexibility. To solve this dilemma, we propose a divide and conquer framework for Unified Human Mesh Recovery (U-HMR) from arbitrary multi-view images. In particular, U-HMR consists of a decoupled structure and two main components: camera and body decoupling (CBD), camera pose estimation (CPE), and arbitrary view fusion (AVF). As camera poses and human body mesh are independent of each other, CBD splits the estimation of them into two sub-tasks for two individual sub-networks (ie, CPE and AVF) to handle respectively, thus the two sub-tasks are disentangled. In CPE, since each camera pose is unrelated to the others, we adopt a shared MLP to process all views in a parallel way. In AVF, in order to fuse multi-view information and make the fusion operation independent of the number of views, we introduce a transformer decoder with a SMPL parameters query token to extract cross-view features for mesh recovery. To demonstrate the efficacy and flexibility of the proposed framework and effect of each component, we conduct extensive experiments on three public datasets: Human3.6M, MPI-INF-3DHP, and TotalCapture"
   },
   {
    "title": "Distribution and Depth-Aware Transformers for 3D Human Mesh Recovery",
@@ -859,7 +881,8 @@
    "arxiv_id": "2403.09063",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "Precise Human Mesh Recovery (HMR) with in-the-wild data is a formidable challenge and is often hindered by depth ambiguities and reduced precision. Existing works resort to either pose priors or multi-modal data such as multi-view or point cloud information, though their methods often overlook the valuable scene-depth information inherently present in a single image. Moreover, achieving robust HMR for out-of-distribution (OOD) data is exceedingly challenging due to inherent variations in pose, shape and depth. Consequently, understanding the underlying distribution becomes a vital subproblem in modeling human forms. Motivated by the need for unambiguous and robust human modeling, we introduce Distribution and depth-aware human mesh recovery (D2A-HMR), an end-to-end transformer architecture meticulously designed to minimize the disparity between distributions and incorporate scene-depth leveraging prior depth information. Our approach demonstrates superior performance in handling OOD data in certain scenarios while consistently achieving competitive results against state-of-the-art HMR methods on controlled datasets"
   },
   {
    "title": "LiDAR-HMR: 3D Human Mesh Recovery From LiDAR",
@@ -875,7 +898,11 @@
    "arxiv_id": "2311.11971",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "In recent years, point cloud perception tasks have been garnering increasing attention. This paper presents the first attempt to estimate 3D human body mesh from sparse LiDAR point clouds. We found that the major challenge in estimating human pose and mesh from point clouds lies in the sparsity, noise, and incompletion of LiDAR point clouds. Facing these challenges, we propose an effective sparse-to-dense reconstruction scheme to reconstruct 3D human mesh. This involves estimating a sparse representation of a human (3D human pose) and gradually reconstructing the body mesh. To better leverage the 3D structural information of point clouds, we employ a cascaded graph transformer (graphormer) to introduce point cloud features during sparse-to-dense reconstruction. Experimental results on three publicly available databases demonstrate the effectiveness of the proposed approach. Code: https://github.com/soullessrobot/LiDAR-HMR/",
+   "code_url": "https://github.com/soullessrobot/LiDAR-HMR",
+   "code_status": "repository",
+   "code_checked": "2026-11-23"
   },
   {
    "title": "VITA: ViT Acceleration for Efficient 3D Human Mesh Recovery via Hardware-Algorithm Co-Design",
@@ -910,7 +937,8 @@
    "arxiv_id": "2301.06020",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "Regression-based methods have shown high efficiency and effectiveness for multi-view human mesh recovery. The key components of a typical regressor lie in the feature extraction of input views and the fusion of multi-view features. In this paper, we present Pixel-aligned Feedback Fusion (PaFF) for accurate yet efficient human mesh recovery from multi-view images. PaFF is an iterative regression framework that performs feature extraction and fusion alternately. At each iteration, PaFF extracts pixel-aligned feedback features from each input view according to the reprojection of the current estimation and fuses them together with respect to each vertex of the downsampled mesh. In this way, our regressor can not only perceive the misalignment status of each view from the feedback features but also correct the mesh parameters more effectively based on the feature fusion on mesh vertices. Additionally, our regressor disentangles the global orientation and translation of the body mesh from the estimation of mesh parameters such that the camera parameters of input views can be better utilized in the regression process. The efficacy of our method is validated in the Human3.6M dataset via comprehensive ablation experiments, where PaFF achieves 33.02 MPJPE and brings significant improvements over the previous best solutions by more than 29%. The project page with code and video results can be found at https://kairobo.github.io/PaFF/"
   },
   {
    "title": "3D Human Mesh Recovery with Learned Gradient",
@@ -965,10 +993,14 @@
    "year": 2026,
    "venue": "",
    "url": "https://doi.org/10.2139/ssrn.6021739",
-   "arxiv_id": null,
+   "arxiv_id": "2605.25861",
    "source": "crossref",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "3D human mesh recovery and 3D clothed human reconstruction are inherently related, yet they have long been studied in isolation, thereby overlooking the potential gains of joint optimization. To overcome this limitation, we propose to address these two tasks within a unified framework, which allows their mutual dependencies to be effectively exploited. Building on this idea, we propose MuNet, a mutualistic network for joint 3D human mesh recovery and 3D clothed human reconstruction from single images. First, we adopt 2-manifold graphs as a unified representation for all 3D models, enabling consistent modeling across 3D human mesh recovery and clothed human reconstruction. Second, we design an end-to-end graph convolutional network that progressively deforms an initial graph into a 3D human mesh and refines it into a detailed 3D clothed human model. Third, we introduce a mutualistic mechanism that allows reciprocal interaction between the two tasks {during training}, where 3D human mesh recovery provides guidance for 3D clothed human reconstruction, and reconstruction feedback refines the 3D human mesh recovery. We extensively evaluate MuNet on six benchmark datasets for 3D human mesh recovery and 3D clothed human reconstruction, including Human3.6M, 3DPW, MPI-INF-3DHP, THuman2.0, CAPE, and RenderPeople. Experimental results demonstrate that MuNet achieves state-of-the-art performance on both tasks across all datasets. The code of MuNet is released for research purposes at https://github.com/starVisionTeam/MuNet",
+   "code_url": "https://github.com/starVisionTeam/MuNet",
+   "code_status": "repository",
+   "code_checked": "2026-11-23"
   },
   {
    "title": "Human Mesh Recovery from Multiple Shots",
@@ -1097,10 +1129,14 @@
    "year": 2026,
    "venue": "2026 IEEE International Conference on Image Processing (ICIP)",
    "url": "https://doi.org/10.1109/icip61757.2026.11630020",
-   "arxiv_id": null,
+   "arxiv_id": "2605.08606",
    "source": "crossref",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "Egocentric human mesh recovery (HMR) from monocular head-mounted cameras is increasingly important for AR/VR applications, but remains challenging due to the lack of reliable ground-truth (GT) annotations based on parametric human body models such as SMPL and SMPL-X for real egocentric images. Existing egocentric HMR methods typically rely on pseudo-GT and focus on body pose estimation, which limits their ability to recover fine-grained whole-body details such as hands and face. We study egocentric whole-body human mesh recovery and propose a prior-guided learning framework that reconstructs whole-body meshes from a single egocentric image. We construct more accurate optimization-based pseudo-GT aligned with 3D joint supervision, and leverage multiple priors by adapting an exocentric HMR foundation model together with a diffusion-based pose prior. A deterministic undistortion module is further adopted to handle fisheye distortions in egocentric images. Experiments across multiple egocentric benchmarks demonstrate improved whole-body reconstruction compared to state-of-the-art methods, and show that our optimization-based pseudo-GT is substantially more accurate than existing regression-based pseudo-GT. To facilitate reproducibility, the code and dataset annotations are publicly available at https://github.com/naso06/EgoSMPLX",
+   "code_url": "https://github.com/naso06/EgoSMPLX",
+   "code_status": "repository",
+   "code_checked": "2026-11-23"
   },
   {
    "title": "A Geometric Feedback-Driven Depth Correction Method for Monocular Human Mesh Recovery",
@@ -1299,10 +1335,14 @@
    "year": 2026,
    "venue": "2026 12th International Conference on Virtual Reality (ICVR)",
    "url": "https://doi.org/10.1109/icvr70658.2026.11672577",
-   "arxiv_id": null,
+   "arxiv_id": "2410.04889",
    "source": "crossref",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "We present D-PoSE (Depth as an Intermediate Representation for 3D Human Pose and Shape Estimation), a one-stage method that estimates human pose and SMPL-X shape parameters from a single RGB image. Recent works use larger models with transformer backbones and decoders to improve the accuracy in human pose and shape (HPS) benchmarks. D-PoSE proposes a vision based approach that uses the estimated human depth-maps as an intermediate representation for HPS and leverages training with synthetic data and the ground-truth depth-maps provided with them for depth supervision during training. Although trained on synthetic datasets, D-PoSE achieves state-of-the-art performance on the real-world benchmark datasets, EMDB and 3DPW. Despite its simple lightweight design and the CNN backbone, it outperforms ViT-based models that have a number of parameters that is larger by almost an order of magnitude. D-PoSE code is available at: https://github.com/nvasilik/D-PoSE",
+   "code_url": "https://github.com/nvasilik/D-PoSE",
+   "code_status": "repository",
+   "code_checked": "2026-11-23"
   },
   {
    "title": "Occlusion-Aware 3D Human Pose Estimation with Body-Shape Adaptive Parametric Modeling for Adolescent Physical Health Monitoring in School Sports Scenarios",
@@ -1344,10 +1384,11 @@
    "year": 2024,
    "venue": "Advances in Neural Information Processing Systems 37",
    "url": "https://doi.org/10.52202/079017-4444",
-   "arxiv_id": null,
+   "arxiv_id": "2407.07532",
    "source": "crossref",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "With the explosive growth of available training data, single-image 3D human modeling is ahead of a transition to a data-centric paradigm. A key to successfully exploiting data scale is to design flexible models that can be supervised from various heterogeneous data sources produced by different researchers or vendors. To this end, we propose a simple yet powerful paradigm for seamlessly unifying different human pose and shape-related tasks and datasets. Our formulation is centered on the ability -- both at training and test time -- to query any arbitrary point of the human volume, and obtain its estimated location in 3D. We achieve this by learning a continuous neural field of body point localizer functions, each of which is a differently parameterized 3D heatmap-based convolutional point localizer (detector). For generating parametric output, we propose an efficient post-processing step for fitting SMPL-family body models to nonparametric joint and vertex predictions. With this approach, we can naturally exploit differently annotated data sources including mesh, 2D/3D skeleton and dense pose, without having to convert between them, and thereby train large-scale 3D human mesh and skeleton estimation models that considerably outperform the state-of-the-art on several public benchmarks including 3DPW, EMDB, EHF, SSP-3D and AGORA"
   },
   {
    "title": "Synthetic Training for Accurate 3D Human Pose and Shape Estimation in the Wild",
@@ -1717,7 +1758,8 @@
    "arxiv_id": "2610.26641",
    "source": "arxiv",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
+   "added": "2026-10-20",
+   "abstract": "Head-mounted stereo fisheye cameras provide a compact view of the wearer's body, but strong distortion, partial visibility and a short baseline make 3D pose estimation difficult. Existing refinement decoders sample image features independently in each view, without requiring the samples to correspond to a common 3D hypothesis. We introduce EgoRayFormer, a causal pose estimator that couples stereo feature sampling and geometric refinement in ray space. For each joint, the decoder projects shared 3D hypotheses along and around its viewing ray into both images. A geometric branch then corrects the projected joint locations and intersects the resulting rays; a learned gate blends this geometric estimate with a learned pose update. This formulation introduces an explicit stereo constraint while retaining flexibility when the rays provide weak depth constraints. In local evaluations on the official device-relative test splits, EgoRayFormer achieves three-seed mean MPJPEs of 17.64 mm on UnrealEgo2 and 49.55 mm on UnrealEgo-RW, improving to 47.57 mm with UnrealEgo2 pre-training. In paired validation ablations, removing the geometric branch increases MPJPE in all three seeds at both input resolutions. With a common ResNet-18 encoder and input resolution, our system reduces RW test MPJPE by 9.09 mm relative to the device-relative EgoPoseFormer baseline. A separate protocol analysis quantifies the difference between device-relative and oracle-root evaluation"
   },
   {
    "title": "Uncertainty-Aware Human Mesh Recovery from Video by Learning Part-Based 3D Dynamics",
@@ -1782,7 +1824,11 @@
    "arxiv_id": "2208.00571",
    "source": "s2",
    "category": "Motion & Temporal Recovery",
-   "added": "2026-11-09"
+   "added": "2026-11-09",
+   "abstract": "Top-down methods dominate the field of 3D human pose and shape estimation, because they are decoupled from human detection and allow researchers to focus on the core problem. However, cropping, their first step, discards the location information from the very beginning, which makes themselves unable to accurately predict the global rotation in the original camera coordinate system. To address this problem, we propose to Carry Location Information in Full Frames (CLIFF) into this task. Specifically, we feed more holistic features to CLIFF by concatenating the cropped-image feature with its bounding box information. We calculate the 2D reprojection loss with a broader view of the full frame, taking a projection process similar to that of the person projected in the image. Fed and supervised by global-location-aware information, CLIFF directly predicts the global rotation along with more accurate articulated poses. Besides, we propose a pseudo-ground-truth annotator based on CLIFF, which provides high-quality 3D annotations for in-the-wild 2D datasets and offers crucial full supervision for regression-based methods. Extensive experiments on popular benchmarks show that CLIFF outperforms prior arts by a significant margin, and reaches the first place on the AGORA leaderboard (the SMPL-Algorithms track). The code and data are available at https://github.com/huawei-noah/noah-research/tree/master/CLIFF",
+   "code_url": "https://github.com/huawei-noah/noah-research",
+   "code_status": "repository",
+   "code_checked": "2026-11-23"
   },
   {
    "title": "SMPLest-X: Ultimate Scaling for Expressive Human Pose and Shape Estimation",
@@ -1809,7 +1855,8 @@
    "arxiv_id": "2501.09782",
    "source": "s2",
    "category": "Hand, Face & Expressive Mesh",
-   "added": "2026-11-09"
+   "added": "2026-11-09",
+   "abstract": "Expressive human pose and shape estimation (EHPS) unifies body, hands, and face motion capture with numerous applications. Despite encouraging progress, current state-of-the-art methods focus on training innovative architectural designs on confined datasets. In this work, we investigate the impact of scaling up EHPS towards a family of generalist foundation models. 1) For data scaling, we perform a systematic investigation on 40 EHPS datasets, encompassing a wide range of scenarios that a model trained on any single dataset cannot handle. More importantly, capitalizing on insights obtained from the extensive benchmarking process, we optimize our training scheme and select datasets that lead to a significant leap in EHPS capabilities. Ultimately, we achieve diminishing returns at 10M training instances from diverse data sources. 2) For model scaling, we take advantage of vision transformers (up to ViT-Huge as the backbone) to study the scaling law of model sizes in EHPS. To exclude the influence of algorithmic design, we base our experiments on two minimalist architectures: SMPLer-X, which consists of an intermediate step for hand and face localization, and SMPLest-X, an even simpler version that reduces the network to its bare essentials and highlights significant advances in the capture of articulated hands. With big data and the large model, the foundation models exhibit strong performance across diverse test benchmarks and excellent transferability to even unseen environments. Moreover, our finetuning strategy turns the generalist into specialist models, allowing them to achieve further performance boosts. Notably, our foundation models consistently deliver state-of-the-art results on seven benchmarks such as AGORA, UBody, EgoBody, and our proposed SynHand dataset for comprehensive hand evaluation. (Code is available at: https://github.com/wqyin/SMPLest-X)"
   },
   {
    "title": "SMPLer-X: Scaling Up Expressive Human Pose and Shape Estimation",
@@ -1834,7 +1881,8 @@
    "arxiv_id": "2309.17448",
    "source": "s2",
    "category": "Hand, Face & Expressive Mesh",
-   "added": "2026-11-09"
+   "added": "2026-11-09",
+   "abstract": "Expressive human pose and shape estimation (EHPS) unifies body, hands, and face motion capture with numerous applications. Despite encouraging progress, current state-of-the-art methods still depend largely on a confined set of training datasets. In this work, we investigate scaling up EHPS towards the first generalist foundation model (dubbed SMPLer-X), with up to ViT-Huge as the backbone and training with up to 4.5M instances from diverse data sources. With big data and the large model, SMPLer-X exhibits strong performance across diverse test benchmarks and excellent transferability to even unseen environments. 1) For the data scaling, we perform a systematic investigation on 32 EHPS datasets, including a wide range of scenarios that a model trained on any single dataset cannot handle. More importantly, capitalizing on insights obtained from the extensive benchmarking process, we optimize our training scheme and select datasets that lead to a significant leap in EHPS capabilities. 2) For the model scaling, we take advantage of vision transformers to study the scaling law of model sizes in EHPS. Moreover, our finetuning strategy turn SMPLer-X into specialist models, allowing them to achieve further performance boosts. Notably, our foundation model SMPLer-X consistently delivers state-of-the-art results on seven benchmarks such as AGORA (107.2 mm NMVE), UBody (57.4 mm PVE), EgoBody (63.6 mm PVE), and EHF (62.3 mm PVE without finetuning). Homepage: https://caizhongang.github.io/projects/SMPLer-X/"
   },
   {
    "title": "HybrIK: A Hybrid Analytical-Neural Inverse Kinematics Solution for 3D Human Pose and Shape Estimation",
@@ -1852,7 +1900,8 @@
    "arxiv_id": "2011.14672",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-11-09"
+   "added": "2026-11-09",
+   "abstract": "Model-based 3D pose and shape estimation methods reconstruct a full 3D mesh for the human body by estimating several parameters. However, learning the abstract parameters is a highly non-linear process and suffers from image-model misalignment, leading to mediocre model performance. In contrast, 3D keypoint estimation methods combine deep CNN network with the volumetric representation to achieve pixel-level localization accuracy but may predict unrealistic body structure. In this paper, we address the above issues by bridging the gap between body mesh estimation and 3D keypoint estimation. We propose a novel hybrid inverse kinematics solution (HybrIK). HybrIK directly transforms accurate 3D joints to relative body-part rotations for 3D body mesh reconstruction, via the twist-and-swing decomposition. The swing rotation is analytically solved with 3D joints, and the twist rotation is derived from the visual cues through the neural network. We show that HybrIK preserves both the accuracy of 3D pose and the realistic body structure of the parametric human model, leading to a pixel-aligned 3D body mesh and a more accurate 3D pose than the pure 3D keypoint estimation methods. Without bells and whistles, the proposed method surpasses the state-of-the-art methods by a large margin on various 3D human pose and shape benchmarks. As an illustrative example, HybrIK outperforms all the previous methods by 13.2 mm MPJPE and 21.9 mm PVE on 3DPW dataset. Our code is available at https://github.com/Jeff-sjtu/HybrIK"
   },
   {
    "title": "AiOS: All-in-One-Stage Expressive Human Pose and Shape Estimation",
@@ -1875,7 +1924,8 @@
    "arxiv_id": "2403.17934",
    "source": "s2",
    "category": "Hand, Face & Expressive Mesh",
-   "added": "2026-11-09"
+   "added": "2026-11-09",
+   "abstract": "Expressive human pose and shape estimation (a.k.a. 3D whole-body mesh recovery) involves the human body, hand, and expression estimation. Most existing methods have tackled this task in a two-stage manner, first detecting the human body part with an off-the-shelf detection model and inferring the different human body parts individually. Despite the impressive results achieved, these methods suffer from 1) loss of valuable contextual information via cropping, 2) introducing distractions, and 3) lacking inter-association among different persons and body parts, inevitably causing performance degradation, especially for crowded scenes. To address these issues, we introduce a novel all-in-one-stage framework, AiOS, for multiple expressive human pose and shape recovery without an additional human detection step. Specifically, our method is built upon DETR, which treats multi-person whole-body mesh recovery task as a progressive set prediction problem with various sequential detection. We devise the decoder tokens and extend them to our task. Specifically, we first employ a human token to probe a human location in the image and encode global features for each instance, which provides a coarse location for the later transformer block. Then, we introduce a joint-related token to probe the human joint in the image and encoder a fine-grained local feature, which collaborates with the global feature to regress the whole-body mesh. This straightforward but effective model outperforms previous state-of-the-art methods by a 9% reduction in NMVE on AGORA, a 30% reduction in PVE on EHF, a 10% reduction in PVE on ARCTIC, and a 3% reduction in PVE on EgoBody"
   },
   {
    "title": "Neural Body Fitting: Unifying Deep Learning and Model Based Human Pose and Shape Estimation",
@@ -1892,7 +1942,11 @@
    "arxiv_id": "1808.05942",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-11-09"
+   "added": "2026-11-09",
+   "abstract": "Direct prediction of 3D body pose and shape remains a challenge even for highly parameterized deep learning models. Mapping from the 2D image space to the prediction space is difficult: perspective ambiguities make the loss function noisy and training data is scarce. In this paper, we propose a novel approach (Neural Body Fitting (NBF)). It integrates a statistical body model within a CNN, leveraging reliable bottom-up semantic body part segmentation and robust top-down body model constraints. NBF is fully differentiable and can be trained using 2D and 3D annotations. In detailed experiments, we analyze how the components of our model affect performance, especially the use of part segmentations as an explicit intermediate representation, and present a robust, efficiently trainable framework for 3D human pose estimation from 2D images with competitive results on standard benchmarks. Code will be made available at http://github.com/mohomran/neural_body_fitting",
+   "code_url": "https://github.com/mohomran/neural_body_fitting",
+   "code_status": "repository",
+   "code_checked": "2026-11-23"
   },
   {
    "title": "Capturing Humans in Motion: Temporal-Attentive 3D Human Pose and Shape Estimation from Monocular Video",
@@ -1908,7 +1962,8 @@
    "arxiv_id": "2203.08534",
    "source": "s2",
    "category": "Motion & Temporal Recovery",
-   "added": "2026-11-09"
+   "added": "2026-11-09",
+   "abstract": "Learning to capture human motion is essential to 3D human pose and shape estimation from monocular video. However, the existing methods mainly rely on recurrent or convolutional operation to model such temporal information, which limits the ability to capture non-local context relations of human motion. To address this problem, we propose a motion pose and shape network (MPS-Net) to effectively capture humans in motion to estimate accurate and temporally coherent 3D human pose and shape from a video. Specifically, we first propose a motion continuity attention (MoCA) module that leverages visual cues observed from human motion to adaptively recalibrate the range that needs attention in the sequence to better capture the motion continuity dependencies. Then, we develop a hierarchical attentive feature integration (HAFI) module to effectively combine adjacent past and future feature representations to strengthen temporal correlation and refine the feature representation of the current frame. By coupling the MoCA and HAFI modules, the proposed MPS-Net excels in estimating 3D human pose and shape in the video. Though conceptually simple, our MPS-Net not only outperforms the state-of-the-art methods on the 3DPW, MPI-INF-3DHP, and Human3.6M benchmark datasets, but also uses fewer network parameters. The video demos can be found at https://mps-net.github.io/MPS-Net/"
   },
   {
    "title": "LiveHPS: LiDAR-Based Scene-Level Human Pose and Shape Estimation in Free Environment",
@@ -1927,7 +1982,8 @@
    "arxiv_id": "2402.17171",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-11-09"
+   "added": "2026-11-09",
+   "abstract": "For human-centric large-scale scenes, fine-grained modeling for 3D human global pose and shape is significant for scene understanding and can benefit many real-world applications. In this paper, we present LiveHPS, a novel single-LiDAR-based approach for scene-level human pose and shape estimation without any limitation of light conditions and wearable devices. In particular, we design a distillation mechanism to mitigate the distribution-varying effect of LiDAR point clouds and exploit the temporal-spatial geometric and dynamic information existing in consecutive frames to solve the occlusion and noise disturbance. LiveHPS, with its efficient configuration and high-quality output, is well-suited for real-world applications. Moreover, we propose a huge human motion dataset, named FreeMotion, which is collected in various scenarios with diverse human poses, shapes and translations. It consists of multi-modal and multi-view acquisition data from calibrated and synchronized LiDARs, cameras, and IMUs. Extensive experiments on our new dataset and other public datasets demonstrate the SOTA performance and robustness of our approach. We will release our code and dataset soon"
   },
   {
    "title": "Global-to-Local Modeling for Video-Based 3D Human Pose and Shape Estimation",
@@ -1945,7 +2001,11 @@
    "arxiv_id": "2303.14747",
    "source": "s2",
    "category": "Motion & Temporal Recovery",
-   "added": "2026-11-09"
+   "added": "2026-11-09",
+   "abstract": "Video-based 3D human pose and shape estimations are evaluated by intra-frame accuracy and inter-frame smoothness. Although these two metrics are responsible for different ranges of temporal consistency, existing state-of-the-art methods treat them as a unified problem and use monotonous modeling structures (e.g., RNN or attention-based block) to design their networks. However, using a single kind of modeling structure is difficult to balance the learning of short-term and long-term temporal correlations, and may bias the network to one of them, leading to undesirable predictions like global location shift, temporal inconsistency, and insufficient local details. To solve these problems, we propose to structurally decouple the modeling of long-term and short-term correlations in an end-to-end framework, Global-to-Local Transformer (GLoT). First, a global transformer is introduced with a Masked Pose and Shape Estimation strategy for long-term modeling. The strategy stimulates the global transformer to learn more inter-frame correlations by randomly masking the features of several frames. Second, a local transformer is responsible for exploiting local details on the human mesh and interacting with the global transformer by leveraging cross-attention. Moreover, a Hierarchical Spatial Correlation Regressor is further introduced to refine intra-frame estimations by decoupled global-local representation and implicit kinematic constraints. Our GLoT surpasses previous state-of-the-art methods with the lowest model parameters on popular benchmarks, i.e., 3DPW, MPI-INF-3DHP, and Human3.6M. Codes are available at https://github.com/sxl142/GLoT",
+   "code_url": "https://github.com/sxl142/GLoT",
+   "code_status": "repository",
+   "code_checked": "2026-11-23"
   },
   {
    "title": "NIKI: Neural Inverse Kinematics with Invertible Neural Networks for 3D Human Pose and Shape Estimation",
@@ -1963,7 +2023,8 @@
    "arxiv_id": "2305.08590",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-11-09"
+   "added": "2026-11-09",
+   "abstract": "With the progress of 3D human pose and shape estimation, state-of-the-art methods can either be robust to occlusions or obtain pixel-aligned accuracy in non-occlusion cases. However, they cannot obtain robustness and mesh-image alignment at the same time. In this work, we present NIKI (Neural Inverse Kinematics with Invertible Neural Network), which models bi-directional errors to improve the robustness to occlusions and obtain pixel-aligned accuracy. NIKI can learn from both the forward and inverse processes with invertible networks. In the inverse process, the model separates the error from the plausible 3D pose manifold for a robust 3D human pose estimation. In the forward process, we enforce the zero-error boundary conditions to improve the sensitivity to reliable joint positions for better mesh-image alignment. Furthermore, NIKI emulates the analytical inverse kinematics algorithms with the twist-and-swing decomposition for better interpretability. Experiments on standard and occlusion-specific benchmarks demonstrate the effectiveness of NIKI, where we exhibit robust and well-aligned results simultaneously. Code is available at https://github.com/Jeff-sjtu/NIKI"
   },
   {
    "title": "MTFT: Multimodal Temporal Fusion Transformer for 3D Human Pose and Shape Estimation",
@@ -2019,7 +2080,8 @@
    "arxiv_id": "2108.06819",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-11-09"
+   "added": "2026-11-09",
+   "abstract": "Event camera is an emerging imaging sensor for capturing dynamics of moving objects as events, which motivates our work in estimating 3D human pose and shape from the event signals. Events, on the other hand, have their unique challenges: rather than capturing static body postures, the event signals are best at capturing local motions. This leads us to propose a two-stage deep learning approach, called EventHPE. The first-stage, FlowNet, is trained by unsupervised learning to infer optical flow from events. Both events and optical flow are closely related to human body dynamics, which are fed as input to the ShapeNet in the second stage, to estimate 3D human shapes. To mitigate the discrepancy between image-based flow (optical flow) and shape-based flow (vertices movement of human body shape), a novel flow coherence loss is introduced by exploiting the fact that both flows are originated from the identical human motion. An in-house event-based 3D human dataset is curated that comes with 3D pose and shape annotations, which is by far the largest one to our knowledge. Empirical evaluations on DHP19 dataset and our in-house dataset demonstrate the effectiveness of our approach"
   },
   {
    "title": "3D Human Pose and Shape Estimation from LiDAR Point Clouds: A Review",
@@ -2035,7 +2097,11 @@
    "arxiv_id": "2509.12197",
    "source": "s2",
    "category": "Surveys",
-   "added": "2026-11-09"
+   "added": "2026-11-09",
+   "abstract": "In this paper, we present a comprehensive review of 3D human pose estimation and human mesh recovery from in-the-wild LiDAR point clouds. We compare existing approaches across several key dimensions, and propose a structured taxonomy to classify these methods. Following this taxonomy, we analyze each method's strengths, limitations, and design choices. In addition, (i) we perform a quantitative comparison of the three most widely used datasets, detailing their characteristics; (ii) we compile unified definitions of all evaluation metrics; and (iii) we establish benchmark tables for both tasks on these datasets to enable fair comparisons and promote progress in the field. We also outline open challenges and research directions critical for advancing LiDAR-based 3D human understanding. Moreover, we maintain an accompanying webpage that organizes papers according to our taxonomy and continuously update it with new studies: https://github.com/valeoai/3D-Human-Pose-Shape-Estimation-from-LiDAR",
+   "code_url": "https://github.com/valeoai/3D-Human-Pose-Shape-Estimation-from-LiDAR",
+   "code_status": "repository",
+   "code_checked": "2026-11-23"
   },
   {
    "title": "Bodies at Rest: 3D Human Pose and Shape Estimation From a Pressure Image Using Synthetic Data",
@@ -2053,7 +2119,8 @@
    "arxiv_id": "2004.01166",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-11-09"
+   "added": "2026-11-09",
+   "abstract": "People spend a substantial part of their lives at rest in bed. 3D human pose and shape estimation for this activity would have numerous beneficial applications, yet line-of-sight perception is complicated by occlusion from bedding. Pressure sensing mats are a promising alternative, but training data is challenging to collect at scale. We describe a physics-based method that simulates human bodies at rest in a bed with a pressure sensing mat, and present PressurePose, a synthetic dataset with 206K pressure images with 3D human poses and shapes. We also present PressureNet, a deep learning model that estimates human pose and shape given a pressure image and gender. PressureNet incorporates a pressure map reconstruction (PMR) network that models pressure image generation to promote consistency between estimated 3D body models and pressure image input. In our evaluations, PressureNet performed well with real data from participants in diverse poses, even though it had only been trained with synthetic data. When we ablated the PMR network, performance dropped substantially"
   },
   {
    "title": "CoEvoer: Collaborative Evolution Transformer for Upper-Body Expressive Human Pose and Shape Estimation",
@@ -2143,7 +2210,8 @@
    "arxiv_id": "2404.01941",
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-11-09"
+   "added": "2026-11-09",
+   "abstract": "Human pose and shape (HPS) estimation with lensless imaging is not only beneficial to privacy protection but also can be used in covert surveillance scenarios due to the small size and simple structure of this device. However, this task presents significant challenges due to the inherent ambiguity of the captured measurements and lacks effective methods for directly estimating human pose and shape from lensless data. In this paper, we propose the first end-to-end framework to recover 3D human poses and shapes from lensless measurements to our knowledge. We specifically design a multi-scale lensless feature decoder to decode the lensless measurements through the optically encoded mask for efficient feature extraction. We also propose a double-head auxiliary supervision mechanism to improve the estimation accuracy of human limb ends. Besides, we establish a lensless imaging system and verify the effectiveness of our method on various datasets acquired by our lensless imaging system"
   },
   {
    "title": "IKOL: Inverse kinematics optimization layer for 3D human pose and shape estimation via Gauss-Newton differentiation",
@@ -2438,6 +2506,625 @@
    "source": "s2",
    "category": "Motion & Temporal Recovery",
    "added": "2026-11-09"
+  },
+  {
+   "title": "Mesh-guided self-assembly of centimeter-scale, cell-derived human dermis",
+   "authors": [
+    "Hang Dong",
+    "Hiroki Yamanaka",
+    "Susumu Saito",
+    "Michiharu Sakamoto",
+    "Yuanjiaozi Li",
+    "Jinya Liu",
+    "Qiannan Zhao",
+    "Koh Ogawa",
+    "Takashi Nakano",
+    "Rie Tatsumi",
+    "Jiro Ono",
+    "Tetsuji Yamaoka",
+    "Naoki Morimoto"
+   ],
+   "year": 2027,
+   "venue": "Bioactive Materials",
+   "url": "https://doi.org/10.1016/j.bioactmat.2026.11.013",
+   "arxiv_id": null,
+   "doi": "10.1016/j.bioactmat.2026.11.013",
+   "source": "crossref",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "4D-HOF: Hand-Object Flow Matching for Feed-Forward 4D Interaction Reconstruction",
+   "authors": [
+    "Shiqi Li",
+    "Sean Cho",
+    "Yijie Li",
+    "Fengzhi Guo",
+    "Bowen Wen",
+    "Cheng Zhang"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2610.08782",
+   "arxiv_id": "2610.08782",
+   "abstract": "Existing methods for 4D hand-object reconstruction often rely on costly per-sequence optimization, while generative approaches typically synthesize interactions from random noise, which can lead to unstable interaction prediction. We introduce 4D-HOF, a feed-forward framework that reconstructs 4D hand-object interactions from coarse but informative estimates produced by vision foundation models. Concretely, we learn a conditional flow matching model that transports foundation-model-derived hand-object states toward an interaction manifold, allowing the model to correct errors in translation, rotation, and alignment in a feed-forward manner. A key advantage of our generative formulation is that it naturally enables test-time guidance within the transport process. Rather than applying a separate post-hoc optimization after reconstruction, we directly steer the evolving generative states using physical interaction constraints and observed 2D evidence, allowing the reconstruction to be refined as part of the generative process itself. By training the generative model on diverse datasets, 4D-HOF generalizes robustly to challenging in-the-wild scenarios. Experiments on out-of-domain benchmarks show that 4D-HOF achieves state-of-the-art performance, producing more stable and accurate 4D hand-object reconstructions",
+   "comment": "Project page: https://tamu-visual-ai.github.io/4D-HOF/",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "CADENCE:Temporally Coherent Whole-Body Human Mesh Recovery that Preserves Expressive Hand Motion",
+   "authors": [
+    "Keniel Peart",
+    "Jagmohan Chauhan",
+    "Indu P. Bodala",
+    "Shelly Vishwakarma"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2611.26783",
+   "arxiv_id": "2611.26783",
+   "abstract": "Whole-body SMPL-X estimators recover body, hand, and face meshes from single images, but applied frame by frame to video they produce jittery motion. Smoothing the output removes the jitter at a cost that body-only benchmarks do not measure: a temporal filter strong enough to steady the torso also flattens the fast finger strokes that carry meaning in sign language and gesture. We present CADENCE, a whole-body SMPL-X system for monocular video designed around this trade-off. A per-frame estimator built on a shared C-RADIOv4 encoder, with a high-resolution hand pathway that reuses the same encoder on hand crops, produces each frame's estimate. An offline temporal refiner then filters the SMPL-X rotation sequence: attention along the kinematic tree selects, for every joint and every frame, a mixture of learned zero-phase filters, so the torso is smoothed while fast finger strokes pass through. On 3DPW, the refiner reduces acceleration error from 17.4 to 5.4 mm/s2 while lowering PA-MPJPE from 41.9 to 40.2 mm; generic smoothers applied to the same predictions reach 6.2 to 7.7 mm/s2. On SignAvatars/How2Sign sign-language sequences, the refiner has the lowest hand jitter among the compared smoothers while keeping a hand-speed peak amplitude of 0.98, against 0.35 for a SmoothNet retrained on the full SMPL-X vector. The per-frame estimator also obtains the lowest full-body mesh error (25.7 mm) and hand joint error (8.3 mm) among the compared methods on EHF",
+   "comment": "",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "Chatting about Upper-Body Expressive Human Pose and Shape Estimation",
+   "authors": [
+    "Yuxiang Zhao",
+    "Wei Huang",
+    "Yujie Song",
+    "Liu Wang",
+    "Huan Zhao"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2604.17959",
+   "arxiv_id": "2604.17959",
+   "abstract": "Expressive Human Pose and Shape Estimation (EHPS) plays a crucial role in various AR/VR applications and has witnessed significant progress in recent years. However, current state-of-the-art methods still struggle with accurate parameter estimation for facial and hand regions and exhibit limited generalization to wild images. To address these challenges, we present CoEvoer, a novel one-stage synergistic cross-dependency transformer framework tailored for upper-body EHPS. CoEvoer enables explicit feature-level interaction across different body parts, allowing for mutual enhancement through contextual information exchange. Specifically, larger and more easily estimated regions such as the torso provide global semantics and positional priors to guide the estimation of finer, more complex regions like the face and hands. Conversely, the localized details captured in facial and hand regions help refine and calibrate adjacent body parts. To the best of our knowledge, CoEvoer is the first framework designed specifically for upper-body EHPS, with the goal of capturing the strong coupling and semantic dependencies among the face, hands, and torso through joint parameter regression. Extensive experiments demonstrate that CoEvoer achieves state-of-the-art performance on upper-body benchmarks and exhibits strong generalization capability even on unseen wild images",
+   "comment": "",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "CISyn: Human Mesh Recovery in Close Interactions with Physics-Simulated Synthetic Data",
+   "authors": [
+    "Yufan Deng",
+    "Lorenza Prospero",
+    "Christian Rupprecht"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2611.18894",
+   "arxiv_id": "2611.18894",
+   "abstract": "3D human mesh recovery (HMR) in close-interaction scenarios is hindered by the lack of large-scale, accurately annotated training data: real capture is expensive, and existing synthetic datasets rarely include physical contact. We introduce CISyn, a large-scale synthetic dataset purpose-built for close human-human interactions, generated via physics simulation and Blender-based rendering. By simulating collision dynamics between SMPL-X-rigged humanoids, CISyn naturally produces the contact, mutual occlusion, and pose entanglement that characterize close-interaction scenes, with no manual annotation effort. The released set provides 25,000 sequences with accurate 3D annotations. We further propose an uncertainty-aware loss that allows models to learn more effectively from the heavily occluded examples in our data. Augmenting state-of-the-art HMR training with CISyn and replacing the regression loss with our uncertainty-aware variant yields consistent improvements on close-interaction benchmarks, validating CISyn as a scalable complement to real-world data. The dataset, generation pipeline, and code are available at https://github.com/yfde/CISyn",
+   "comment": "",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-23",
+   "code_url": "https://github.com/yfde/CISyn",
+   "code_status": "repository",
+   "code_checked": "2026-11-23"
+  },
+  {
+   "title": "CQF-HMR: Continuous Quaternion Flows for Probabilistic 3D Human Mesh Recovery from a Single Image",
+   "authors": [
+    "Cuong Le",
+    "Bao-Long Tran",
+    "Pavlo Melnyk",
+    "Tahereh Dehdarirad",
+    "Bastian Wandt",
+    "Mårten Wadenbäck"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2609.00995",
+   "arxiv_id": "2609.00995",
+   "abstract": "Recovering 3D digital humans from a single 2D image is an ill-posed computer vision problem due to the loss of depth information. Probabilistic 3D human pose estimation compensates for this by estimating a set of 3D hypotheses from a prior distribution via generative models. However, most prior work focuses only on 3D keypoints, which often leads to implausible poses that are difficult to apply to downstream tasks, e.g. animation or digital humans. SMPL-based methods are more scalable thanks to the explicit body priors, but it requires more complex modeling of the generation process due to the non-additive nature of the joint rotations. In this work, we propose a novel approach for probabilistic 3D humans using quaternion-constrained continuous normalizing flows conditioned on 2D pose estimations. Our proposed quaternion flows show significant advantages over approaches using other rotation representations. Experiments demonstrate state-of-the-art results of our method on Human3.6M, particularly in ambiguous settings, and comparable pose estimation accuracy on challenging 3DPW and EMDB benchmarks",
+   "comment": "Under submission",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "DanceHMR: Hand-Aware Whole-Body Human Mesh Recovery from Monocular Videos",
+   "authors": [
+    "Wenhao Shen",
+    "Ming Zhou",
+    "Hengyuan Zhang",
+    "Siyuan Bian",
+    "Youjiang Xu",
+    "Yuan Zhang"
+   ],
+   "year": 2026,
+   "venue": "Proceedings of the SIGGRAPH Asia 2026 Conference Papers",
+   "url": "https://arxiv.org/abs/2605.18102",
+   "arxiv_id": "2605.18102",
+   "abstract": "Monocular video human mesh recovery is essential for digital humans, avatar animation, and embodied simulation, where both temporal stability and expressive whole-body motion are required. Existing video HMR methods produce coherent body motion but often overlook detailed hand articulation, while image-based whole-body methods recover SMPL-X meshes independently per frame, often leading to jittery and inaccurate hand motion. We present a temporally coherent whole-body HMR framework for challenging in-the-wild monocular videos. Our model unifies body context and part-specific hand observations through residual body-hand fusion, enabling stable body motion and detailed hand recovery within a single temporal architecture. We further introduce close-up-aware augmentation to improve robustness under upper-body framing. Experiments on whole-body and body-only benchmarks demonstrate improved hand reconstruction and competitive body accuracy. Our method also produces temporally stable and 2D-consistent SMPL-X motion in challenging real-world videos",
+   "comment": "Project page: https://shenwenhao01.github.io/dancehmr/",
+   "journal_ref": "",
+   "source": "arxiv",
+   "doi": "10.48550/arXiv.2605.18102",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "DETRAM: End-to-end DEtection, Tracking and Recovery of HumAn Meshes",
+   "authors": [
+    "Chunggi Lee",
+    "Seonwook Park",
+    "Wanhua Li",
+    "Umar Iqbal",
+    "Hanspeter Pfister"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2607.09089",
+   "arxiv_id": "2607.09089",
+   "abstract": "In the task of human mesh recovery (HMR), multi-person scenes are particularly difficult to handle due to the many entities that appear and occlusions between them over time. In particular for video inputs, there is a need to track each entity reliably and consistently. Existing methods rely on pretrained human detection modules, increasing their runtime and limiting the number of tracked entities. We present DETRAM, a unified framework for multi-person HMR and tracking that simultaneously detects, reconstructs, and tracks humans across time, both automatically and via user prompts. DETRAM uses a single transformer decoder with an identity-consistent set of learnable query embeddings that persist across frames: detection queries discover new people, tracking queries maintain pose and shape for existing individuals, and prompt queries follow user-specified identities. Our approach achieves state-of-the-art tracking results on PoseTrack21, 3DPW, BEDLAM, and MuPoTS-3D, and competitive reconstruction accuracy on BEDLAM and 3DPW, while uniquely supporting prompt-based tracking of individuals in multi-person scenes. To our knowledge, this is the first method to unify promptability and multi-person HMR with tracking in an end-to-end trainable framework, enabling user-directed human analysis in videos",
+   "comment": "",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "DiffProxy: Multi-View Human Mesh Recovery via Diffusion-Generated Dense Proxies",
+   "authors": [
+    "Renke Wang",
+    "Zhen-Yu Zhang",
+    "Ying Tai",
+    "Jun Li",
+    "Jian Yang"
+   ],
+   "year": 2026,
+   "venue": "European Conference on Computer Vision",
+   "url": "https://arxiv.org/abs/2601.02267",
+   "arxiv_id": "2601.02267",
+   "doi": "10.48550/arXiv.2601.02267",
+   "abstract": "Precise human mesh recovery (HMR) from multi-view images remains challenging: end-to-end methods produce entangled errors hard to localize, while fitting-based methods rely on sparse keypoints that provide limited surface constraints. We observe that the true bottleneck lies in the quality of intermediate representations, and that dense pixel-to-surface correspondences can be effectively generated by repurposing pre-trained diffusion models with rich visual priors. We propose DiffProxy, a Stable-Diffusion-based framework trained on large-scale synthetic data with pixel-perfect annotations. A multi-conditional proxy generator predicts dense correspondences from multi-view images, providing uniform surface constraints that enable precise fitting. Hand refinement feeds enlarged hand crops alongside full-body images for fine-grained detail, while test-time scaling exploits diffusion stochasticity to estimate per-pixel uncertainty. Trained only on synthetic data, DiffProxy achieves state-of-the-art results on five diverse real-world benchmarks. Project page: https://wrk226.github.io/DiffProxy.html",
+   "source": "s2",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "Efficient monocular human mesh recovery and dynamic acupoint mapping for digital Traditional Chinese Medicine",
+   "authors": [
+    "Jian-Hong Gan",
+    "An-Qi Wang",
+    "Yang Yang",
+    "Xun Deng",
+    "Hong-Ping Shu",
+    "Pei-Yang Wei",
+    "Zhi-Bin Li",
+    "Chun-Jiang Wu",
+    "Tong-Li He"
+   ],
+   "year": 2026,
+   "venue": "The Visual Computer",
+   "url": "https://doi.org/10.1007/s00371-026-04792-5",
+   "arxiv_id": null,
+   "doi": "10.1007/s00371-026-04792-5",
+   "abstract": "Efficient 3D human modeling and standardized acupoint localization are foundational to the digitization of Traditional Chinese Medicine (TCM), yet existing pure optimization methods suffer from long inference times, and current 3D acupoint schemes often lack anatomically grounded constraints. In this work, we present SMPLify-M, a cascaded framework that combines a lightweight CBAM-MobileNetV3 regression network with the SMPLify-X optimization pipeline for accelerated monocular 3D human mesh recovery and dynamic acupoint mapping. The CBAM-MobileNetV3 network regresses a 94-dimensional mixed parameter representation—comprising body shape (16), global root orientation (3), left and right hand pose (12+12, PCA latent), jaw pose (3), left and right eye pose (3+3), facial expression (10), and body pose (32, VPoser latent)—to initialize the SMPLify-X optimizer. We further propose a rule-based acupoint localization method that integrates bone proportional measurement (Cun measurement) with 3D mesh vertex indexing, enabling rule-based anchoring of 361 acupoints across 14 meridians on the SMPL-X mesh surface, with quantitative evaluation on the Lung Meridian. Experiments are conducted on MS COCO, EHF, Human3.6M, and a private dataset using an NVIDIA RTX A5000 GPU. Compared with the original SMPLify-X optimization baseline, SMPLify-M reduces the PA-MPJPE reconstruction error on Human3.6M by 8.5% and reduces per-image inference latency by 43.7% (from approximately 40 s to approximately 23 s per image). The source code, trained model weights, acupoint mapping files, and a reproduction guide are publicly available at https://github.com/wwwwwangg/smplify-m-new with DOI: https://doi.org/10.5281/zenodo.19674775. Public datasets are accessible via their original links; the private dataset is partially released owing to personal privacy constraints",
+   "source": "s2",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-23",
+   "code_url": "https://github.com/wwwwwangg/smplify-m-new",
+   "code_status": "repository",
+   "code_checked": "2026-11-23"
+  },
+  {
+   "title": "EventEgoHands++: Event-based Egocentric 3D Hand Mesh Reconstruction with Real Dataset",
+   "authors": [
+    "Ryosei Hara",
+    "Wataru Ikeda",
+    "Masashi Hatano",
+    "Mariko Isogawa"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2609.17189",
+   "arxiv_id": "2609.17189",
+   "abstract": "3D hand mesh reconstruction is a challenging yet essential task for downstream applications, including human-robot interaction and AR/VR. Although conventional cameras have been widely adopted for this task, methods that rely on them struggle in low-light environments and under severe motion blur. To address these limitations, event-based cameras have recently attracted attention for their high dynamic range and high temporal resolution. However, applying event cameras to egocentric hand reconstruction remains challenging because camera wearer's motion produces dense background events that obscure hand-specific signals. Although the first egocentric event-based approach mitigates this issue using hand segmentation, its binary hand mask does not distinguish between left and right hands. As a result, the model lacks instance-level hand information and predicts both hands even when only one or neither hand is present. This limitation leads to incorrect inter-hand relationships and degraded reconstruction accuracy. In this paper, we propose EventEgoHands++, a framework for event-based 3D hand mesh reconstruction from an egocentric viewpoint. The proposed method incorporates a Hand Detector that estimates instance-level bounding boxes and masks for both the left and right hands. Moreover, we introduce Adaptive Attention, which dynamically gates the attention based on these detection results to accurately learn the spatial relationship and mutual interactions between the hands. To train and evaluate our framework, we extend the synthetic N-HOT3D dataset and newly construct EEH-R, the largest real-world event-based egocentric hand dataset to date, comprising approximately 1M annotated frames captured in environments including low-light conditions. Extensive experiments on both synthetic and real datasets demonstrate that our method consistently outperforms the baselines",
+   "comment": "Accepted to IEEE Access. Project Page: https://ryhara.github.io/EventEgoHandsV2/",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Datasets & Benchmarks",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "FactorizedHMR: A Hybrid Framework for Video Human Mesh Recovery",
+   "authors": [
+    "Patrick Kwon",
+    "Chen Chen"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2605.14854",
+   "arxiv_id": "2605.14854",
+   "abstract": "Human Mesh Recovery (HMR) is fundamentally ambiguous: under occlusion or weak depth cues, multiple 3D bodies can explain the same image evidence. This ambiguity is not uniform across the body, as torso pose and root structure are often relatively well constrained, whereas distal articulations such as the arms and legs are more uncertain. Building on this observation, we propose FactorizedHMR, a two-stage framework that treats these two regimes differently. A deterministic regression module first recovers a stable torso-root anchor, and a probabilistic flow-matching module then completes the remaining non-torso articulation. To make this completion reliable, we combine a composite target representation with geometry-aware supervision and feature-aware classifier-free guidance, preserving the torso-root anchor while improving single-reference recovery of ambiguity-prone articulation. We also introduce a synthetic data pipeline that provides the paired image-camera-motion supervision under diverse viewpoints. Across camera-space and world-space benchmarks, FactorizedHMR remains competitive with strong baselines, with the clearest gains in occlusion-heavy recovery and drift-sensitive world-space metrics",
+   "comment": "Accepted to NeurIPS 2026",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "Fast-HaMeR: Boosting Hand Mesh Reconstruction using Knowledge Distillation",
+   "authors": [
+    "Hunain Ahmed Jillani",
+    "Ahmed Tawfik Aboukhadra",
+    "Ahmed Elhayek",
+    "Jameel Malik",
+    "Nadia Robertini",
+    "Didier Stricker"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2603.16444",
+   "arxiv_id": "2603.16444",
+   "abstract": "Fast and accurate 3D hand reconstruction is essential for real-time applications in VR/AR, human-computer interaction, robotics, and healthcare. Most state-of-the-art methods rely on heavy models, limiting their use on resource-constrained devices like headsets, smartphones, and embedded systems. In this paper, we investigate how the use of lightweight neural networks, combined with Knowledge Distillation, can accelerate complex 3D hand reconstruction models by making them faster and lighter, while maintaining comparable reconstruction accuracy. While our approach is suited for various hand reconstruction frameworks, we focus primarily on boosting the HaMeR model, currently the leading method in terms of reconstruction accuracy. We replace its original ViT-H backbone with lighter alternatives, including MobileNet, MobileViT, ConvNeXt, and ResNet, and evaluate three knowledge distillation strategies: output-level, feature-level, and a hybrid of both. Our experiments show that using lightweight backbones that are only 35% the size of the original achieves 1.5x faster inference speed while preserving similar performance quality with only a minimal accuracy difference of 0.4mm. More specifically, we show how output-level distillation notably improves student performance, while feature-level distillation proves more effective for higher-capacity students. Overall, the findings pave the way for efficient real-world applications on low-power devices. The code and models are publicly available under https://github.com/hunainahmedj/Fast-HaMeR",
+   "comment": "",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-23",
+   "code_url": "https://github.com/hunainahmedj/Fast-HaMeR",
+   "code_status": "repository",
+   "code_checked": "2026-11-23"
+  },
+  {
+   "title": "HGGT: Robust and Flexible 3D Hand Mesh Reconstruction from Uncalibrated Images",
+   "authors": [
+    "Yumeng Liu",
+    "Xiao-Xiao Long",
+    "Marc Habermann",
+    "Xuanze Yang",
+    "Cheng Lin",
+    "Yuan Liu",
+    "Yuexin Ma",
+    "Ligang Liu"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2603.23997",
+   "arxiv_id": "2603.23997",
+   "abstract": "Recovering high-fidelity 3D hand geometry from images is a critical task in computer vision, holding significant value for domains such as robotics, animation and VR/AR. Crucially, scalable applications demand both accuracy and deployment flexibility, requiring the ability to leverage massive amounts of unstructured image data from the internet or enable deployment on consumer-grade RGB cameras without complex calibration. However, current methods face a dilemma. While single-view approaches are easy to deploy, they suffer from depth ambiguity and occlusion. Conversely, multi-view systems resolve these uncertainties but typically demand fixed, calibrated setups, limiting their real-world utility. To bridge this gap, we draw inspiration from 3D foundation models that learn explicit geometry directly from visual data. By reformulating hand reconstruction from arbitrary views as a visual-geometry grounded task, we propose a feed-forward architecture that, for the first time in literature, jointly infers 3D hand meshes and camera poses from uncalibrated views. Extensive evaluations show that our approach outperforms state-of-the-art benchmarks and demonstrates strong generalization to uncalibrated, in-the-wild scenarios. Here is the link of our project page: https://lym29.github.io/HGGT/",
+   "comment": "project page: https://lym29.github.io/HGGT/",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "InstantHMR : Real-Time Human Mesh Recovery on Your Phone",
+   "authors": [
+    "Mohamed Adjel",
+    "Kahina Chalabi",
+    "Vincent Bonnet"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2611.09195",
+   "arxiv_id": "2611.09195",
+   "abstract": "Real-time 3D human mesh recovery from a single image on mobile devices is a challenging problem with many applications, including robotics, biomechanics, AR/VR, and exergames. Current state-of-the-art models are either too slow to run efficiently on mobile devices or sacrifice accuracy for speed. We present InstantHMR, a family of open-source single-image regressors suited for mobile inference, based on the Momentum Human Rig (MHR) parametric model and trained exclusively on publicly available annotations from the SAM 3D Body dataset. Our approach achieves remarkable performance on a Samsung Galaxy S23 NPU, recovering a 6,890-vertex body mesh in 5.5 ms per person, and 0.98 ms on an NVIDIA RTX 4070 GPU. This speed surpasses all existing methods we evaluated. On mobile, it is 12x faster than the single mobile-compatible method that slightly outperforms ours in accuracy, while achieving competitive accuracy with 40.0 mm PA-MPJPE on 3DPW, 48.8 mm on EMDB and 41.7 mm on RICH. To ensure fair comparisons, we re-evaluate 11 state-of-the-art methods under a unified protocol aligned with the closest MHR-based competitors, including Meta's official MHR-to-SMPL conversion, and report their reproduction results. Additionally, we measure latency across eight different targets, ranging from desktop TensorRT to two phone NPUs. Code and models are available at https://github.com/Naturalpad-studio/InstantHMR",
+   "comment": "",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-23",
+   "code_url": "https://github.com/Naturalpad-studio/InstantHMR",
+   "code_status": "repository",
+   "code_checked": "2026-11-23"
+  },
+  {
+   "title": "JRDB-Pose3D: A Multi-person 3D Human Pose and Shape Estimation Dataset for Robotics",
+   "authors": [
+    "Sandika Biswas",
+    "Kian Izadpanah",
+    "Hamid Rezatofighi"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2602.03064",
+   "arxiv_id": "2602.03064",
+   "abstract": "Real-world scenes are inherently crowded. Hence, estimating 3D poses of all nearby humans, tracking their movements over time, and understanding their activities within social and environmental contexts are essential for many applications, such as autonomous driving, robot perception, robot navigation, and human-robot interaction. However, most existing 3D human pose estimation datasets primarily focus on single-person scenes or are collected in controlled laboratory environments, which restricts their relevance to real-world applications. To bridge this gap, we introduce JRDB-Pose3D, which captures multi-human indoor and outdoor environments from a mobile robotic platform. JRDB-Pose3D provides rich 3D human pose annotations for such complex and dynamic scenes, including SMPL-based pose annotations with consistent body-shape parameters and track IDs for each individual over time. JRDB-Pose3D contains, on average, 5-10 human poses per frame, with some scenes featuring up to 35 individuals simultaneously. The proposed dataset presents unique challenges, including frequent occlusions, truncated bodies, and out-of-frame body parts, which closely reflect real-world environments. Moreover, JRDB-Pose3D inherits all available annotations from the JRDB dataset, such as 2D pose, information about social grouping, activities, and interactions, full-scene semantic masks with consistent human- and object-level tracking, and detailed annotations for each individual, such as age, gender, and race, making it a holistic dataset for a wide range of downstream perception and human-centric understanding tasks",
+   "comment": "",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Datasets & Benchmarks",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "Lightweight whole-body mesh recovery with joints and depth aware hand detail optimization",
+   "authors": [
+    "Zi-Long Yang",
+    "Shujun Zhang",
+    "Xiao Wang",
+    "Hu Jin",
+    "Li-Min Sun"
+   ],
+   "year": 2026,
+   "venue": "Journal of Visual Communication and Image Representation",
+   "url": "https://doi.org/10.1016/j.jvcir.2026.104729",
+   "arxiv_id": null,
+   "doi": "10.1016/j.jvcir.2026.104729",
+   "abstract": "",
+   "source": "s2",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "MoPO: Incorporating Motion Prior for Occluded Human Mesh Recovery",
+   "authors": [
+    "Tao Tang",
+    "Hong Liu",
+    "Xinshun Wang",
+    "Wanruo Zhang"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2605.09856",
+   "arxiv_id": "2605.09856",
+   "abstract": "Although recent studies have made remarkable progress in human mesh recovery, they still exhibit limited robustness to occlusions and often produce inaccurate poses and severe motion jitter due to the insufficient spatial features for occluded body parts. Inspired by the rapid advancements in human motion prediction, we discover that compared to occluded image features, pose sequence inherently contains reliable motion prior for estimating occluded body parts. In this paper, we incorporate Motion Prior for Occluded human mesh recovery, called MoPO. Our MoPO mainly consists of two components: 1) The motion de-occlusion module, where we propose a spatial-temporal occlusion detector to detect joint visibility, and then we propose a lightweight motion predictor to complete the occluded body parts by predicting the most plausible joint positions based on history poses. 2) The motion-aware fusion and refinement module, which fuses the completed joint sequence with image features to estimate human shape and initial human pose. Moreover, the completed joint sequence is further used to refine the final human pose through inverse kinematics, which provides the occlusion-free motion prior for regressing human poses. Extensive experiments demonstrate that MoPO achieves state-of-the-art performance on both occlusion-specific and standard benchmarks, significantly enhancing the accuracy and temporal consistency of occluded human mesh recovery. Our code and demo can be found in the supplementary material",
+   "comment": "35 pages",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "Multi-HMR 2: Multi-Person Camera-Centric Human Detection, Mesh Recovery and Tracking",
+   "authors": [
+    "Guénolé Fiche",
+    "Philippe Weinzaepfel",
+    "Romain Brégier",
+    "Fabien Baradel"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2606.14841",
+   "arxiv_id": "2606.14841",
+   "abstract": "Most advances in human mesh recovery (HMR) have focused on pelvis-centered recovery, overlooking metric 3D localization and detection accuracy in the camera coordinate system - two key factors for real-world applications such as human-robot interaction and social scene understanding. Current evaluation protocols often ignore these aspects, emphasizing per-person, root-centered recovery rather than camera-space perception. As a result, existing approaches rely on fixed camera assumptions or handcrafted post-processing, limiting their robustness and practical deployment. We introduce Multi-HMR 2, a simple yet robust DETR-based framework for Multi-person Camera-centric Human detection, mesh Recovery, and tracking. Multi-HMR 2 predicts a scene-consistent camera together with human meshes, enabling metric 3D localization without ground-truth intrinsics. Moreover, by distilling image-based memory features from SAM2, Multi-HMR 2 extends to tracking, achieving consistent identity association without video supervision. Despite its conceptual simplicity - no handcrafted components, no video input, and no ground-truth cameras - Multi-HMR 2 achieves state-of-the-art pelvis-centered performance while substantially improving detection accuracy and metric 3D localization",
+   "comment": "",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "Multiview Multi-Person Human Mesh Recovery Under Large Scenes with Occlusions",
+   "authors": [
+    "Qi Zhang",
+    "Tao Yu",
+    "Jiechao He",
+    "Antoni B. Chan",
+    "Hui Huang"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2607.24302",
+   "arxiv_id": "2607.24302",
+   "abstract": "Human mesh recovery (HMR) aims to recover 3D human meshes from images. Most existing HMR benchmarks and methods focus on either multi-person reconstruction from a single view or single-person reconstruction from multiple views, where the number of subjects and the scene scale are relatively limited. Such settings are insufficient for real-world applications with large scenes and severe inter-person occlusions. To address this limitation, we introduce a large-scale synthetic benchmark for multiview multi-person HMR, termed MVMP-HMR. The proposed dataset contains 15 complex scenes with up to 50 camera views and 30 interacting persons, featuring large spatial coverage and severe occlusions, which significantly increases the difficulty of human mesh recovery. Based on this benchmark, we further propose a multiview multi-person whole-body human mesh recovery model, referred to as MVMP-HMR model. The model first fuses multiview features into a scene-level 3D feature volume, and then leverages pelvis joints predicted by a 3D pose estimation network to extract person-specific queries from the 3D feature volume. These human queries are cross-attended with the 3D feature volume and integrated to decode each person's 3D mesh. Moreover, we introduce two novel losses--the orientation loss and the 3D joint density loss--to alleviate orientation and pose ambiguities under severe occlusions. Experiments demonstrate that existing state-of-the-art HMR methods struggle on the proposed MVMP-HMR benchmark, while our method consistently outperforms prior SOTAs in large-scale scenes with severe occlusions",
+   "comment": "10 pages, 7 figures",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "Natural Human Motion Recovery by Aligning High-Order Temporal Dynamics from Monocular Videos",
+   "authors": [
+    "Dingkun Wei",
+    "Zehong Shen",
+    "Yan Xia",
+    "Georgios Pavlakos",
+    "Yujun Shen",
+    "Xiaowei Zhou"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2605.26879",
+   "arxiv_id": "2605.26879",
+   "abstract": "Human motion recovered from monocular videos often appears overly smooth or dynamically inconsistent, even when joint positions are numerically accurate. We observe that this limitation stems from the absence of reliable high-order temporal cues -- velocity and acceleration -- which are essential for reconstructing motion that exhibits realistic momentum, timing, and high-frequency detail. We introduce HTD-Refine, a post-processing framework that augments existing Human Motion Recovery (HMR) pipelines using explicitly estimated high-order temporal dynamics. At the core of our system is PVA-Net, a temporal transformer that infers per-joint 2D positions, 3D velocities, and 3D accelerations directly from a monocular video. These predicted dynamics serve as soft yet informative constraints in a global optimization procedure that refines world-space trajectories, significantly reducing jitter, suppressing over-smoothing, and restoring physically plausible motion. Extensive experiments on challenging in-the-wild benchmarks show that HTD-Refine consistently improves state-of-the-art HMR methods, yielding more accurate global trajectories and substantially more natural motion dynamics. Our results highlight the critical role of high-order temporal modeling in advancing monocular human motion recovery",
+   "comment": "13 pages, 6 figures. Accepted as an Oral presentation and Best Paper Candidate at CVPR 2026. Project page: https://zju3dv.github.io/htd-refine/",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "OmniPoser: Flexible Human Motion Recovery in the Wild with Masked Flow Matching",
+   "authors": [
+    "Minghao Liu",
+    "Tutian Tang"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2610.19857",
+   "arxiv_id": "2610.19857",
+   "abstract": "Recovering 3D human motion from sparse wearable sensors is challenging due to the inherent noise, occlusion, and instability of real-world tracking signals. Existing approaches are restricted to fixed sensor configurations and, when built on diffusion models, are computationally prohibitive for real-time deployment. We propose OmniPoser, a universal framework that recovers full-body SMPL motion from a flexible combination of heterogeneous inputs, such as 3D keypoints, sparse IMU rotations, head-mounted 6-DoF poses, or any subset thereof, within a single model. OmniPoser introduces a cross-modal masking mechanism paired with a Masked Conditioning Encoder, enabling one architecture to incorporate diverse sensor configurations through a masked design. A decoupled dual-stream generative backbone generates complete motion via Conditional Flow Matching, requiring only a single ODE integration step at inference. Across three settings and seven benchmarks, including in-the-wild Nymeria and Ego-Exo4D datasets, OmniPoser performs on par with state-of-the-art methods while running at over 700 FPS. The project page is available at https://jamesbridgewater51.github.io/omniposer-eccv/",
+   "comment": "Accepted as a poster at the European Conference on Computer Vision (ECCV) 2026",
+   "journal_ref": "Computer Vision - ECCV 2026. Lecture Notes in Computer Science, vol. 17075, pp. 1-19. Springer, 2026",
+   "source": "arxiv",
+   "category": "Occlusion & In-the-Wild Recovery",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "PCHMR: Empowering and Benchmarking Human Mesh Recovery in Privacy-Constrained Real-World Settings",
+   "authors": [
+    "Zeyu Cao",
+    "Qingxuan Wu",
+    "Zhiyang Dou",
+    "Rui Xu",
+    "Yuan Liu",
+    "Javier Fernandez-Marques",
+    "Nicholas D. Lane",
+    "Taku Komura",
+    "Wenping Wang"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2610.24841",
+   "arxiv_id": "2610.24841",
+   "abstract": "Fine-tuning directly on user-side data is an effective way to improve the performance of widely adopted data-driven human mesh recovery (HMR) models. However, doing so for existing HMR methods often assumes aggregating user-side data from real-world HMR-deployed devices to a central training server, posing a significant privacy risk as sensitive human images are transmitted. How can human mesh recovery be evaluated and improved in privacy-constrained real-world settings? We study this question through a benchmark in which state-of-the-art HMR models are trained with federated learning and a secure-aggregation variant, neither of which centralizes raw images, and evaluated across a wide range of client-scale and data-heterogeneity settings. We document that common HMR training pipelines are built around centralized data access and quantify how representative HMR backbones behave when that assumption is removed. Furthermore, to study the data bottleneck of privacy-constrained HMR training, we propose DePoser, a local annotation and fine-tuning pipeline enhanced with depth foundation models, with which collaboratively trained HMR models can be locally tailored to the end user's distribution. On in-the-wild data, fine-tuning on DePoser annotations improves personalization accuracy, measured against DePoser-generated pseudo-ground truth. This benchmark aims to support future work on privacy-constrained HMR models and their real-world deployment and evaluation",
+   "comment": "TMLR 2026",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Datasets & Benchmarks",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "PEAR: Pixel-aligned Expressive humAn mesh Recovery",
+   "authors": [
+    "Jiahao Wu",
+    "Yunfei Liu",
+    "Lijian Lin",
+    "Ye Zhu",
+    "Lei Zhu",
+    "Jingyi Li",
+    "Yu Li"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2601.22693",
+   "arxiv_id": "2601.22693",
+   "abstract": "Reconstructing detailed 3D human meshes from a single in-the-wild image remains a fundamental challenge in computer vision. Existing SMPLX-based methods often suffer from slow inference, produce only coarse body poses, and exhibit misalignments or unnatural artifacts in fine-grained regions such as the face and hands. These issues make current approaches difficult to apply to downstream tasks. To address these challenges, we propose PEAR-a fast and robust framework for pixel-aligned expressive human mesh recovery. PEAR explicitly tackles three major limitations of existing methods: slow inference, inaccurate localization of fine-grained human pose details, and insufficient facial expression capture. Specifically, to enable real-time SMPLX parameter inference, we depart from prior designs that rely on high resolution inputs or multi-branch architectures. Instead, we adopt a clean and unified ViT-based model capable of recovering coarse 3D human geometry. To compensate for the loss of fine-grained details caused by this simplified architecture, we introduce pixel-level supervision to optimize the geometry, significantly improving the reconstruction accuracy of fine-grained human details. To make this approach practical, we further propose a modular data annotation strategy that enriches the training data and enhances the robustness of the model. Overall, PEAR is a preprocessing-free framework that can simultaneously infer EHM-s (SMPLX and scaled-FLAME) parameters at over 100 FPS. Extensive experiments on multiple benchmark datasets demonstrate that our method achieves substantial improvements in pose estimation accuracy compared to previous SMPLX-based approaches. Project page: https://wujh2001.github.io/PEAR",
+   "comment": "23 pages",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "RaStream: Edge-Deployable Streaming Human Mesh Recovery from mmWave Radar",
+   "authors": [
+    "Jiazhen Dong",
+    "Lei Liu"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2608.11791",
+   "arxiv_id": "2608.11791",
+   "abstract": "Millimeter-wave (mmWave) radar provides a privacy-preserving sensing modality for human motion analysis, yet continuous SMPL-X recovery on edge devices remains challenging because accurate reconstruction benefits from dense volumetric radar observations that preserve weak articulated reflections, while repeatedly processing such high-dimensional data over time incurs substantial computational cost. Temporal context is also necessary to resolve frame-local ambiguity, but SMPL-X attributes evolve at different rates, with body morphology remaining relatively stable and articulated pose, root orientation, and global translation changing rapidly. We present RaStream, a causal streaming framework that separates rich volumetric spatial perception from lightweight temporal reasoning. For each radar observation, a localization-conditioned spatial encoder exploits global scene context to estimate a coarse body location and focuses detailed reconstruction on a center-guided region of interest while preserving native 3D radar structure. Global and local features are then fused into a compact representation, allowing volumetric evidence to be extracted once per observation and temporal history to be propagated through compact representations and fixed-size persistent states. RaStream further maintains a slow morphology state for shape-related information and a fast motion state for pose, orientation, and translation. On the 661K-frame M4Human benchmark, RaStream reduces MVE from 90.90 mm for RT-Mesh to 84.27 mm with spatial-only inference and to 72.05 mm with causal temporal refinement. The Base configuration requires 26.93 ms per FP32 invocation on a Jetson Orin Nano. These results demonstrate practical edge-streaming radar mesh recovery through one-time volumetric evidence extraction and compact causal temporal propagation",
+   "comment": "",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "Scene and Human in One World: Reconstruction in a Feedforward Pass",
+   "authors": [
+    "Boao Shi",
+    "Qiao Feng",
+    "Yiming Huang",
+    "Lingjie Liu"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2606.27720",
+   "arxiv_id": "2606.27720",
+   "abstract": "Reconstructing humans in dynamic scenes from moving monocular cameras remains challenging due to scale ambiguity, human-scene misalignment, and occlusion interference. Rather than treating human mesh recovery and scene reconstruction as separate tasks, we believe that accurate human-scene reconstruction requires the two tasks to mutually inform each other: parametric human models offer semantic structure and metric-scale priors, while scene geometry provides spatial context for human localization and alignment. Built on this insight, we introduce SHOW, a mask-promptable human mesh recovery framework that couples feed-forward 3D scene reconstruction with Human Mesh Recovery in a unified metric space. SHOW injects human semantics and scale priors from parametric human models into normalized point-map prediction, enabling metric-scale scene reconstruction from inherently scale-ambiguous monocular input. In turn, the recovered scene geometry constrains human mesh estimation, encouraging spatially consistent human placement and improved human-scene alignment. To handle complex multi-person and cluttered scenes, SHOW further incorporates a promptable masking mechanism that enables flexible target-human selection while suppressing background distractions and occlusion interference. Through joint training, the model learns both human-aware geometric features and geometry-constrained human features, producing aligned metric-scale reconstructions from monocular human-centric videos. Extensive experiments demonstrate that SHOW improves metric-scale consistency, human-scene alignment, and reconstruction accuracy under challenging camera motion, occlusion, and cluttered backgrounds",
+   "comment": "",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "Training-Free Anonymization of Driving Data with Promptable Segmentation and 3D Human Mesh Recovery",
+   "authors": [
+    "Max A. Buettner",
+    "Mark Azer",
+    "Fabian B. Flohr"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2611.20412",
+   "arxiv_id": "2611.20412",
+   "abstract": "Camera recordings for autonomous driving contain faces and license plates that should be anonymized before labeling, sharing, or training. Dedicated detectors can miss small plates and faces behind vehicle glass. We present FM-Anonymize, a training-free anonymization pipeline that combines promptable segmentation, 3D human mesh recovery, and generative replacement. SAM 3 locates people, faces, and vehicles and searches zoomed vehicle crops for plates, occupants, and windows. SAM 3D Body assesses face visibility from head orientation and projects head regions for blurring. Optional diffusion inpainting replaces eligible blurred heads with synthetic faces, guided by estimated pose and keypoints. On PP4AV, the blur pipeline protects 97.8% of faces and 95.5% of plates, the highest privacy recall of all compared methods at their default settings. On our recordings, where the localization thresholds were set, it protects 97.1% of faces and 93.4% of plates, compared with 93.7%/73.0% for UrbanAnonymizer, 42.7%/40.7% for EgoBlur, and 96.6% of faces for deface. Synthetic replacement raises full-body keypoint average precision over blurring from 54.1% to 79.6% on our recordings and from 39.9% to 68.3% on PP4AV. Code and configurations are available on https://github.com/max-a-ai/FM-Anonymize",
+   "comment": "8 pages, 6 figures, 3 tables",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Full-Body Human Mesh Recovery",
+   "added": "2026-11-23",
+   "code_url": "https://github.com/max-a-ai/FM-Anonymize",
+   "code_status": "repository",
+   "code_checked": "2026-11-23"
+  },
+  {
+   "title": "UT-HMR: Uncertainty-Guided Temporal Modeling for Robust 3D Human Mesh Recovery",
+   "authors": [
+    "Zhibo Wang",
+    "Sirisha Rambhatla",
+    "Yuhao Chen",
+    "Maria Koshkina",
+    "David Clausi"
+   ],
+   "year": 2026,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2610.36203",
+   "arxiv_id": "2610.36203",
+   "abstract": "Monocular 3D human mesh recovery (HMR) remains unreliable under weak observations caused by long camera-to-person distances, occlusion, and motion blur. In challenging scenarios such as sports, these factors make the problem highly ambiguous, as different 3D poses may yield similar 2D projections. This ambiguity is especially severe for one-stage HMR, which recovers all meshes directly from the full image without person crops or external 2D cues. To handle this ambiguity, we present UT-HMR ( Uncertainty-guided Temporal HMR), to our knowledge the first one-stage HMR framework to capture correlated pose uncertainty across joints. Each person query predicts a Gaussian distribution over the full SMPL pose with a compact low-rank-plus-diagonal covariance, which is converted into joint-wise precision weights for heteroscedastic supervision while keeping inference deterministic. Temporal early fusion further injects neighboring-frame evidence before pose decoding, supplying the visual evidence needed to resolve the ambiguity that the uncertainty captures. With a lightweight ViT-B backbone, UT-HMR achieves state-of-the-art results on VIP-HockeyPose-v2 (ice hockey) and WorldPose (soccer), reducing MPJPE, PA-MPJPE, and PVE by up to 4.7%, 3.8%, and 5.6%, and remains competitive on 3DPW against methods with larger backbones and higher input resolutions",
+   "comment": "Accepted at WACV 2027",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Motion & Temporal Recovery",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "CLIP-Hand: CLIP-based regressor for hand pose estimation and mesh recovery",
+   "authors": [
+    "Feng Zhou",
+    "Shuang Ji",
+    "Pei Shen",
+    "Ju Dai",
+    "Junjun Pan",
+    "Yu-Kun Lai",
+    "P. Rosin"
+   ],
+   "year": 2025,
+   "venue": "The Visual Computer",
+   "url": "https://doi.org/10.1007/s00371-025-04203-1",
+   "arxiv_id": null,
+   "doi": "10.1007/s00371-025-04203-1",
+   "abstract": "",
+   "source": "s2",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-23"
+  },
+  {
+   "title": "Collaborative Learning for 3D Hand-Object Reconstruction and Compositional Action Recognition from Egocentric RGB Videos Using Superquadrics",
+   "authors": [
+    "Tze Ho Elden Tse",
+    "Runyang Feng",
+    "Linfang Zheng",
+    "Jiho Park",
+    "Yixing Gao",
+    "Jihie Kim",
+    "Ales Leonardis",
+    "Hyung Jin Chang"
+   ],
+   "year": 2025,
+   "venue": "arXiv",
+   "url": "https://arxiv.org/abs/2501.07100",
+   "arxiv_id": "2501.07100",
+   "abstract": "With the availability of egocentric 3D hand-object interaction datasets, there is increasing interest in developing unified models for hand-object pose estimation and action recognition. However, existing methods still struggle to recognise seen actions on unseen objects due to the limitations in representing object shape and movement using 3D bounding boxes. Additionally, the reliance on object templates at test time limits their generalisability to unseen objects. To address these challenges, we propose to leverage superquadrics as an alternative 3D object representation to bounding boxes and demonstrate their effectiveness on both template-free object reconstruction and action recognition tasks. Moreover, as we find that pure appearance-based methods can outperform the unified methods, the potential benefits from 3D geometric information remain unclear. Therefore, we study the compositionality of actions by considering a more challenging task where the training combinations of verbs and nouns do not overlap with the testing split. We extend H2O and FPHA datasets with compositional splits and design a novel collaborative learning framework that can explicitly reason about the geometric relations between hands and the manipulated object. Through extensive quantitative and qualitative evaluations, we demonstrate significant improvements over the state-of-the-arts in (compositional) action recognition",
+   "comment": "Accepted to AAAI 2025",
+   "journal_ref": "",
+   "source": "arxiv",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-23"
   }
  ]
 }
