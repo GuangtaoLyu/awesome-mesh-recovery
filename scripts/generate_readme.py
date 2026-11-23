@@ -95,6 +95,26 @@ def format_entry(idx, p):
     return "".join(parts)
 
 
+EMBODIED_TITLE = "Embodied Motion Recovery & Robot Tracking"
+EMBODIED_ANCHOR = "embodied-motion-recovery--robot-tracking"
+
+
+def load_embodied_section():
+    """Source of truth for hand-curated embodied entries.
+
+    Fail loudly instead of silently deleting the section if the source is
+    missing or malformed during a scheduled README regeneration.
+    """
+    path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "embodied.md")
+    with open(path, encoding="utf-8") as f:
+        section = f.read().strip().splitlines()
+    if not section or section[0] != f"## {EMBODIED_TITLE}":
+        raise ValueError(f"Invalid embodied section heading: {path}")
+    if not any(line.startswith("### ") for line in section):
+        raise ValueError(f"Missing embodied subcategories: {path}")
+    return section
+
+
 def generate(papers, config, readme_path):
     taxonomy = config.get("taxonomy", [])
     cats = {c: [] for c in taxonomy}
@@ -104,15 +124,9 @@ def generate(papers, config, readme_path):
             c = config.get("default_category")
         cats.setdefault(c, []).append(p)
 
-    # Separately curate robotics bridges; do not mix them into HMR harvesting.
-    section_path = os.path.join(
-        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-        "data", "embodied.md",
-    )
-    embodied_lines = []
-    if os.path.isfile(section_path):
-        with open(section_path, encoding="utf-8") as f:
-            embodied_lines = f.read().strip().splitlines()
+    # Curated source is separate from the auto-harvested paper store.
+    embodied_lines = load_embodied_section()
+    curated_count = sum(bool(re.match(r"^\d+\. \*\*", line)) for line in embodied_lines)
 
     lines = []
     lines.append(f"# {config.get('display_name', 'Awesome List')}")
@@ -122,23 +136,26 @@ def generate(papers, config, readme_path):
         lines.append("")
     lines.append(
         f"*Last updated: {datetime.date.today().isoformat()} | "
-        f"Total papers: {len(papers)}*"
+        f"Auto-indexed papers: {len(papers)} | Curated embodied highlights: {curated_count}*"
     )
     lines.append("")
     lines.append(
         "> \U0001F916 Auto-updated weekly by GitHub Actions "
         "(multi-source: arXiv + DBLP + Semantic Scholar + Crossref). "
-        "Entries are auto-categorized by topic."
+        "Core papers are auto-categorized; the embodied section is curated separately."
     )
     lines.append("")
 
     # Contents TOC (only non-empty categories)
     lines.append("## Contents")
+    lines.append(f"- [{EMBODIED_TITLE}](#{EMBODIED_ANCHOR})")
     for c in taxonomy:
         if cats.get(c):
             lines.append(f"- [{c}](#{_anchor(c)})")
-        if c == "Motion & Temporal Recovery" and embodied_lines:
-            lines.append("- [Embodied Motion Recovery & Robot Tracking](#embodied-motion-recovery--robot-tracking)")
+    lines.append("")
+
+    # Embodied work is the first research section in both the TOC and body.
+    lines.extend(embodied_lines)
     lines.append("")
 
     for c in taxonomy:
@@ -150,17 +167,14 @@ def generate(papers, config, readme_path):
             for i, p in enumerate(items, 1):
                 lines.append(format_entry(i, p))
             lines.append("")
-        if c == "Motion & Temporal Recovery" and embodied_lines:
-            lines.extend(embodied_lines)
-            lines.append("")
 
     lines.append("## Contributing")
     lines.append("")
     lines.append(
         "Found a missing or mis-categorized paper? Open an issue or pull "
-        "request — the list is regenerated automatically, so manual README "
-        "edits will be overwritten on the next run. For the curated embodied "
-        "section, edit `data/embodied.md`."
+        "request. README.md is generated from `data/papers.json` (automatically "
+        "harvested) and `data/embodied.md` (manually curated). To add or revise "
+        "embodied works, edit `data/embodied.md` rather than README.md directly."
     )
     lines.append("")
 
