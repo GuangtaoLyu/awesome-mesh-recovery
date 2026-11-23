@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 """Source-of-truth literature pipeline.
 
-Accepted HMR: data/papers.json        (strict automatic admission)
-Curated robotics: data/embodied.md   (human-reviewed; NEVER auto-overwritten)
-Review leads: data/review_queue.json  (unpublished discovery suggestions)
-Rejections: data/ignored.json        (stable identifiers, no re-suggestion)
-Generated view: README.md            (always built from accepted + curated)
+Recovery: data/papers.json          (automatic, preprints included)
+Embodied: data/embodied.json        (automatic, preprints included)
+Exclusions: data/ignored.json       (stable identifier blocklist)
+Generated view: README.md          (always built from the two JSON sources)
 
 Usage:
     python scripts/pipeline.py                # weekly discovery + regeneration
     python scripts/pipeline.py --render-only  # offline, no discovery or data edits
 
-Committing is done by GitHub Actions only AFTER the generated-view tests pass.
+GitHub Actions publishes only after all tests pass.
 """
 import argparse
+import copy
 import datetime
 import json
 import os
@@ -28,13 +28,13 @@ sys.path.insert(0, str(HERE))
 from lib_common import load_json, norm_title  # noqa: E402
 import classify  # noqa: E402
 import generate_readme  # noqa: E402
+import embodied_index  # noqa: E402
 import harvest  # noqa: E402
 import selection  # noqa: E402
 
 CONFIG = ROOT / "config.json"
 PAPERS = ROOT / "data" / "papers.json"
-CURATED = ROOT / "data" / "embodied.md"
-QUEUE = ROOT / "data" / "review_queue.json"
+EMBODIED = ROOT / "data" / "embodied.json"
 IGNORED = ROOT / "data" / "ignored.json"
 README = ROOT / "README.md"
 
@@ -44,7 +44,7 @@ def keys(paper):
     title = norm_title(paper.get("title", ""))
     result = {"title:" + title} if title else set()
     raw_id = paper.get("arxiv_id") or ""
-    url = str(paper.get("url") or "")
+    url = str(paper.get("url") or paper.get("paper_url") or "")
     match = re.search(r"arxiv\.org/(?:abs|pdf)/(\d{4}\.\d{4,5})", url, re.I)
     if not raw_id and match:
         raw_id = match.group(1)
@@ -150,73 +150,118 @@ def _known_index(records):
     return result
 
 
-def process_candidates(papers, queue, blocked_keys, curated, batches, config, today):
-    """Pure candidate processing; returns updated papers, queue and counters."""
-    papers = [dict(p) for p in papers]
-    queue = [dict(q) for q in queue]
-    indexed = _known_index(papers)
-    queued = _known_index(queue)
-    blocked_keys = set(blocked_keys)
-    counters = {"auto_added": 0, "enriched": 0, "review_added": 0, "ignored": 0,
-                "queue_capacity_skips": 0}
-    max_queue = int(config["discovery"]["review_queue_max"])
-    per_track = int(config["discovery"]["new_review_per_run_per_track"])
+def process_candidates(papers, embodied, blocked_keys, batches, config, today,
+                       *, verify_code=True):
+    """Pure scheduled update: automatically publish eligible preprints/papers.
 
-    for track in ("core", "embodied"):
+    Existing titles, editorial classifications and partial-code labels survive
+    refreshed metadata. No reviewer, approval queue or acceptance requirement.
+    """
+    papers = [dict(p) for p in papers]
+    embodied = copy.deepcopy(embodied)
+    embodied.setdefault("papers", [])
+    core_index = _known_index(papers)
+    robot_index = _known_index(embodied["papers"])
+    blocked = set(blocked_keys)
+    max_core = int(config.get("discovery", {}).get("new_core_per_run", 30))
+    max_embodied = int(config.get("discovery", {}).get("new_embodied_per_run", 15))
+    stats = {"core_added": 0, "embodied_added": 0,
+             "metadata_updated": 0, "skipped": 0}
+
+    # Process embodied first; never print an eligible embodied paper in both
+    # the robotic highlight section and the broad recovery index.
+    for track in ("embodied", "core"):
         candidates = dedup_records(batches.get(track, []))
-        # The APIs each return ranked results; newer works are examined first.
-        candidates.sort(key=lambda p: -(p.get("year") or 0))
-        added_review_for_track = 0
+        candidates.sort(key=lambda p: (-(p.get("year") or 0),
+                                       (p.get("title") or "").lower()))
         for candidate in candidates:
             identity = keys(candidate)
-            if not identity:
+            if not identity or identity & blocked:
                 continue
-            if identity & curated or identity & blocked_keys:
+            robot_id = next((robot_index[k] for k in identity if k in robot_index), None)
+            core_id = next((core_index[k] for k in identity if k in core_index), None)
+            if robot_id is not None:
+                updated = embodied_index.enrich(
+                    embodied["papers"][robot_id], candidate, verify_code=verify_code
+                )
+                if updated != embodied["papers"][robot_id]:
+                    embodied["papers"][robot_id] = updated
+                    stats["metadata_updated"] += 1
+                for k in keys(updated):
+                    robot_index[k] = robot_id
                 continue
-            seen = next((indexed[k] for k in identity if k in indexed), None)
-            if seen is not None:
-                enriched = enrich(papers[seen], candidate)
-                if enriched != papers[seen]:
-                    papers[seen] = enriched
-                    counters["enriched"] += 1
-                    for k in keys(enriched):
-                        indexed[k] = seen
+            if core_id is not None:
+                updated = enrich(papers[core_id], candidate)
+                updated = embodied_index.discover_code(
+                    updated, candidate, verify=verify_code
+                )
+                if updated != papers[core_id]:
+                    papers[core_id] = updated
+                    stats["metadata_updated"] += 1
+                for k in keys(updated):
+                    core_index[k] = core_id
                 continue
-            if any(k in queued for k in identity):
+
+            if track == "core":
+                # High-confidence robotics bridges discovered by generic HMR
+                # searches are routed to the front section automatically.
+                robot_decision = selection.decide(candidate, config, "embodied")[0]
+                target = "embodied" if robot_decision == "auto" else "core"
+            else:
+                target = "embodied"
+            decision, _ = selection.decide(candidate, config, target)
+            if decision != "auto":
+                stats["skipped"] += 1
                 continue
-            decision, reason = selection.decide(candidate, config, track)
-            if decision == "ignore":
-                counters["ignored"] += 1
+            if not (candidate.get("arxiv_id") or
+                    str(candidate.get("url") or "").startswith("https://")):
+                stats["skipped"] += 1
                 continue
-            if decision == "auto" and track == "core":
+
+            if target == "embodied":
+                if stats["embodied_added"] >= max_embodied:
+                    continue
+                record = embodied_index.new_paper(candidate, today=today)
+                record = embodied_index.discover_code(
+                    record, candidate, verify=verify_code
+                )
+                embodied["papers"].append(record)
+                i = len(embodied["papers"]) - 1
+                for k in keys(record):
+                    robot_index[k] = i
+                stats["embodied_added"] += 1
+            else:
+                if stats["core_added"] >= max_core:
+                    continue
                 record = dict(candidate)
                 record["category"] = classify.classify(record, config)
                 record["added"] = today.isoformat()
+                record = embodied_index.discover_code(
+                    record, candidate, verify=verify_code
+                )
                 papers.append(record)
-                idx = len(papers) - 1
+                i = len(papers) - 1
                 for k in keys(record):
-                    indexed[k] = idx
-                counters["auto_added"] += 1
-                continue
-            if len(queue) >= max_queue or added_review_for_track >= per_track:
-                counters["queue_capacity_skips"] += 1
-                continue
-            record = dict(candidate)
-            record["track"] = track
-            record["reason"] = reason
-            record["first_seen"] = today.isoformat()
-            queue.append(record)
-            idx = len(queue) - 1
-            for k in keys(record):
-                queued[k] = idx
-            added_review_for_track += 1
-            counters["review_added"] += 1
+                    core_index[k] = i
+                stats["core_added"] += 1
+    return dedup_records(papers), embodied, stats
 
-    # A new curated / accepted paper should disappear from the review queue.
-    accepted = set(indexed)
-    queue = [q for q in queue
-             if not (keys(q) & accepted or keys(q) & curated or keys(q) & blocked_keys)]
-    return papers, queue, counters
+
+def _refresh_ids(papers, embodied, today, limit=30):
+    """One small rotating batch per week checks old arXiv metadata for new code.
+
+    Incomplete optional lookups do not stop the regular discovery workflow.
+    """
+    missing = []
+    for p in list(papers) + list(embodied["papers"]):
+        if p.get("arxiv_id") and not p.get("code_url"):
+            missing.append(str(p["arxiv_id"]).split("v")[0])
+    missing = list(dict.fromkeys(missing))
+    if not missing:
+        return []
+    offset = ((today.isocalendar().week - 1) * limit) % len(missing)
+    chosen = (missing + missing)[offset: offset + min(limit, len(missing))]
+    return harvest.arxiv_by_ids(chosen)
 
 
 def run(*, render_only=False, today=None):
@@ -224,50 +269,37 @@ def run(*, render_only=False, today=None):
     config = load_json(str(CONFIG), {})
     store = load_json(str(PAPERS), None)
     if not isinstance(store, dict) or not isinstance(store.get("papers"), list):
-        raise ValueError("data/papers.json is missing/invalid; refusing to bootstrap from README")
+        raise ValueError("Missing/invalid data/papers.json; never regenerate from README")
     if not store["papers"]:
-        raise ValueError("Empty accepted-paper store; refusing destructive regeneration")
-    if not CURATED.is_file():
-        raise FileNotFoundError("Missing human-reviewed data/embodied.md")
-    curated_text = CURATED.read_text(encoding="utf-8")
-    curated = curated_keys(curated_text)
-    if len(curated) < 2:
-        raise ValueError("Curated embodied section is unexpectedly empty")
+        raise ValueError("Empty recovery source-of-truth; refusing destructive update")
+    embodied = embodied_index.load(EMBODIED)
+    if not IGNORED.is_file():
+        raise FileNotFoundError("Missing existing identifier blocklist")
+    ignored = load_json(str(IGNORED), None)
+    if not isinstance(ignored, dict) or not isinstance(ignored.get("keys"), list):
+        raise ValueError("Malformed data/ignored.json")
 
     papers = dedup_records(store["papers"])
-    if not QUEUE.is_file() or not IGNORED.is_file():
-        raise FileNotFoundError("Review queue or rejection data is missing; refusing to discard decisions")
-    queue_data = load_json(str(QUEUE), None)
-    ignored_data = load_json(str(IGNORED), None)
-    if not isinstance(queue_data, dict) or not isinstance(queue_data.get("items"), list):
-        raise ValueError("Invalid review_queue.json")
-    if not isinstance(ignored_data, dict) or not isinstance(ignored_data.get("keys"), list):
-        raise ValueError("Invalid ignored.json")
-    queue = queue_data["items"]
-
     if not render_only:
         batches = {}
         for track in ("core", "embodied"):
             candidates, status = harvest.harvest(config, track=track, today=today)
             batches[track] = candidates
-            print(f"[discover:{track}] {status['succeeded']}/{status['attempted']} "
-                  f"queries succeeded, {len(candidates)} raw candidates")
-        papers, queue, stats = process_candidates(
-            papers, queue, ignored_data["keys"], curated, batches, config, today
+            print(f"[discover:{track}] {status['succeeded']}/"
+                  f"{status['attempted']} queries succeeded; "
+                  f"{len(candidates)} raw papers")
+        batches["embodied"] += _refresh_ids(papers, embodied, today)
+        papers, embodied, counts = process_candidates(
+            papers, embodied, ignored["keys"], batches, config, today
         )
-        print(f"[select] +{stats['auto_added']} indexed, "
-              f"+{stats['review_added']} review leads, "
-              f"{stats['enriched']} metadata enrichments, "
-              f"{stats['ignored']} unrelated ignored, "
-              f"{stats['queue_capacity_skips']} unqueued due to limits")
-        # A new DOI/arXiv connection can bridge two older indexed records.
-        papers = dedup_records(papers)
+        print("[update] " + ", ".join(f"{k}: {v}" for k, v in counts.items()))
         _write_if_changed(PAPERS, {"papers": papers})
-        _write_if_changed(QUEUE, {"items": queue})
+        _write_if_changed(EMBODIED, embodied)
 
-    # README is always generated, never edited as the primary source.
+    # Both collections are automatic; README never acts as input.
     generate_readme.generate(papers, config, str(README))
-    print(f"[render] {len(papers)} indexed papers; {len(queue)} pending review leads")
+    print(f"[render] {len(papers)} recovery + {len(embodied['papers'])} embodied papers")
+
 
 
 def main():
