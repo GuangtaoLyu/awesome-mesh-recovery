@@ -48,8 +48,8 @@ def _publication(item):
     if status == "venue-listed" and venue:
         return venue
     if item.get("arxiv_id"):
-        return f"arXiv preprint ({year})" if year else "arXiv preprint"
-    return f"Preprint / venue unverified ({year})" if year else "Publication unverified"
+        return f"arXiv {year}" if year else "arXiv"
+    return f"Preprint {year}" if year else "Venue unverified"
 
 
 def _link(label, url):
