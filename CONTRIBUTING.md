@@ -2,7 +2,7 @@
 
 This repository is **fully auto-updated every Monday at 09:00 UTC**. A paper
 does **not** need to have been accepted by a conference or journal. Relevant
-arXiv-only preprints are included as "arXiv preprint (year)".
+arXiv-only preprints are included as "arXiv 2026" (year follows the source metadata).
 
 ## What appears on the README?
 
