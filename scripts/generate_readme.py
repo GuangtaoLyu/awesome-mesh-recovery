@@ -6,7 +6,6 @@ category (so adding a paper never forces a global renumber), and sorts by year
 desc then title. This is the auto-reorganized view the user asked for.
 """
 import re
-import datetime
 import os
 
 # Long container-title (as returned by Crossref) -> short acronym.
@@ -57,7 +56,8 @@ def _short_venue(v):
 
 
 def _anchor(cat):
-    return cat.lower().replace(" & ", " and ").replace(" ", "-").replace("&", "and")
+    """Match GitHub heading slugs: strip punctuation, preserve spaces as dashes."""
+    return re.sub(r"[^a-z0-9 _-]", "", cat.lower()).replace(" ", "-")
 
 
 def format_entry(idx, p):
@@ -135,8 +135,7 @@ def generate(papers, config, readme_path):
         lines.append(config["description"])
         lines.append("")
     lines.append(
-        f"*Last updated: {datetime.date.today().isoformat()} | "
-        f"Auto-indexed papers: {len(papers)} | Curated embodied highlights: {curated_count}*"
+        f"*Auto-indexed papers: {len(papers)} | Curated embodied highlights: {curated_count}*"
     )
     lines.append("")
     lines.append(
@@ -171,10 +170,12 @@ def generate(papers, config, readme_path):
     lines.append("## Contributing")
     lines.append("")
     lines.append(
-        "Found a missing or mis-categorized paper? Open an issue or pull "
-        "request. README.md is generated from `data/papers.json` (automatically "
-        "harvested) and `data/embodied.md` (manually curated). To add or revise "
-        "embodied works, edit `data/embodied.md` rather than README.md directly."
+        "Found a missing paper? Open an issue or PR. Auto-indexed HMR comes "
+        "from `data/papers.json`, while the first embodied section is curated "
+        "in `data/embodied.md`. Borderline discoveries go to "
+        "[`data/review_queue.json`](data/review_queue.json), never directly "
+        "into the curated section. See [CONTRIBUTING.md](CONTRIBUTING.md) "
+        "for review, rejection, and release-status rules."
     )
     lines.append("")
 
