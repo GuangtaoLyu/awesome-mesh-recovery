@@ -164,7 +164,7 @@ class PresentationTests(unittest.TestCase):
         }
         line = embodied_index.format_paper(record)
         self.assertEqual(len(line.splitlines()), 1)
-        self.assertIn("arXiv preprint (2026)", line)
+        self.assertIn("(arXiv 2026)", line)
         self.assertIn("[Code (partial release)]", line)
         self.assertNotIn("summary", line)
 
