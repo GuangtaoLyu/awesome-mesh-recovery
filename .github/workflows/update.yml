@@ -3,8 +3,8 @@ name: Weekly Auto Update
 # Fully automatic: harvest new papers from arXiv + DBLP + Semantic Scholar +
 # Crossref, deduplicate them, classify, regenerate README.md, and push.
 # No human review. Runs every Monday 09:00 UTC (= 17:00 Beijing) and on manual
-# dispatch. The pipeline itself performs the dedup (by normalized title +
-# arXiv id + URL), so the list never accumulates duplicates.
+# dispatch. Auto-harvested papers and the hand-curated embodied section are
+# combined by the README generator. The source of truth is NOT README.md.
 on:
   schedule:
     - cron: "0 9 * * 1"
@@ -22,6 +22,8 @@ jobs:
   update:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -36,10 +38,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      # Best-effort: a transient network failure must not spam notifications.
-      - name: Run update pipeline (harvest + dedup + regenerate README)
-        continue-on-error: true
+      - name: Run update pipeline (harvest + dedup + curated section + README)
         run: python scripts/pipeline.py
+
+      - name: Verify generated README and curated content
+        run: python -m unittest discover -s tests -v
 
       # Only push when something actually changed.
       - name: Push if changed
@@ -49,5 +52,5 @@ jobs:
             echo "No new commits."
             exit 0
           fi
-          git pull --rebase origin "${GITHUB_REF_NAME}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin "HEAD:${GITHUB_REF_NAME}"

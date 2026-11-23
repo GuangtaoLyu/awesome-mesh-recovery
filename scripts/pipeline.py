@@ -6,7 +6,7 @@
 3. Harvest candidates from all sources (arXiv/DBLP/S2/Crossref).
 4. Dedup against existing papers; only genuinely new ones are added.
 5. Classify each new paper with the per-repo classify.py.
-6. Regenerate README.md from papers.json.
+6. Regenerate README.md from papers.json + curated data/embodied.md.
 7. Auto-commit (the workflow pushes). Never pushes itself.
 
 Deduplication
@@ -182,9 +182,11 @@ def main():
 
 
 def git_commit(added, removed=0):
-    if added == 0 and removed == 0:
-        print("[pipeline] nothing changed, skip commit")
-        return
+    """Commit regenerated outputs whenever they changed, even with zero new papers.
+
+    This also repairs a README made stale by an edit to data/embodied.md.
+    Do not stage unrelated Python caches or manually curated source files.
+    """
     try:
         subprocess.check_output(
             ["git", "rev-parse", "--is-inside-work-tree"],
@@ -192,12 +194,18 @@ def git_commit(added, removed=0):
         )
     except Exception:
         return
-    subprocess.call(["git", "add", "-A"], cwd=ROOT)
+    subprocess.run(["git", "add", "--", "README.md", "data/papers.json"], cwd=ROOT, check=True)
+    changed = subprocess.run(["git", "diff", "--cached", "--quiet", "--", "README.md", "data/papers.json"], cwd=ROOT)
+    if changed.returncode == 0:
+        print("[pipeline] generated outputs unchanged, skip commit")
+        return
+    if changed.returncode != 1:
+        raise RuntimeError("git diff --cached failed")
     msg = (
         f"auto-update: +{added} paper(s), dedup removed {removed} duplicate(s) "
         f"({datetime.date.today().isoformat()})"
     )
-    subprocess.call(["git", "commit", "-q", "-m", msg], cwd=ROOT)
+    subprocess.run(["git", "commit", "-q", "-m", msg], cwd=ROOT, check=True)
 
 
 if __name__ == "__main__":
