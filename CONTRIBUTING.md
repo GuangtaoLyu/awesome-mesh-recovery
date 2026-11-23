@@ -23,7 +23,8 @@ index of 3D human and hand **mesh, pose-and-shape, and motion recovery**.
    Older papers already in the index remain untouched.
 2. Merge cross-source duplicates by normalized title, arXiv ID and DOI.
    Existing titles, categories and editorial decisions take precedence; newly
-   available identifiers or publication venues may fill missing metadata.
+   available identifiers and consistent publication metadata may fill gaps.
+   Conflicting preprint/conference years are left for manual verification.
 3. **Auto-accept only specific recovery titles** (e.g., Human Mesh Recovery,
    Human Pose and Shape Estimation, Hand Mesh Reconstruction).
    Broader 3D pose, world-grounded motion, hand reconstruction or SMPL-related
