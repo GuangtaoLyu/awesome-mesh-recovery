@@ -1,106 +1,70 @@
-# Contributing & Maintenance
+# Contribution and maintenance
 
-This is an **awesome list**, not a general robotics paper feed. The front-page
-embodied section is a deliberate bridge from **human / hand recovery** to
-**retargeting and robot-executable motion**, while the rest remains a focused
-index of 3D human and hand **mesh, pose-and-shape, and motion recovery**.
+This repository is **fully auto-updated every Monday at 09:00 UTC**. A paper
+does **not** need to have been accepted by a conference or journal. Relevant
+arXiv-only preprints are included as "arXiv 2026" (year follows the source metadata).
 
-## Where to make changes
+## What appears on the README?
 
-| File | Role | Maintainer action |
-| --- | --- | --- |
-| `data/papers.json` | Accepted HMR papers (existing historical records preserved) | Normally automatic; manually verified additions can be approved from the queue |
-| `data/embodied.md` | Curated robotics bridge; displayed **first** | Edit only after checking the actual paper and release status |
-| `data/review_queue.json` | Unpublished discovery suggestions | Review, approve or reject; **not** rendered as papers |
-| `data/ignored.json` | Rejected titles / arXiv IDs / DOIs | Generated when rejecting; prevents repeats |
-| `config.json` | Discovery queries, eligibility phrases, queue limits, taxonomy | Tune with a focused change and tests |
-| `README.md` | Generated view from accepted papers plus curated section | **Do not directly add papers here** |
+An Awesome List is a browsable index, not an annotated survey. Each paper is
+**one line only**:
 
-## Weekly update (Monday 09:00 UTC)
-
-1. Query arXiv, DBLP, Semantic Scholar and Crossref, restricted to the recent
-   discovery window in `config.json` (currently three publication years).
-   Older papers already in the index remain untouched.
-2. Merge cross-source duplicates by normalized title, arXiv ID and DOI.
-   Existing titles, categories and editorial decisions take precedence; newly
-   available identifiers and consistent publication metadata may fill gaps.
-   Conflicting preprint/conference years are left for manual verification.
-3. **Auto-accept only specific recovery titles** (e.g., Human Mesh Recovery,
-   Human Pose and Shape Estimation, Hand Mesh Reconstruction).
-   Broader 3D pose, world-grounded motion, hand reconstruction or SMPL-related
-   leads require review. Other topics are ignored.
-4. Discover plausible *embodied* follow-up papers using separate robot/video
-   queries. **Never insert them automatically** into the curated front section.
-   A paper on robot tracking alone is not automatically a mesh-recovery paper.
-5. Save limited, deduplicated suggestions in `data/review_queue.json`
-   (currently max 80 total; up to 8 new leads per track each run).
-6. Generate the README **only from accepted + curated sources**, run offline
-   tests, and push only if content actually changed. Dates alone do not produce
-   commits. Failed queries are reported; total core-source failure blocks the
-   update. Missing curated data fails loudly instead of deleting the section.
-
-## Review workflow
-
-Run these commands locally (or via GitHub's code editor when editing the
-curated Markdown manually):
-
-```bash
-python scripts/review_candidates.py list
-python scripts/review_candidates.py approve 3 --category "Hand, Face & Expressive Mesh"
-python scripts/review_candidates.py reject 5
-python scripts/pipeline.py --render-only
-python -m unittest discover -s tests -v
+```markdown
+- **VideoMimic** (CoRL 2025) — [Paper](...) · [Code](...)
+- **ExMR** (arXiv 2026) — [Paper](...) · [Code (demo)](...)
+- **VideoManip** (arXiv 2026) — [Paper](...) · [Code (partial)](...)
+- **Hand2Robot** (arXiv 2026) — [Paper](...)
 ```
 
-The list command shows stable **1-based indices at the time of listing**;
-list again after approving or rejecting because indices shift.
+No abstract, detailed methods, citation metrics, reviewer scores, real-robot
+claims or repetitive task tags in every entry. Scope is explained by the
+section headings.
 
-- **Core recovery:** Approve after verifying that the paper actually predicts
-  a human / hand mesh, shape parameters or relevant 3D motion; choose the
-  closest category. Review must not be confused with automatic acceptance.
-- **Embodied:** Verify the connection to recovery, then add one concise entry
-  to `data/embodied.md` under the appropriate full-body or hand section.
-  Include `[Paper]`, `[Code]`, `[Project]` only when confirmed. Prefer the
-  original article URL and official repository. Do **not** approve embodied
-  proposals into the generic auto-index; when the entry is in the curated
-  file, the next update automatically removes matching leads.
-- **Rejected:** Reject low-quality, unrelated, duplicate or misleading leads.
-  The queue removes them, and the stable identifiers in `data/ignored.json`
-  prevent the same paper from reappearing under another provider URL.
-- **Manual addition:** To insert an older seminal paper that discovery no
-  longer scans, add it directly to `data/papers.json` with the correct category
-  (or to curated embodied Markdown), then run the offline generator and tests.
+## Automatic data sources and publication rules
 
-## Scope and evidence rules
+| Source | Role |
+| --- | --- |
+| `data/papers.json` | Broad human, hand, body and face recovery index |
+| `data/embodied.json` | Recovery → robot, retargeting and tracking papers; shown **first** |
+| `data/ignored.json` | Optional list of excluded paper identifiers |
+| `config.json` | Queries, scope filters, caps and classification |
+| `README.md` | Generated; **never** the paper database |
 
-**Embodied groups:** Whole-Body Recovery → Humanoid Robots; Hand-Object
-Recovery → Dexterous Robots; Reusable Retargeting Toolkit.
+The automated pipeline searches arXiv, DBLP, Semantic Scholar and Crossref.
+A paper's publication status does **not** determine eligibility. Instead,
+the title and (when available) abstract must establish relevance to the
+selected track. The narrow "recovery-to-robot" bridge excludes generic VLA
+and unrelated robotics work.
 
-- **Vision → Robot:** Has a concrete perception/reconstruction and
-  retargeting/execution path.
-- **Recovery:** A perception backbone. Do not claim robot execution merely
-  because downstream adaptation is possible.
-- **Retargeting / Teleoperation:** Translates human motion to robot
-  references; XR/MoCap systems must be labeled as such.
-- **Tracking / Control:** Executes or stabilizes robot references. It is a
-  downstream component, not a mesh estimator.
-- **Code status:** Link the verified public repository and specify whether
-  it includes reconstruction, retargeting, training, real deployment, only a
-  demo, or merely pretrained weights. Do not infer complete release from a
-  GitHub link. For example, VideoManip currently releases the reconstruction
-  pathway, not all grasping/manipulation-policy stages.
+New works enter their track **automatically**. Papers from different sources
+are deduplicated by normalized title, arXiv ID or DOI. Existing editorial
+labels are preserved, and published venue claims are only promoted when
+the new source has consistent year information. Older papers remain indexed.
 
-Preserve the curated section at the start of the table of contents **and**
-body. When editing an item, use accurate venue/year/link information and
-avoid redundant entries in both the curated and auto-indexed collections.
+## Code and link policy
 
-## Reliability and recovery
+- Always link a verifiable primary paper: official arXiv or publisher/DOI.
+- Add `[Code]` only when a GitHub repository can be found in author-supplied
+  paper metadata (abstract/comment) and the repository exists.
+- A repository link **does not mean complete code is released**.
+- Existing explicitly verified `partial` / `demo` labels are preserved;
+  new public repositories receive the neutral `Code` label.
+- If no code is verified, **omit the Code link**. Missing a link does not
+  mean the work is closed source. Do not claim "not released" as a fact.
+- Project pages or model links are optional and included only when known.
 
-- Manual rendering (no internet): `python scripts/pipeline.py --render-only`
-- Local validation: `python -m unittest discover -s tests -v`
-- Automatic update: `.github/workflows/update.yml` (scheduled and manual;
-  manual dispatch has a `render_only` checkbox)
-- PR validation: `.github/workflows/ci.yml` (offline only)
-- There is **no automatic deletion** of old accepted papers or manually
-  curated robotics papers. Tune the selection phrases in config and add tests
-  instead of weakening admission rules to chase citation counts.
+## Updates and tests
+
+- Weekly: `.github/workflows/update.yml`
+- PR tests: `.github/workflows/ci.yml`
+- Offline rebuild: `python scripts/pipeline.py --render-only`
+- Offline validation: `python -m unittest discover -s tests -v`
+
+Any GitHub Actions update first regenerates the README, then tests it.
+It commits only changed JSON data and README files. A missing source
+file or complete core-search outage blocks publishing instead of erasing data.
+The discovery window is deliberately limited for scheduled updates; historical
+works do not expire.
+
+Issues and pull requests for corrections are welcome, but **routine maintenance
+requires no human approval or manual review queue**.

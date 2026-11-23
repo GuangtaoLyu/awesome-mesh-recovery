@@ -7,6 +7,8 @@ desc then title. This is the auto-reorganized view the user asked for.
 """
 import re
 import os
+import json
+import embodied_index
 
 # Long container-title (as returned by Crossref) -> short acronym.
 _VENUE_ACR = [
@@ -61,38 +63,25 @@ def _anchor(cat):
 
 
 def format_entry(idx, p):
-    title = p.get("title", "")
-    authors = p.get("authors") or []
-    if authors:
-        first = authors[0].split()[-1]
-        auth = f"{first} et al." if len(authors) > 1 else authors[0]
-    else:
-        auth = ""
-    raw_venue = p.get("venue") or ""
-    venue = _short_venue(raw_venue)
+    """Compact one-line listing: name, year/venue, and verified links."""
+    title = p.get("title") or "Untitled paper"
+    venue = _short_venue(p.get("venue") or "")
     year = p.get("year")
-    link = ""
-    if p.get("arxiv_id"):
-        link = f"[arXiv](https://arxiv.org/abs/{p['arxiv_id']})"
-    elif p.get("url"):
-        label = venue or "Paper"
-        link = f"[{label}]({p['url']})"
-    parts = [f"{idx}. **{title}**"]
-    if auth:
-        parts.append(f", {auth}")
-    # Venue + year. arXiv preprints have no real venue, so show the year only.
-    # _short_venue() strips a year embedded in the container-title, so it is
-    # never printed twice.
-    if "arxiv" in raw_venue.lower():
-        # "arXiv" / "arXiv.org" / "arXiv preprint" -> no real venue, year only.
-        meta = str(year) if year else ""
-    else:
-        meta = " ".join(str(x) for x in [venue, year] if x)
-    if meta:
-        parts.append(f", {meta}")
-    if link:
-        parts.append(f", {link}")
-    return "".join(parts)
+    if venue.lower() in ("arxiv", "arxiv.org", "print"):
+        venue = "arXiv"
+    meta = " ".join(str(x) for x in (venue, year) if x)
+    url = (f"https://arxiv.org/abs/{p['arxiv_id']}" if p.get("arxiv_id")
+           else p.get("url"))
+    links = []
+    if url:
+        links.append(f"[Paper]({url})")
+    if p.get("code_url"):
+        label = ("Code (partial)" if p.get("code_status") == "partial" else
+                 "Code (demo)" if p.get("code_status") == "demo" else "Code")
+        links.append(f"[{label}]({p['code_url']})")
+    if p.get("project_url"):
+        links.append(f"[Project]({p['project_url']})")
+    return f"- **{title}** ({meta}) — " + " · ".join(links)
 
 
 EMBODIED_TITLE = "Embodied Motion Recovery & Robot Tracking"
@@ -100,19 +89,13 @@ EMBODIED_ANCHOR = "embodied-motion-recovery--robot-tracking"
 
 
 def load_embodied_section():
-    """Source of truth for hand-curated embodied entries.
-
-    Fail loudly instead of silently deleting the section if the source is
-    missing or malformed during a scheduled README regeneration.
-    """
-    path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "embodied.md")
-    with open(path, encoding="utf-8") as f:
-        section = f.read().strip().splitlines()
-    if not section or section[0] != f"## {EMBODIED_TITLE}":
-        raise ValueError(f"Invalid embodied section heading: {path}")
-    if not any(line.startswith("### ") for line in section):
-        raise ValueError(f"Missing embodied subcategories: {path}")
-    return section
+    """All embodied papers come from structured, auto-updated JSON."""
+    path = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "data", "embodied.json"
+    )
+    data = embodied_index.load(path)
+    return embodied_index.render(data).strip().splitlines(), len(data["papers"])
 
 
 def generate(papers, config, readme_path):
@@ -125,8 +108,7 @@ def generate(papers, config, readme_path):
         cats.setdefault(c, []).append(p)
 
     # Curated source is separate from the auto-harvested paper store.
-    embodied_lines = load_embodied_section()
-    curated_count = sum(bool(re.match(r"^\d+\. \*\*", line)) for line in embodied_lines)
+    embodied_lines, embodied_count = load_embodied_section()
 
     lines = []
     lines.append(f"# {config.get('display_name', 'Awesome List')}")
@@ -135,13 +117,13 @@ def generate(papers, config, readme_path):
         lines.append(config["description"])
         lines.append("")
     lines.append(
-        f"*Auto-indexed papers: {len(papers)} | Curated embodied highlights: {curated_count}*"
+        f"*Recovery papers: {len(papers)} | Embodied papers: {embodied_count}*"
     )
     lines.append("")
     lines.append(
         "> \U0001F916 Auto-updated weekly by GitHub Actions "
         "(multi-source: arXiv + DBLP + Semantic Scholar + Crossref). "
-        "Core papers are auto-categorized; the embodied section is curated separately."
+        "Includes arXiv preprints; code links are shown when verified."
     )
     lines.append("")
 
@@ -170,12 +152,10 @@ def generate(papers, config, readme_path):
     lines.append("## Contributing")
     lines.append("")
     lines.append(
-        "Found a missing paper? Open an issue or PR. Auto-indexed HMR comes "
-        "from `data/papers.json`, while the first embodied section is curated "
-        "in `data/embodied.md`. Borderline discoveries go to "
-        "[`data/review_queue.json`](data/review_queue.json), never directly "
-        "into the curated section. See [CONTRIBUTING.md](CONTRIBUTING.md) "
-        "for review, rejection, and release-status rules."
+        "Papers are collected automatically from arXiv, DBLP, Semantic Scholar "
+        "and Crossref. The sources of truth are `data/papers.json` and "
+        "`data/embodied.json`. To suggest corrections, open an issue or PR. "
+        "See [CONTRIBUTING.md](CONTRIBUTING.md) for scope and link rules."
     )
     lines.append("")
 

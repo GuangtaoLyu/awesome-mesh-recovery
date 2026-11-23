@@ -14,7 +14,8 @@ import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 
-ATOM = {"a": "http://www.w3.org/2005/Atom"}
+ATOM = {"a": "http://www.w3.org/2005/Atom",
+        "arxiv": "http://arxiv.org/schemas/atom"}
 
 
 def _get(url, *, retries=2, timeout=20):
@@ -76,6 +77,9 @@ def arxiv(query, since_year, limit):
             "venue": "arXiv",
             "url": f"https://arxiv.org/abs/{arxiv_id}",
             "arxiv_id": arxiv_id,
+            "abstract": _norm_title(entry.findtext("a:summary", default="", namespaces=ATOM)),
+            "comment": _norm_title(entry.findtext("arxiv:comment", default="", namespaces=ATOM)),
+            "journal_ref": _norm_title(entry.findtext("arxiv:journal_ref", default="", namespaces=ATOM)),
             "source": "arxiv",
         })
     return found
@@ -111,7 +115,7 @@ def dblp(query, since_year, limit):
 def semantic_scholar(query, since_year, limit):
     url = _param(
         "https://api.semanticscholar.org/graph/v1/paper/search",
-        query=query, fields="title,authors,year,venue,externalIds,url",
+        query=query, fields="title,authors,year,venue,externalIds,url,abstract",
         limit=min(limit, 100),
     )
     data = json.loads(_get(url))
@@ -132,6 +136,7 @@ def semantic_scholar(query, since_year, limit):
             "year": year,
             "venue": item.get("venue") or "",
             "url": url, "arxiv_id": arxiv_id, "doi": doi,
+            "abstract": _norm_title(item.get("abstract")),
             "source": "s2",
         })
     return found
@@ -210,3 +215,40 @@ def harvest(config, *, track="core", today=None):
     if track == "core" and not status["succeeded"]:
         raise RuntimeError("All core discovery requests failed; existing data left unchanged")
     return found, status
+
+
+def arxiv_by_ids(ids, *, chunk_size=30):
+    """Refresh older indexed preprints regardless of the discovery time window.
+
+    Used to look for author-supplied code URLs in abstract/comment updates.
+    Failure of this optional enrichment does not block weekly discovery.
+    """
+    ids = list(dict.fromkeys(
+        str(x).split("v")[0] for x in ids if re.fullmatch(r"\d{4}\.\d{4,5}(?:v\d+)?", str(x))
+    ))
+    out = []
+    for start in range(0, len(ids), chunk_size):
+        chunk = ids[start:start + chunk_size]
+        try:
+            url = _param("https://export.arxiv.org/api/query",
+                         id_list=",".join(chunk), max_results=len(chunk))
+            root = ET.fromstring(_get(url))
+            for entry in root.findall("a:entry", ATOM):
+                aid = _arxiv_id(entry.findtext("a:id", default="", namespaces=ATOM))
+                if not aid or aid not in chunk:
+                    continue
+                pub = entry.findtext("a:published", default="", namespaces=ATOM)
+                out.append({
+                    "title": _norm_title(entry.findtext("a:title", default="", namespaces=ATOM)),
+                    "arxiv_id": aid,
+                    "year": int(pub[:4]) if pub[:4].isdigit() else None,
+                    "venue": "arXiv",
+                    "url": "https://arxiv.org/abs/" + aid,
+                    "abstract": _norm_title(entry.findtext("a:summary", default="", namespaces=ATOM)),
+                    "comment": _norm_title(entry.findtext("arxiv:comment", default="", namespaces=ATOM)),
+                    "journal_ref": _norm_title(entry.findtext("arxiv:journal_ref", default="", namespaces=ATOM)),
+                    "source": "arxiv",
+                })
+        except Exception as ex:
+            print(f"[arxiv-refresh] optional batch failed: {type(ex).__name__}: {ex}")
+    return out
