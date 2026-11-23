@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Admission policy for literature discovery.
+"""Automatic scope filter for core recovery and embodied follow-up papers.
 
-core: strict recovery/shape title phrases may be auto-indexed; borderline
-      items enter a review queue.
-embodied: relevant discoveries ALWAYS enter a review queue, never auto-publish
-          into the curated hand/robot section.
+Acceptance depends on task relevance, NOT conference decisions or code release.
+Ambiguous papers are skipped for now and can be rediscovered in future runs.
+Human review is optional correction through PRs, never a scheduled dependency.
 """
 import re
 
@@ -13,31 +12,54 @@ def normalize_title(title):
     return " ".join(re.sub(r"[^a-z0-9]+", " ", (title or "").lower()).split())
 
 
-def _has_phrase(title, phrases):
-    norm = " " + normalize_title(title) + " "
-    return any(" " + normalize_title(p) + " " in norm for p in phrases if normalize_title(p))
+def _has_phrase(text, phrases):
+    normalized = " " + normalize_title(text) + " "
+    return any(" " + normalize_title(p) + " " in normalized
+               for p in phrases if normalize_title(p))
+
+
+def _words(text, pattern):
+    return bool(re.search(pattern, normalize_title(text)))
 
 
 def decide(paper, config, track="core"):
-    """Return (auto | review | ignore, reason).
+    """Return (auto | ignore, reason); no manual-review gate.
 
-    This gate applies only to newly discovered papers; it does not re-evaluate
-    or remove earlier manually collected / published records.
+    A preprint with an arXiv URL is a perfectly valid publication record.
+    Only uncertain topic scope is excluded automatically.
     """
     title = paper.get("title") or ""
-    if len(normalize_title(title)) < 14:
+    abstract = paper.get("abstract") or ""
+    norm = normalize_title(title)
+    if len(norm) < 14:
         return "ignore", "missing or implausibly short title"
-    year = paper.get("year")
+
+    if track == "core":
+        if _has_phrase(title, config["selection"]["auto_accept_title_phrases"]):
+            return "auto", "specific human or hand recovery title"
+        # Some newer work uses "motion reconstruction" rather than "mesh".
+        subject = _words(title, r"\b(human|body|hand|face|smpl|mano)\b")
+        reconstruction = _words(title, r"\b(recovery|reconstruction|mesh|pose and shape|motion capture)\b")
+        if subject and reconstruction:
+            # Generic 3D pose estimation and character animation alone are out
+            # of scope unless explicit shape/mesh/recovery is present.
+            return "auto", "recovery/reconstruction title pattern"
+        return "ignore", "outside the focused recovery title scope"
+
     if track == "embodied":
-        if _has_phrase(title, config["selection"]["embodied_title_phrases"]):
-            return "review", "robotics connection needs human scope/code verification"
-        return "ignore", "no concrete recovery-to-robot connection in title"
-    if track != "core":
-        raise ValueError(f"Unknown discovery track: {track}")
-    if _has_phrase(title, config["selection"]["auto_accept_title_phrases"]):
-        if year:
-            return "auto", "specific mesh / pose-and-shape recovery terminology"
-        return "review", "strong title but publication year missing"
-    if _has_phrase(title, config["selection"]["review_title_phrases"]):
-        return "review", "possibly relevant recovery or hand-motion work"
-    return "ignore", "outside the focused mesh/shape recovery title policy"
+        combined = title + " " + abstract
+        robot = _words(combined, r"\b(robot|robots|robotic|humanoid|dexterous|teleoperation|"
+                               r"retargeting|retarget|sim to real|sim2real)\b")
+        human = _words(combined, r"\b(human|hand|hands|body|humanoid|video|videos|"
+                               r"monocular|egocentric|motion|demonstration)\b")
+        bridge = _words(combined, r"\b(reconstruction|recovery|retarget|retargeting|"
+                                r"teleoperation|tracking|imitation|mimic|"
+                                r"demonstration|hand object)\b")
+        # An explicit title signal is necessary: an abstract passing mention
+        # of robots must not turn every HMR paper into an embodied entry.
+        title_signal = _has_phrase(title, config["selection"]["embodied_title_phrases"])
+        if robot and human and bridge and title_signal:
+            return "auto", "human/video/hand recovery connected to robot execution"
+        return "ignore", "insufficient evidence of recovery-to-robot connection"
+
+    raise ValueError(f"Unknown discovery track: {track}")
