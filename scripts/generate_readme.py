@@ -7,6 +7,7 @@ desc then title. This is the auto-reorganized view the user asked for.
 """
 import re
 import datetime
+import os
 
 # Long container-title (as returned by Crossref) -> short acronym.
 _VENUE_ACR = [
@@ -103,6 +104,16 @@ def generate(papers, config, readme_path):
             c = config.get("default_category")
         cats.setdefault(c, []).append(p)
 
+    # Separately curate robotics bridges; do not mix them into HMR harvesting.
+    section_path = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "data", "embodied.md",
+    )
+    embodied_lines = []
+    if os.path.isfile(section_path):
+        with open(section_path, encoding="utf-8") as f:
+            embodied_lines = f.read().strip().splitlines()
+
     lines = []
     lines.append(f"# {config.get('display_name', 'Awesome List')}")
     lines.append("")
@@ -126,25 +137,30 @@ def generate(papers, config, readme_path):
     for c in taxonomy:
         if cats.get(c):
             lines.append(f"- [{c}](#{_anchor(c)})")
+        if c == "Motion & Temporal Recovery" and embodied_lines:
+            lines.append("- [Embodied Motion Recovery & Robot Tracking](#embodied-motion-recovery-and-robot-tracking)")
     lines.append("")
 
     for c in taxonomy:
         items = cats.get(c, [])
-        if not items:
-            continue
-        items.sort(key=lambda p: (-(p.get("year") or 0), p["title"].lower()))
-        lines.append(f"## {c}")
-        lines.append("")
-        for i, p in enumerate(items, 1):
-            lines.append(format_entry(i, p))
-        lines.append("")
+        if items:
+            items.sort(key=lambda p: (-(p.get("year") or 0), p["title"].lower()))
+            lines.append(f"## {c}")
+            lines.append("")
+            for i, p in enumerate(items, 1):
+                lines.append(format_entry(i, p))
+            lines.append("")
+        if c == "Motion & Temporal Recovery" and embodied_lines:
+            lines.extend(embodied_lines)
+            lines.append("")
 
     lines.append("## Contributing")
     lines.append("")
     lines.append(
         "Found a missing or mis-categorized paper? Open an issue or pull "
         "request — the list is regenerated automatically, so manual README "
-        "edits will be overwritten on the next run."
+        "edits will be overwritten on the next run. For the curated embodied "
+        "section, edit `data/embodied.md`."
     )
     lines.append("")
 
