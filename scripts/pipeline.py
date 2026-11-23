@@ -154,7 +154,8 @@ def process_candidates(papers, queue, blocked_keys, curated, batches, config, to
     indexed = _known_index(papers)
     queued = _known_index(queue)
     blocked_keys = set(blocked_keys)
-    counters = {"auto_added": 0, "enriched": 0, "review_added": 0, "ignored": 0}
+    counters = {"auto_added": 0, "enriched": 0, "review_added": 0, "ignored": 0,
+                "queue_capacity_skips": 0}
     max_queue = int(config["discovery"]["review_queue_max"])
     per_track = int(config["discovery"]["new_review_per_run_per_track"])
 
@@ -195,6 +196,7 @@ def process_candidates(papers, queue, blocked_keys, curated, batches, config, to
                 counters["auto_added"] += 1
                 continue
             if len(queue) >= max_queue or added_review_for_track >= per_track:
+                counters["queue_capacity_skips"] += 1
                 continue
             record = dict(candidate)
             record["track"] = track
@@ -230,11 +232,13 @@ def run(*, render_only=False, today=None):
         raise ValueError("Curated embodied section is unexpectedly empty")
 
     papers = dedup_records(store["papers"])
-    queue_data = load_json(str(QUEUE), {"items": []})
-    ignored_data = load_json(str(IGNORED), {"keys": []})
-    if not isinstance(queue_data.get("items"), list):
+    if not QUEUE.is_file() or not IGNORED.is_file():
+        raise FileNotFoundError("Review queue or rejection data is missing; refusing to discard decisions")
+    queue_data = load_json(str(QUEUE), None)
+    ignored_data = load_json(str(IGNORED), None)
+    if not isinstance(queue_data, dict) or not isinstance(queue_data.get("items"), list):
         raise ValueError("Invalid review_queue.json")
-    if not isinstance(ignored_data.get("keys"), list):
+    if not isinstance(ignored_data, dict) or not isinstance(ignored_data.get("keys"), list):
         raise ValueError("Invalid ignored.json")
     queue = queue_data["items"]
 
@@ -251,7 +255,10 @@ def run(*, render_only=False, today=None):
         print(f"[select] +{stats['auto_added']} indexed, "
               f"+{stats['review_added']} review leads, "
               f"{stats['enriched']} metadata enrichments, "
-              f"{stats['ignored']} unrelated ignored")
+              f"{stats['ignored']} unrelated ignored, "
+              f"{stats['queue_capacity_skips']} unqueued due to limits")
+        # A new DOI/arXiv connection can bridge two older indexed records.
+        papers = dedup_records(papers)
         _write_if_changed(PAPERS, {"papers": papers})
         _write_if_changed(QUEUE, {"items": queue})
 
