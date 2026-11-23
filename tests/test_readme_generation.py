@@ -48,7 +48,7 @@ class TestReadmeGeneration(unittest.TestCase):
     def test_one_line_per_entry(self):
         text = render(PAPERS)
         self.assertNotIn("\n   - ", text)
-        self.assertIn("arXiv preprint", text)
+        self.assertIn("(arXiv 2026)", text)
         self.assertIn("[Code (partial release)]", text)
 
     def test_readme_reproducible(self):
