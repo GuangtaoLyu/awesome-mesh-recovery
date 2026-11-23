@@ -82,9 +82,12 @@ def enrich(old, new):
         merged["url"] = new["url"]
     old_venue = str(merged.get("venue") or "").lower()
     incoming_venue = str(new.get("venue") or "")
-    if old_venue in ("", "arxiv", "arxiv.org", "print") and incoming_venue.lower() not in (
-        "", "arxiv", "arxiv.org", "print"
-    ):
+    incoming_real = incoming_venue.lower() not in ("", "arxiv", "arxiv.org", "print")
+    old_year, new_year = merged.get("year"), new.get("year")
+    same_publication_year = not (old_year and new_year) or str(old_year) == str(new_year)
+    # Avoid rendering "CVPR 2025" from a 2025 arXiv preprint and 2026
+    # proceedings record. Conflicting publication years need manual review.
+    if old_venue in ("", "arxiv", "arxiv.org", "print") and incoming_real and same_publication_year:
         merged["venue"] = incoming_venue
     return merged
 
