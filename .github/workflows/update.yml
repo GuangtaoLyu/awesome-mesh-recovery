@@ -1,14 +1,14 @@
 name: Weekly Literature Update
 
 # Monday 09:00 UTC. The generated README is not an input source.
-# Strict recovery papers may auto-index; embodied leads require human review.
+# Relevant preprints and embodied work auto-index without an acceptance/review gate.
 on:
   schedule:
     - cron: "0 9 * * 1"
   workflow_dispatch:
     inputs:
       render_only:
-        description: "Regenerate README from existing curated/indexed data without API discovery"
+        description: "Regenerate README from existing JSON data without API discovery"
         type: boolean
         default: false
 
@@ -49,12 +49,12 @@ jobs:
             python scripts/pipeline.py
           fi
 
-      - name: Validate selection, deduplication and generated README
+      - name: Validate automatic acceptance, deduplication and compact README
         run: python -m unittest discover -s tests -v
 
-      - name: Commit ONLY source-of-truth output changes
+      - name: Commit only changed JSON source data and generated README
         run: |
-          git add -- README.md data/papers.json data/review_queue.json
+          git add -- README.md data/papers.json data/embodied.json
           if git diff --cached --quiet; then
             echo "No changes to publish."
             exit 0
