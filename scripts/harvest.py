@@ -1,250 +1,212 @@
 # -*- coding: utf-8 -*-
-"""Multi-source paper harvester for small awesome-lists.
+"""Best-effort, per-query multi-source discovery with explicit diagnostics.
 
-These niche motion directions publish MORE in conferences (CVPR/ICCV/ECCV/
-NeurIPS/ICML...) than on arXiv, so we search several no-auth sources:
-  - arXiv        (export.arxiv.org API)
-  - DBLP         (dblp.org API, strong conference coverage)
-  - Semantic Scholar (broad, includes arXiv + venue + DOI)
-  - Crossref     (published DOI / venue papers)
-
-Each source is isolated in try/except so one flaky source never fails the run.
-Returns a flat list of candidate dicts (no dedup against the existing list yet).
+Sources can fail independently (notably Semantic Scholar rate limits). A
+zero-success CORE discovery must fail the weekly run rather than masquerade
+as a successful update. Each query is retried and bounded; no paid APIs.
 """
-import re
+import datetime
 import json
+import re
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
-import urllib.error
 import xml.etree.ElementTree as ET
 
-from lib_common import norm_title
-
-NS = {"atom": "http://www.w3.org/2005/Atom"}
+ATOM = {"a": "http://www.w3.org/2005/Atom"}
 
 
-def _get(url, timeout=30, retries=2):
-    """GET with 429 backoff so rate-limited sources (S2/DBLP) get a 2nd chance."""
-    last = None
+def _get(url, *, retries=2, timeout=20):
+    req = urllib.request.Request(
+        url, headers={"User-Agent": "awesome-mesh-recovery/2.0 (GitHub literature index)"}
+    )
     for attempt in range(retries + 1):
         try:
-            req = urllib.request.Request(
-                url, headers={"User-Agent": "motion-awesome-bot/1.0"}
-            )
-            with urllib.request.urlopen(req, timeout=timeout) as r:
-                return r.read()
-        except urllib.error.HTTPError as e:
-            last = e
-            if e.code == 429 and attempt < retries:
-                time.sleep(3 * (attempt + 1))
-                continue
-            raise
-        except Exception as e:  # noqa: BLE001
-            raise
-    raise last
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                return response.read()
+        except urllib.error.HTTPError as error:
+            if error.code not in (429, 500, 502, 503, 504) or attempt == retries:
+                raise
+        except (urllib.error.URLError, TimeoutError):
+            if attempt == retries:
+                raise
+        time.sleep(2 * (attempt + 1))
 
 
-def _norm_authors(authors):
-    return [a.strip() for a in authors if a and a.strip()]
+def _norm_title(text):
+    return " ".join(str(text or "").split()).rstrip(".")
 
 
-# --------------------------------------------------------------------------
-# arXiv
-# --------------------------------------------------------------------------
-def harvest_arxiv(queries, max_each=40, year_from=2015):
-    out, seen = [], set()
-    for q in queries:
-        try:
-            url = (
-                "http://export.arxiv.org/api/query?search_query="
-                + urllib.parse.quote(q)
-                + f"&sortBy=submittedDate&sortOrder=descending&max_results={max_each}"
-            )
-            data = _get(url)
-            root = ET.fromstring(data)
-            for e in root.findall("atom:entry", NS):
-                title = " ".join(
-                    e.findtext("atom:title", default="", namespaces=NS).split()
-                )
-                y = e.findtext("atom:published", default="", namespaces=NS)[:4]
-                url_id = e.findtext("atom:id", default="", namespaces=NS)
-                authors = [
-                    a.findtext("atom:name", default="", namespaces=NS)
-                    for a in e.findall("atom:author", namespaces=NS)
-                ]
-                m = re.search(r"abs/([0-9]+\.[0-9]+)", url_id or "")
-                arxiv_id = m.group(1) if m else None
-                year = int(y) if y.isdigit() else None
-                if not title or norm_title(title) in seen:
-                    continue
-                seen.add(norm_title(title))
-                out.append({
-                    "title": title,
-                    "authors": _norm_authors(authors),
-                    "year": year,
-                    "venue": "arXiv",
-                    "url": url_id,
-                    "arxiv_id": arxiv_id,
-                    "source": "arxiv",
-                })
-        except Exception as ex:
-            print(f"[harvest:arxiv] {q!r} failed: {ex!r}")
-    return out
+def _authors(values):
+    return [str(v).strip() for v in values if str(v).strip()]
 
 
-# --------------------------------------------------------------------------
-# DBLP
-# --------------------------------------------------------------------------
-def harvest_dblp(queries, max_each=50, year_from=2015):
-    out, seen = [], set()
-    for q in queries:
-        try:
-            url = (
-                "https://dblp.org/search/publ/api?q="
-                + urllib.parse.quote(q)
-                + f"&format=json&h={max_each}"
-            )
-            data = json.loads(_get(url))
-            hits = data.get("result", {}).get("hits", {}).get("hit", [])
-            for h in hits:
-                info = h.get("info", {})
-                title = " ".join(str(info.get("title", "")).split())
-                if not title or norm_title(title) in seen:
-                    continue
-                authors_raw = info.get("authors", {}).get("author", [])
-                if isinstance(authors_raw, dict):
-                    authors_raw = [authors_raw]
-                authors = [a.get("text", "") for a in authors_raw]
-                year = info.get("year")
-                if isinstance(year, str) and year.isdigit():
-                    year = int(year)
-                else:
-                    year = None
-                venue = info.get("venue", "") or ""
-                ee = info.get("ee") or info.get("url") or ""
-                m = re.search(r"arxiv\.org/abs/([0-9]+\.[0-9]+)", str(ee))
-                arxiv_id = m.group(1) if m else None
-                if year and year < int(year_from):
-                    continue
-                seen.add(norm_title(title))
-                out.append({
-                    "title": title,
-                    "authors": _norm_authors(authors),
-                    "year": year,
-                    "venue": venue,
-                    "url": ee,
-                    "arxiv_id": arxiv_id,
-                    "source": "dblp",
-                })
-        except Exception as ex:
-            print(f"[harvest:dblp] {q!r} failed: {ex!r}")
-    return out
+def _arxiv_id(value):
+    match = re.search(r"arxiv.org/(?:abs|pdf)/(\d{4}\.\d{4,5})", str(value or ""), flags=re.I)
+    return match.group(1) if match else None
 
 
-# --------------------------------------------------------------------------
-# Semantic Scholar
-# --------------------------------------------------------------------------
-def harvest_s2(queries, max_each=50, year_from=2015):
-    out, seen = [], set()
-    for q in queries:
-        try:
-            url = (
-                "https://api.semanticscholar.org/graph/v1/paper/search"
-                "?query=" + urllib.parse.quote(q)
-                + "&fields=title,authors,year,venue,externalIds,url"
-                + f"&limit={max_each}"
-            )
-            data = json.loads(_get(url))
-            for p in data.get("data", []):
-                title = " ".join(str(p.get("title", "")).split())
-                if not title or norm_title(title) in seen:
-                    continue
-                authors = [a.get("name", "") for a in p.get("authors", [])]
-                year = p.get("year")
-                venue = p.get("venue") or ""
-                ext = p.get("externalIds") or {}
-                arxiv_id = ext.get("ArXiv")
-                doi = ext.get("DOI")
-                url = p.get("url") or (
-                    f"https://doi.org/{doi}" if doi else (
-                        f"https://arxiv.org/abs/{arxiv_id}" if arxiv_id else "")
-                )
-                if year and year < int(year_from):
-                    continue
-                seen.add(norm_title(title))
-                out.append({
-                    "title": title,
-                    "authors": _norm_authors(authors),
-                    "year": year,
-                    "venue": venue,
-                    "url": url,
-                    "arxiv_id": arxiv_id,
-                    "source": "s2",
-                })
-        except Exception as ex:
-            print(f"[harvest:s2] {q!r} failed: {ex!r}")
-    return out
+def _param(url, **params):
+    return url + "?" + urllib.parse.urlencode(params)
 
 
-# --------------------------------------------------------------------------
-# Crossref
-# --------------------------------------------------------------------------
-def harvest_crossref(queries, max_each=30, year_from=2015):
-    out, seen = [], set()
-    for q in queries:
-        try:
-            url = (
-                "https://api.crossref.org/works?query="
-                + urllib.parse.quote(q)
-                + f"&filter=from-pub-date:{year_from}-01-01&rows={max_each}"
-            )
-            data = json.loads(_get(url))
-            for item in data.get("message", {}).get("items", []):
-                title = item.get("title")
-                if not title:
-                    continue
-                title = " ".join(str(title[0]).split())
-                if not title or norm_title(title) in seen:
-                    continue
-                authors = [
-                    (a.get("given", "") + " " + a.get("family", "")).strip()
-                    for a in item.get("author", [])
-                ]
-                year = None
-                for fld in ("published", "issued", "published-print"):
-                    parts = item.get(fld, {}).get("date-parts", [[None]])
-                    if parts and parts[0] and parts[0][0]:
-                        year = parts[0][0]
-                        break
-                venue = " ".join(item.get("container-title", [])) if item.get("container-title") else ""
-                doi = item.get("DOI")
-                url = f"https://doi.org/{doi}" if doi else item.get("URL", "")
-                m = re.search(r"arxiv\.org/abs/([0-9]+\.[0-9]+)", url or "")
-                arxiv_id = m.group(1) if m else None
-                if year and isinstance(year, int) and year < int(year_from):
-                    continue
-                seen.add(norm_title(title))
-                out.append({
-                    "title": title,
-                    "authors": _norm_authors(authors),
-                    "year": year,
-                    "venue": venue,
-                    "url": url,
-                    "arxiv_id": arxiv_id,
-                    "source": "crossref",
-                })
-        except Exception as ex:
-            print(f"[harvest:crossref] {q!r} failed: {ex!r}")
-    return out
+def arxiv(query, since_year, limit):
+    url = _param(
+        "https://export.arxiv.org/api/query",
+        search_query='all:"' + query + '"',
+        sortBy="submittedDate",
+        sortOrder="descending",
+        max_results=limit,
+    )
+    root = ET.fromstring(_get(url))
+    found = []
+    for entry in root.findall("a:entry", ATOM):
+        title = _norm_title(entry.findtext("a:title", default="", namespaces=ATOM))
+        posted = entry.findtext("a:published", default="", namespaces=ATOM)
+        year = int(posted[:4]) if posted[:4].isdigit() else None
+        arxiv_id = _arxiv_id(entry.findtext("a:id", default="", namespaces=ATOM))
+        if not title or not arxiv_id or (year and year < since_year):
+            continue
+        found.append({
+            "title": title,
+            "authors": _authors(e.findtext("a:name", default="", namespaces=ATOM)
+                                for e in entry.findall("a:author", ATOM)),
+            "year": year,
+            "venue": "arXiv",
+            "url": f"https://arxiv.org/abs/{arxiv_id}",
+            "arxiv_id": arxiv_id,
+            "source": "arxiv",
+        })
+    return found
 
 
-def harvest(config):
-    q = config.get("queries", {})
-    yf = config.get("year_from", 2015)
-    out = []
-    out += harvest_arxiv(q.get("arxiv", []), year_from=yf)
-    out += harvest_dblp(q.get("dblp", []), year_from=yf)
-    out += harvest_s2(q.get("s2", []), year_from=yf)
-    out += harvest_crossref(q.get("crossref", []), year_from=yf)
-    return out
+def dblp(query, since_year, limit):
+    url = _param("https://dblp.org/search/publ/api", q=query, format="json", h=limit)
+    data = json.loads(_get(url))
+    found = []
+    for result in data.get("result", {}).get("hits", {}).get("hit", []):
+        item = result.get("info", {})
+        title = _norm_title(item.get("title"))
+        raw_year = item.get("year")
+        year = int(raw_year) if str(raw_year).isdigit() else None
+        if not title or (year and year < since_year):
+            continue
+        raw_authors = item.get("authors", {}).get("author", [])
+        if isinstance(raw_authors, dict):
+            raw_authors = [raw_authors]
+        authors = _authors(a.get("text", "") if isinstance(a, dict) else a
+                           for a in raw_authors)
+        ee = item.get("ee") or item.get("url") or ""
+        if isinstance(ee, list):
+            ee = ee[0] if ee else ""
+        found.append({
+            "title": title, "authors": authors, "year": year,
+            "venue": item.get("venue") or "", "url": ee,
+            "arxiv_id": _arxiv_id(ee), "source": "dblp",
+        })
+    return found
+
+
+def semantic_scholar(query, since_year, limit):
+    url = _param(
+        "https://api.semanticscholar.org/graph/v1/paper/search",
+        query=query, fields="title,authors,year,venue,externalIds,url",
+        limit=min(limit, 100),
+    )
+    data = json.loads(_get(url))
+    found = []
+    for item in data.get("data", []):
+        title = _norm_title(item.get("title"))
+        year = item.get("year")
+        if not title or (year and year < since_year):
+            continue
+        ids = item.get("externalIds") or {}
+        arxiv_id = ids.get("ArXiv")
+        doi = ids.get("DOI")
+        url = (f"https://arxiv.org/abs/{arxiv_id}" if arxiv_id else
+               (f"https://doi.org/{doi}" if doi else item.get("url") or ""))
+        found.append({
+            "title": title,
+            "authors": _authors(a.get("name", "") for a in item.get("authors") or []),
+            "year": year,
+            "venue": item.get("venue") or "",
+            "url": url, "arxiv_id": arxiv_id, "doi": doi,
+            "source": "s2",
+        })
+    return found
+
+
+def crossref(query, since_year, limit):
+    url = _param(
+        "https://api.crossref.org/works",
+        **{
+            "query.title": query,
+            "filter": f"from-pub-date:{since_year}-01-01",
+            "sort": "published",
+            "order": "desc",
+            "rows": limit,
+        },
+    )
+    data = json.loads(_get(url))
+    found = []
+    for item in data.get("message", {}).get("items", []):
+        titles = item.get("title") or []
+        title = _norm_title(titles[0] if titles else "")
+        date_parts = []
+        for field in ("published", "issued", "published-print"):
+            parts = (item.get(field) or {}).get("date-parts") or []
+            if parts and parts[0]:
+                date_parts = parts[0]
+                break
+        year = date_parts[0] if date_parts and isinstance(date_parts[0], int) else None
+        if not title or (year and year < since_year):
+            continue
+        doi = item.get("DOI")
+        raw_venue = item.get("container-title") or []
+        found.append({
+            "title": title,
+            "authors": _authors(" ".join((a.get("given", ""), a.get("family", "")))
+                                for a in item.get("author") or []),
+            "year": year,
+            "venue": " ".join(raw_venue) if isinstance(raw_venue, list) else raw_venue,
+            "url": f"https://doi.org/{doi}" if doi else item.get("URL") or "",
+            "arxiv_id": None, "doi": doi, "source": "crossref",
+        })
+    return found
+
+
+SOURCES = {
+    "arxiv": arxiv,
+    "dblp": dblp,
+    "s2": semantic_scholar,
+    "crossref": crossref,
+}
+
+
+def harvest(config, *, track="core", today=None):
+    """Return (candidate list, diagnostics) for one discovery track.
+
+    Empty or failed optional embodied searches do not prevent a successful
+    core update. Calls and data are bounded by the configured recent window.
+    """
+    today = today or datetime.date.today()
+    lookback = int(config.get("discovery", {}).get("years_back", 3))
+    since_year = max(int(config.get("year_from", 2015)), today.year - lookback + 1)
+    query_map = config["queries" if track == "core" else "embodied_queries"]
+    found = []
+    status = {"track": track, "attempted": 0, "succeeded": 0, "failures": []}
+    for name, handler in SOURCES.items():
+        for query in query_map.get(name, []):
+            status["attempted"] += 1
+            try:
+                items = handler(query, since_year, 30)
+                found.extend(items)
+                status["succeeded"] += 1
+            except Exception as ex:
+                message = f"{name}: {query}: {type(ex).__name__}: {ex}"
+                status["failures"].append(message)
+                print(f"[harvest] WARNING {message}")
+    if track == "core" and not status["succeeded"]:
+        raise RuntimeError("All core discovery requests failed; existing data left unchanged")
+    return found, status
