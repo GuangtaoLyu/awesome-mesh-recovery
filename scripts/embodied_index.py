@@ -56,57 +56,41 @@ def _link(label, url):
     return f"[{label}]({url})" if url and str(url).startswith("https://") else ""
 
 
-def format_paper(index, item):
+def format_paper(item):
+    """One-line awesome-list style; never repeat per-paper task descriptions."""
     title = _strip(item["title"])
-    publication = _publication(item)
-    role = _strip(item.get("role")) or "Recovery / robotics bridge"
     links = [
         _link("Paper", item.get("paper_url")),
         _link("Code" if item.get("code_status") == "repository" else
-              CODE_LABELS.get(item.get("code_status"), "Code (scope unverified)"),
+              CODE_LABELS.get(item.get("code_status"), "Code"),
               item.get("code_url")),
         _link("Project", item.get("project_url")),
         _link("Models", item.get("models_url")),
     ]
-    links = [s for s in links if s]
-    if not item.get("code_url"):
-        links.append("Code: unverified")
-    info = f"{index}. **{title}** — *{publication}* · **{role}**"
-    if links:
-        info += " · " + " · ".join(links)
-    summary = _strip(item.get("summary")).rstrip(".")
-    if summary:
-        info += "\n   - " + summary + "."
-    return info
+    links = [link for link in links if link]
+    return f"- **{title}** ({_publication(item)}) — " + " · ".join(links)
 
 
 def render(data):
     lines = [
         "## Embodied Motion Recovery & Robot Tracking",
         "",
-        "A focused **research-to-robot bridge**, spanning video/hand recovery, "
-        "motion retargeting, teleoperation and tracking. Papers are included "
-        "**regardless of conference acceptance**; arXiv-only work is labeled "
-        "as a preprint. New papers and links are found by the weekly automated "
-        "pipeline. A code link verifies a repository, **not** a complete release.",
+        "From human/hand recovery to robot retargeting, teleoperation and tracking. "
+        "**arXiv preprints are included**; links to code are shown only when "
+        "found, and a code link does not imply a complete release.",
         "",
     ]
-    papers = data.get("papers", [])
     for group in GROUPS:
         lines += ["### " + group, ""]
-        group_papers = [p for p in papers if p.get("group") == group]
-        # Fresh research first, then stable original position on equal year.
-        group_papers.sort(key=lambda p: -(p.get("year") or 0))
-        for i, p in enumerate(group_papers, 1):
-            lines.append(format_paper(i, p))
+        group_papers = [p for p in data.get("papers", []) if p.get("group") == group]
+        group_papers.sort(key=lambda p: (-(p.get("year") or 0), p["title"].lower()))
+        lines.extend(format_paper(p) for p in group_papers)
         lines.append("")
-    tools = data.get("toolkits", [])
-    if tools:
+    if data.get("toolkits"):
         lines += ["### Reusable Retargeting Toolkit", ""]
-        for t in tools:
-            link = _link("Code", t.get("code_url"))
-            lines.append(f"- **{t['name']}** — {_strip(t.get('role'))}: "
-                         f"{_strip(t.get('summary')).rstrip('.')}. {link}")
+        for t in data["toolkits"]:
+            url = _link("Code", t.get("code_url"))
+            lines.append(f"- **{t['name']}** — {url}" if url else f"- **{t['name']}**")
         lines.append("")
     return "\n".join(lines).rstrip() + "\n"
 
@@ -220,7 +204,7 @@ def new_paper(candidate, *, today):
         modality = "human motion / interaction"
     output = ("humanoid robot motion" if group == GROUPS[0]
               else "dexterous hand / robot interaction")
-    summary = f"Input: {modality}; related output: {output}"
+    summary = ""
     arxiv_id = candidate.get("arxiv_id")
     paper_url = (f"https://arxiv.org/abs/{arxiv_id}" if arxiv_id else
                  candidate.get("url"))
