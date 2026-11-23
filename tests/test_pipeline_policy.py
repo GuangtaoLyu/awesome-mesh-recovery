@@ -60,6 +60,22 @@ class DedupTests(unittest.TestCase):
         self.assertEqual(result[0]["venue"], "CVPR")
         self.assertEqual(result[0]["authors"], ["Alice"])
 
+    def test_publication_year_conflict_does_not_fabricate_venue(self):
+        old = {"title": "A Hand Mesh Recovery Method", "year": 2025,
+               "venue": "arXiv", "source": "arxiv"}
+        new = {"title": "A Hand Mesh Recovery Method", "year": 2026,
+               "venue": "CVPR", "source": "crossref"}
+        updated = pipeline.enrich(old, new)
+        self.assertEqual(updated["year"], 2025)
+        self.assertEqual(updated["venue"], "arXiv")
+
+    def test_same_year_metadata_upgrade(self):
+        old = {"title": "A Hand Mesh Recovery Method", "year": 2026,
+               "venue": "arXiv", "source": "arxiv"}
+        new = {"title": "A Hand Mesh Recovery Method", "year": 2026,
+               "venue": "CVPR", "source": "dblp"}
+        self.assertEqual(pipeline.enrich(old, new)["venue"], "CVPR")
+
     def test_curated_identifiers_from_markdown(self):
         c = ("1. **VideoManip: Human Reconstruction for Robotics** — 2026. "
              "[Paper](https://arxiv.org/abs/2602.09013)\n")
