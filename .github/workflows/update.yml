@@ -1,21 +1,22 @@
-name: Weekly Auto Update
+name: Weekly Literature Update
 
-# Fully automatic: harvest new papers from arXiv + DBLP + Semantic Scholar +
-# Crossref, deduplicate them, classify, regenerate README.md, and push.
-# No human review. Runs every Monday 09:00 UTC (= 17:00 Beijing) and on manual
-# dispatch. Auto-harvested papers and the hand-curated embodied section are
-# combined by the README generator. The source of truth is NOT README.md.
+# Monday 09:00 UTC. The generated README is not an input source.
+# Strict recovery papers may auto-index; embodied leads require human review.
 on:
   schedule:
     - cron: "0 9 * * 1"
   workflow_dispatch:
+    inputs:
+      render_only:
+        description: "Regenerate README from existing curated/indexed data without API discovery"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
-# Never let a new run race a still-running one against the same branch.
 concurrency:
-  group: auto-update
+  group: awesome-mesh-recovery-update
   cancel-in-progress: false
 
 jobs:
@@ -27,30 +28,38 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Configure git
+      - name: Configure bot
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Run update pipeline (harvest + dedup + curated section + README)
-        run: python scripts/pipeline.py
+      - name: Discover and render (or render offline)
+        env:
+          RENDER_ONLY: ${{ inputs.render_only }}
+        run: |
+          if [ "$RENDER_ONLY" = "true" ]; then
+            python scripts/pipeline.py --render-only
+          else
+            python scripts/pipeline.py
+          fi
 
-      - name: Verify generated README and curated content
+      - name: Validate selection, deduplication and generated README
         run: python -m unittest discover -s tests -v
 
-      # Only push when something actually changed.
-      - name: Push if changed
+      - name: Commit ONLY source-of-truth output changes
         run: |
-          git fetch origin "${GITHUB_REF_NAME}"
-          if [ -z "$(git log "origin/${GITHUB_REF_NAME}..HEAD" --oneline)" ]; then
-            echo "No new commits."
+          git add -- README.md data/papers.json data/review_queue.json
+          if git diff --cached --quiet; then
+            echo "No changes to publish."
             exit 0
           fi
-          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git commit -m "auto-update: curated README and literature discovery"
+          git fetch origin "${GITHUB_REF_NAME}"
+          git rebase "origin/${GITHUB_REF_NAME}"
           git push origin "HEAD:${GITHUB_REF_NAME}"

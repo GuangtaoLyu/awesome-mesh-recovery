@@ -1,31 +1,22 @@
 # -*- coding: utf-8 -*-
-"""Per-repo classifier for awesome-mesh-recovery.
+"""Conservative title-first categories for NEW automatically indexed papers.
 
-Rule order matters (first match wins). Falls back to config default
-(Full-Body Human Mesh Recovery).
+Existing categories in data/papers.json are preserved. Embodied works have a
+separate manually curated section and never become a robotics auto-category.
 """
-from lib_common import classify_by_rules
-
-RULES = [
-    ("Surveys", ["survey", "review of", "a review"]),
-    ("Datasets & Benchmarks", ["dataset", "benchmark", "benchmarking"]),
-    ("Hand, Face & Expressive Mesh",
-     ["hand mesh", "face mesh", "expressive", "facial", "hand pose",
-      "face reconstruction", "hand reconstruction", "hand-hoc", "face hoc"]),
-    ("Occlusion & In-the-Wild Recovery",
-     ["occlusion", "occluded", "in-the-wild", "in the wild", "real-world",
-      "real world", "wild"]),
-    ("Motion & Temporal Recovery",
-     ["motion recovery", "motion ", "temporal", "video", "dynamic",
-      "sequence", "autoregressive", "frame", "time-series", "spatio-temporal"]),
-    ("Full-Body Human Mesh Recovery",
-     ["mesh recovery", "human mesh", "pose and shape", "human shape",
-      "body mesh", "pose estimation", "3d human", "hpe", "mesh from",
-      "shape estimation", "parametric"]),
-]
-
-DEFAULT = "Full-Body Human Mesh Recovery"
+import re
 
 
 def classify(paper, config=None):
-    return classify_by_rules(paper, RULES, DEFAULT)
+    title = (paper.get("title") or "").lower()
+    if re.search(r"\b(survey|systematic review|literature review|review of)\b", title):
+        return "Surveys"
+    if re.search(r"\b(dataset|benchmark|benchmarking|evaluation protocol)\b", title):
+        return "Datasets & Benchmarks"
+    if re.search(r"\b(hand|face|facial|expressive|mano|smpl-x)\b", title):
+        return "Hand, Face & Expressive Mesh"
+    if re.search(r"\b(occluded|occlusion|in.the.wild|partial visibility)\b", title):
+        return "Occlusion & In-the-Wild Recovery"
+    if re.search(r"\b(video|videos|temporal|motion|sequence|online|streaming|dynamic)\b", title):
+        return "Motion & Temporal Recovery"
+    return (config or {}).get("default_category", "Full-Body Human Mesh Recovery")

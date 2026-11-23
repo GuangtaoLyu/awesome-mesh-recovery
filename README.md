@@ -1,18 +1,18 @@
 # Awesome Mesh Recovery
 
-A curated, auto-updated list of 3D human mesh recovery / pose-and-shape estimation papers.
+A curated, regularly updated index of human and hand mesh / pose-and-shape recovery, with a focused manually curated bridge to robotics.
 
-*Last updated: 2026-11-23 | Auto-indexed papers: 150 | Curated embodied highlights: 21*
+*Auto-indexed papers: 150 | Curated embodied highlights: 21*
 
 > 🤖 Auto-updated weekly by GitHub Actions (multi-source: arXiv + DBLP + Semantic Scholar + Crossref). Core papers are auto-categorized; the embodied section is curated separately.
 
 ## Contents
 - [Embodied Motion Recovery & Robot Tracking](#embodied-motion-recovery--robot-tracking)
 - [Full-Body Human Mesh Recovery](#full-body-human-mesh-recovery)
-- [Occlusion & In-the-Wild Recovery](#occlusion-and-in-the-wild-recovery)
-- [Hand, Face & Expressive Mesh](#hand,-face-and-expressive-mesh)
-- [Motion & Temporal Recovery](#motion-and-temporal-recovery)
-- [Datasets & Benchmarks](#datasets-and-benchmarks)
+- [Occlusion & In-the-Wild Recovery](#occlusion--in-the-wild-recovery)
+- [Hand, Face & Expressive Mesh](#hand-face--expressive-mesh)
+- [Motion & Temporal Recovery](#motion--temporal-recovery)
+- [Datasets & Benchmarks](#datasets--benchmarks)
 - [Surveys](#surveys)
 
 ## Embodied Motion Recovery & Robot Tracking
@@ -222,5 +222,5 @@ A curated, auto-updated list of 3D human mesh recovery / pose-and-shape estimati
 
 ## Contributing
 
-Found a missing or mis-categorized paper? Open an issue or pull request. README.md is generated from `data/papers.json` (automatically harvested) and `data/embodied.md` (manually curated). To add or revise embodied works, edit `data/embodied.md` rather than README.md directly.
+Found a missing paper? Open an issue or PR. Auto-indexed HMR comes from `data/papers.json`, while the first embodied section is curated in `data/embodied.md`. Borderline discoveries go to [`data/review_queue.json`](data/review_queue.json), never directly into the curated section. See [CONTRIBUTING.md](CONTRIBUTING.md) for review, rejection, and release-status rules.
 
