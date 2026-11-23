@@ -1,36 +1,33 @@
 {
   "display_name": "Awesome Mesh Recovery",
-  "description": "A curated, auto-updated list of 3D human mesh recovery / pose-and-shape estimation papers.",
+  "description": "A curated, regularly updated index of human and hand mesh / pose-and-shape recovery, with a focused manually curated bridge to robotics.",
   "year_from": 2015,
-  "must_include": [
-    "mesh recovery",
-    "human mesh",
-    "pose and shape",
-    "human shape",
-    "body mesh",
-    "3d human"
-  ],
   "queries": {
     "arxiv": [
       "human mesh recovery",
-      "3D human mesh recovery",
       "human pose and shape estimation",
-      "monocular human mesh recovery"
+      "hand mesh recovery",
+      "hand mesh reconstruction",
+      "expressive human mesh",
+      "human motion recovery"
     ],
     "dblp": [
       "human mesh recovery",
-      "3D human mesh recovery",
-      "human pose and shape estimation"
+      "human pose and shape estimation",
+      "hand mesh recovery",
+      "expressive human pose shape"
     ],
     "s2": [
       "human mesh recovery",
       "human pose and shape estimation",
-      "3D human shape estimation"
+      "hand mesh recovery",
+      "hand mesh reconstruction",
+      "world grounded human motion recovery"
     ],
     "crossref": [
       "human mesh recovery",
       "human pose and shape estimation",
-      "3D human mesh"
+      "hand mesh recovery"
     ]
   },
   "taxonomy": [
@@ -41,5 +38,92 @@
     "Datasets & Benchmarks",
     "Surveys"
   ],
-  "default_category": "Full-Body Human Mesh Recovery"
+  "default_category": "Full-Body Human Mesh Recovery",
+  "discovery": {
+    "years_back": 3,
+    "review_queue_max": 80,
+    "new_review_per_run_per_track": 8
+  },
+  "selection": {
+    "auto_accept_title_phrases": [
+      "human mesh recovery",
+      "human mesh reconstruction",
+      "3d human mesh",
+      "body mesh recovery",
+      "body mesh reconstruction",
+      "human pose and shape estimation",
+      "human pose and shape recovery",
+      "human shape and pose estimation",
+      "human shape estimation",
+      "hand mesh recovery",
+      "hand mesh reconstruction",
+      "3d hand mesh",
+      "hand pose and shape estimation",
+      "3d hand pose and shape",
+      "expressive human mesh",
+      "expressive human pose and shape",
+      "whole-body human mesh",
+      "whole body human mesh",
+      "face mesh recovery",
+      "3d face mesh"
+    ],
+    "review_title_phrases": [
+      "human motion recovery",
+      "human motion reconstruction",
+      "human motion capture",
+      "world-grounded human",
+      "world-space human",
+      "video-based human",
+      "3d human pose",
+      "human body reconstruction",
+      "human reconstruction",
+      "hand reconstruction",
+      "hand pose estimation",
+      "hand motion",
+      "hand-object",
+      "hand object",
+      "smpl",
+      "mano",
+      "pose and shape",
+      "face reconstruction",
+      "facial reconstruction",
+      "human mesh",
+      "human shape"
+    ],
+    "embodied_title_phrases": [
+      "vision-to-robot",
+      "video-to-robot",
+      "human-to-robot",
+      "human to robot",
+      "humanoid",
+      "dexterous",
+      "retargeting",
+      "teleoperation",
+      "motion tracking",
+      "robot hand",
+      "robotic hand",
+      "robot imitation",
+      "human video",
+      "hand-object",
+      "hand object",
+      "manipulation from human"
+    ]
+  },
+  "embodied_queries": {
+    "arxiv": [
+      "human to robot motion retargeting",
+      "video to humanoid imitation",
+      "dexterous hand object reconstruction"
+    ],
+    "dblp": [
+      "humanoid retargeting",
+      "dexterous hand video imitation"
+    ],
+    "s2": [
+      "video to robot humanoid imitation",
+      "human hand robot retargeting",
+      "dexterous tracking from human videos"
+    ],
+    "crossref": []
+  }
 }
