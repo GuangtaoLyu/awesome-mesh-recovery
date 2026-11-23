@@ -11,8 +11,8 @@ A curated, regularly updated index of human and hand mesh / pose-and-shape recov
 - [Full-Body Human Mesh Recovery](#full-body-human-mesh-recovery)
 - [Occlusion & In-the-Wild Recovery](#occlusion--in-the-wild-recovery)
 - [Hand, Face & Expressive Mesh](#hand-face--expressive-mesh)
-- [Motion & Temporal Recovery](#motion-and-temporal-recovery)
-- [Datasets & Benchmarks](#datasets-and-benchmarks)
+- [Motion & Temporal Recovery](#motion--temporal-recovery)
+- [Datasets & Benchmarks](#datasets--benchmarks)
 - [Surveys](#surveys)
 
 ## Embodied Motion Recovery & Robot Tracking
