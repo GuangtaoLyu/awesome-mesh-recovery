@@ -96,6 +96,31 @@ class AdmissionTests(unittest.TestCase):
              "abstract": "Vision language planning in indoor environments"}
         self.assertEqual(selection.decide(p, CONFIG, "embodied")[0], "ignore")
 
+    def test_legacy_pose_only_and_camera_application_titles_stay_out(self):
+        titles = [
+            "KASportsFormer: Kinematic Anatomy Enhanced Transformer for "
+            "3D Human Pose Estimation on Short Sports Scene Video",
+            "Posegu: 3d Human Pose Estimation with Novel Human Pose Generator",
+            "EgoRayFormer: Ray-Space Stereo Refinement for "
+            "Egocentric 3D Human Pose Estimation",
+            "Unsupervised camera pose estimation through human mesh recovery",
+            "Unsupervised continuous camera network pose estimation through "
+            "human mesh recovery",
+            "Interaction with Virtual Objects using Human Pose and Shape Estimation",
+            "Generating Multi-View Action Data from a Monocular Camera Video "
+            "by Fusing Human Mesh Recovery and 3D Scene Reconstruction",
+            "Dual Mesh Convolutional Networks for Human Shape Correspondence",
+        ]
+        for title in titles:
+            with self.subTest(title=title):
+                self.assertEqual(selection.decide({"title": title}, CONFIG, "core")[0],
+                                 "ignore")
+        # Body/hand/shape recovery itself still needs automatic admission.
+        self.assertEqual(selection.decide(
+            {"title": "Video-based Human Mesh Recovery for Occluded People"},
+            CONFIG, "core"
+        )[0], "auto")
+
     def test_title_only_classification(self):
         self.assertEqual(classify.classify(
             {"title": "Occluded Hand Mesh Recovery", "venue": "Dynamic Robotics"}),
@@ -238,6 +263,39 @@ class PresentationTests(unittest.TestCase):
                   "paper_url": "https://arxiv.org/abs/2611.10000"}
         line = embodied_index.format_paper(record)
         self.assertNotIn("Code", line)
+
+    def test_author_link_required_for_code(self):
+        third_party = {
+            "abstract": "We compare with methods using "
+                        "https://github.com/facebookresearch/sam2."
+        }
+        self.assertEqual(embodied_index._github_candidates(third_party), [])
+        official = {
+            "comment": "Our code is available at "
+                       "https://github.com/example-lab/paper/tree/main/method."
+        }
+        self.assertEqual(
+            embodied_index._github_candidates(official),
+            ["https://github.com/example-lab/paper/tree/main/method"],
+        )
+
+    def test_new_preprint_never_invents_unknown_year_or_summary(self):
+        item = embodied_index.new_paper(
+            {"title": "Human-to-Robot Motion Retargeting",
+             "url": "https://doi.org/10.1234/example", "venue": ""},
+            today=TODAY,
+        )
+        self.assertIsNone(item["year"])
+        self.assertNotIn("role", item)
+        self.assertNotIn("summary", item)
+        self.assertIn("Preprint", embodied_index.format_paper(item))
+        paper = embodied_index.new_paper(
+            {"title": "Dexterous Hand Tracking from Human Video",
+             "arxiv_id": "2611.12345", "venue": "arXiv"},
+            today=TODAY,
+        )
+        self.assertEqual(paper["year"], 2026)
+        self.assertEqual(paper["group"], embodied_index.GROUPS[1])
 
     def test_seeded_embodied_collection_preserved(self):
         data = embodied_index.load(ROOT / "data" / "embodied.json")
