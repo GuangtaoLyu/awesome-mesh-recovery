@@ -111,6 +111,15 @@ def _github_candidates(candidate):
             if owner.lower() in ("features", "topics", "orgs", "users", "search"):
                 continue
             url = f"https://github.com/{owner}/{name}"
+            # A research group may publish a paper within a large monorepo.
+            # Retain the author's exact tree path instead of linking only to
+            # the repository root (e.g. noah-research/tree/master/CLIFF).
+            suffix = re.match(
+                r"/tree/[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*",
+                text[match.end():],
+            )
+            if suffix:
+                url += suffix.group(0).rstrip(".,:;])}")
             if url not in found:
                 found.append(url)
     return found
@@ -127,8 +136,9 @@ def _http_get(url, timeout=8):
 
 
 def _official_repository(url):
-    match = re.fullmatch(
-        r"https://github\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)", url or ""
+    match = re.match(
+        r"^https://github\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)(?:/|$)",
+        url or "",
     )
     if not match:
         return False
