@@ -2,7 +2,7 @@
 
 A weekly auto-updated list of human/hand mesh and motion recovery papers, with embodied motion-to-robot research.
 
-*Recovery papers: 180 | Embodied papers: 29*
+*Recovery papers: 178 | Embodied papers: 24*
 
 > 🤖 Auto-updated weekly by GitHub Actions (multi-source: arXiv + DBLP + Semantic Scholar + Crossref). Includes arXiv preprints; code links are shown when verified.
 
@@ -25,11 +25,8 @@ From human/hand recovery to robot retargeting, teleoperation and tracking. **arX
 - **From Festival Video to the Stage: A Sim-to-Real Ladder for Long-Horizon Expressive Whole-Body Dance on a Commercial Humanoid** (arXiv 2026) — [Paper](https://arxiv.org/abs/2611.11127)
 - **GMR: General Motion Retargeting** (ICRA 2026) — [Paper](https://arxiv.org/abs/2510.02252) · [Code](https://github.com/YanjieZe/GMR)
 - **GVHMR: World-Grounded Human Motion Recovery via Gravity-View Coordinates** (SIGGRAPH Asia 2024 / TPAMI 2026) — [Paper](https://arxiv.org/abs/2409.06662) · [Code](https://github.com/zju3dv/GVHMR)
-- **Morphology-Consistent Humanoid Interaction through Robot-Centric Video Synthesis** (arXiv 2026) — [Paper](https://arxiv.org/abs/2603.19709)
 - **MoViC: Real-Time Humanoid Whole-Body Control from Monocular Video Streams** (arXiv 2026) — [Paper](https://arxiv.org/abs/2611.19998) · [Project](https://movicproject.github.io/)
-- **OnlineHMR: Video-based Online World-Grounded Human Mesh Recovery** (CVPR 2026) — [Paper](https://arxiv.org/abs/2603.17355) · [Code](https://github.com/Tsukasane/Video-OnlineHMR)
 - **Pose Distance Fields for Humanoid Robots** (arXiv 2026) — [Paper](https://arxiv.org/abs/2602.04851)
-- **Proprioceptive-visual correspondence enables self-other distinction in humanoid robots** (arXiv 2026) — [Paper](https://arxiv.org/abs/2606.13222)
 - **SONIC: Supersizing Motion Tracking for Natural Humanoid Whole-Body Control** (Science Robotics 2026) — [Paper](https://arxiv.org/abs/2511.07820) · [Project](https://nvlabs.github.io/GEAR-SONIC/) · [Models](https://huggingface.co/nvidia/GEAR-SONIC)
 - **TWIST2: Scalable, Portable, and Holistic Humanoid Data Collection System** (ICRA 2026) — [Paper](https://arxiv.org/abs/2511.02832) · [Code](https://github.com/amazon-far/TWIST2)
 - **TWIST: Teleoperated Whole-Body Imitation System** (CoRL 2025) — [Paper](https://arxiv.org/abs/2505.02833) · [Code](https://github.com/YanjieZe/TWIST)
@@ -46,10 +43,8 @@ From human/hand recovery to robot retargeting, teleoperation and tracking. **arX
 - **OmniHOI: Dexterous Hand-Object Interaction from Monocular Human Video** (arXiv 2026) — [Paper](https://arxiv.org/abs/2610.10855)
 - **UniDex: A Robot Foundation Suite for Universal Dexterous Hand Control from Egocentric Human Videos** (CVPR 2026) — [Paper](https://arxiv.org/abs/2603.22264) · [Code](https://github.com/unidex-ai/UniDex)
 - **VideoManip: Dexterous Manipulation Policies from RGB Human Videos via 4D Hand-Object Trajectory Reconstruction** (arXiv 2026) — [Paper](https://arxiv.org/abs/2602.09013) · [Code (partial release)](https://github.com/hychen-naza/VideoManip)
-- **DexForce: Extracting Force-informed Actions from Kinesthetic Demonstrations for Dexterous Manipulation** (arXiv 2025) — [Paper](https://arxiv.org/abs/2501.10356)
 - **DexTrack: Towards Generalizable Neural Tracking Control for Dexterous Manipulation from Human References** (ICLR 2025) — [Paper](https://arxiv.org/abs/2502.09614) · [Code](https://github.com/Meowuu7/DexTrack)
 - **HaWoR: World-Space Hand Motion Reconstruction from Egocentric Videos** (CVPR 2025) — [Paper](https://arxiv.org/abs/2501.02973) · [Code](https://github.com/ThunderVVV/HaWoR)
-- **HOSt3R: Keypoint-free Hand-Object 3D Reconstruction from RGB images** (arXiv 2025) — [Paper](https://arxiv.org/abs/2508.16465)
 - **ManipTrans: Efficient Dexterous Bimanual Manipulation Transfer via Residual Learning** (CVPR 2025) — [Paper](https://arxiv.org/abs/2503.21860) · [Code](https://github.com/ManipTrans/ManipTrans)
 - **Stereo Hand-Object Reconstruction for Human-to-Robot Handover** (arXiv 2024) — [Paper](https://arxiv.org/abs/2412.07487)
 - **DexMV: Imitation Learning for Dexterous Manipulation from Human Videos** (ECCV 2022) — [Paper](https://arxiv.org/abs/2108.05877) · [Code](https://github.com/yzqin/dexmv-sim)
@@ -60,7 +55,6 @@ From human/hand recovery to robot retargeting, teleoperation and tracking. **arX
 
 ## Full-Body Human Mesh Recovery
 
-- **Mesh-guided self-assembly of centimeter-scale, cell-derived human dermis** (Bioactive Materials 2027) — [Paper](https://doi.org/10.1016/j.bioactmat.2026.11.013)
 - **A Geometric Feedback-Driven Depth Correction Method for Monocular Human Mesh Recovery** (ICRAS 2026) — [Paper](https://doi.org/10.1109/icras70064.2026.11717916)
 - **Adaptive Tokens for 3D Human Pose and Shape Estimation** (2026) — [Paper](https://doi.org/10.2139/ssrn.6072135)
 - **All-Age Human Mesh Recovery** (CVPRF 2026) — [Paper](https://doi.org/10.1109/cvprf71909.2026.00356)
@@ -79,7 +73,6 @@ From human/hand recovery to robot retargeting, teleoperation and tracking. **arX
 - **MuNet: A Mutualistic Network for Joint 3D Human Mesh Recovery and 3D Clothed Human Reconstruction from Single Images** (2026) — [Paper](https://arxiv.org/abs/2605.25861) · [Code](https://github.com/starVisionTeam/MuNet)
 - **SAM 3D Body: Robust Full-Body Human Mesh Recovery** (arXiv 2026) — [Paper](https://arxiv.org/abs/2602.15989)
 - **Scene and Human in One World: Reconstruction in a Feedforward Pass** (arXiv 2026) — [Paper](https://arxiv.org/abs/2606.27720)
-- **Training-Free Anonymization of Driving Data with Promptable Segmentation and 3D Human Mesh Recovery** (arXiv 2026) — [Paper](https://arxiv.org/abs/2611.20412) · [Code](https://github.com/max-a-ai/FM-Anonymize)
 - **A Twist Representation and Shape Refinement Method for Human Mesh Recovery** (ACM MM 2025) — [Paper](https://www.semanticscholar.org/paper/cfeaa39b0db9adbd862b63b6a88ab49ee12dfdcb)
 - **Adapting Human Mesh Recovery with Vision-Language Feedback** (arXiv 2025) — [Paper](https://arxiv.org/abs/2502.03836)
 - **ADHMR: Aligning Diffusion-based Human Mesh Recovery via Direct Preference Optimization** (ICML 2025) — [Paper](https://arxiv.org/abs/2505.10250)
@@ -120,7 +113,6 @@ From human/hand recovery to robot retargeting, teleoperation and tracking. **arX
 - **TokenHMR: Advancing Human Mesh Recovery with a Tokenized Pose Representation** (IEEE 2024) — [Paper](https://arxiv.org/abs/2404.16752)
 - **VITA: ViT Acceleration for Efficient 3D Human Mesh Recovery via Hardware-Algorithm Co-Design** (Design Automation Conference 2024) — [Paper](https://www.semanticscholar.org/paper/a67db3519c29d667cefb1bf919af079472e3156f)
 - **3D Human Mesh Recovery with Sequentially Global Rotation Estimation** (ICCV 2023) — [Paper](https://doi.org/10.1109/iccv51070.2023.01373)
-- **: Neural Inverse Kinematics with Invertible Neural Networks for 3D Human Pose and Shape Estimation”** (2023) — [Paper](https://www.semanticscholar.org/paper/89d9179edc2494b0e0f69da3f04c54d2049e76ef)
 - **Adaptive and Robust Mmwave-Based 3D Human Mesh Estimation for Diverse Poses** (ICIP 2023) — [Paper](https://doi.org/10.1109/icip49359.2023.10222059)
 - **Deformable Mesh Transformer for 3D Human Mesh Recovery** (CVPR 2023) — [Paper](https://www.semanticscholar.org/paper/4a566208c7592c9c085f1512f39f552c3e9a8526)
 - **Delving Deep into Pixel Alignment Feature for Accurate Multi-view Human Mesh Recovery** (AAAI Conference on Artificia... 2023) — [Paper](https://arxiv.org/abs/2301.06020)
@@ -131,7 +123,7 @@ From human/hand recovery to robot retargeting, teleoperation and tracking. **arX
 - **Learning Analytical Posterior Probability for Human Mesh Recovery** (CVPR 2023) — [Paper](https://www.semanticscholar.org/paper/ae704793fc170a8df3a328994b7da54f5a9e64f3)
 - **Learning Human Mesh Recovery in 3D Scenes** (CVPR 2023) — [Paper](https://arxiv.org/abs/2306.03847)
 - **LiDAR-HMR: 3D Human Mesh Recovery From LiDAR** (ACM MM 2023) — [Paper](https://arxiv.org/abs/2311.11971) · [Code](https://github.com/soullessrobot/LiDAR-HMR)
-- **NIKI: Neural Inverse Kinematics with Invertible Neural Networks for 3D Human Pose and Shape Estimation** (CVPR 2023) — [Paper](https://arxiv.org/abs/2305.08590)
+- **NIKI: Neural Inverse Kinematics with Invertible Neural Networks for 3D Human Pose and Shape Estimation** (CVPR 2023) — [Paper](https://arxiv.org/abs/2305.08590) · [Code](https://github.com/jeffffffli/NIKI)
 - **PointHPS: Cascaded 3D Human Pose and Shape Estimation from Point Clouds** (International Journal of Com... 2023) — [Paper](https://arxiv.org/abs/2308.14492)
 - **PoseExaminer: Automated Testing of Out-of-Distribution Robustness in Human Pose and Shape Estimation** (CVPR 2023) — [Paper](https://arxiv.org/abs/2303.07337)
 - **POTTER: Pooling Attention Transformer for Efficient Human Mesh Recovery** (CVPR 2023) — [Paper](https://arxiv.org/abs/2303.13357)
@@ -196,6 +188,7 @@ From human/hand recovery to robot retargeting, teleoperation and tracking. **arX
 - **PEAR: Pixel-aligned Expressive humAn mesh Recovery** (arXiv 2026) — [Paper](https://arxiv.org/abs/2601.22693)
 - **CLIP-Hand: CLIP-based regressor for hand pose estimation and mesh recovery** (The Visual Computer 2025) — [Paper](https://doi.org/10.1007/s00371-025-04203-1)
 - **Collaborative Learning for 3D Hand-Object Reconstruction and Compositional Action Recognition from Egocentric RGB Videos Using Superquadrics** (arXiv 2025) — [Paper](https://arxiv.org/abs/2501.07100)
+- **HOSt3R: Keypoint-free Hand-Object 3D Reconstruction from RGB images** (ICCVW 2025) — [Paper](https://arxiv.org/abs/2508.16465)
 - **SMPLest-X: Ultimate Scaling for Expressive Human Pose and Shape Estimation** (TPAMI 2025) — [Paper](https://arxiv.org/abs/2501.09782)
 - **AiOS: All-in-One-Stage Expressive Human Pose and Shape Estimation** (CVPR 2024) — [Paper](https://arxiv.org/abs/2403.17934)
 - **HMR-Adapter: A Lightweight Adapter with Dual-Path Cross Augmentation for Expressive Human Mesh Recovery** (ACM MM 2024) — [Paper](https://www.semanticscholar.org/paper/76689f0fd7f6fbd55f7706f969f038beceecb657)
@@ -239,7 +232,7 @@ From human/hand recovery to robot retargeting, teleoperation and tracking. **arX
 - **Joint Path Alignment Framework for 3D Human Pose and Shape Estimation From Video** (IEEE Access 2023) — [Paper](https://www.semanticscholar.org/paper/b7d02320539a4650e67192a6c08d913a724fe1af)
 - **Video Inference for Human Mesh Recovery with Vision Transformer** (FG 2023) — [Paper](https://doi.org/10.1109/fg57933.2023.10042731)
 - **Capturing Humans in Motion: Temporal-Attentive 3D Human Pose and Shape Estimation from Monocular Video** (CVPR 2022) — [Paper](https://arxiv.org/abs/2203.08534)
-- **CLIFF: Carrying Location Information in Full Frames into Human Pose and Shape Estimation** (ECCV 2022) — [Paper](https://arxiv.org/abs/2208.00571) · [Code](https://github.com/huawei-noah/noah-research)
+- **CLIFF: Carrying Location Information in Full Frames into Human Pose and Shape Estimation** (ECCV 2022) — [Paper](https://arxiv.org/abs/2208.00571) · [Code](https://github.com/huawei-noah/noah-research/tree/master/CLIFF)
 - **Uncertainty-Aware Human Mesh Recovery from Video by Learning Part-Based 3D Dynamics** (ICCV 2021) — [Paper](https://doi.org/10.1109/iccv48922.2021.01215)
 - **VIBE: Video Inference for Human Body Pose and Shape Estimation** (CVPR 2020) — [Paper](https://doi.org/10.1109/cvpr42600.2020.00530)
 
