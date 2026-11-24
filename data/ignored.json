@@ -1,15 +1,34 @@
 {
  "keys": [
   "arxiv:2501.10356",
+  "arxiv:2507.20763",
   "arxiv:2603.19709",
   "arxiv:2606.13222",
+  "arxiv:2610.26641",
   "arxiv:2611.20412",
   "doi:10.1016/j.bioactmat.2026.11.013",
+  "doi:10.1109/3dv53792.2021.00039",
+  "doi:10.1109/cvpr.2017.610",
+  "doi:10.1145/3349801.3349803",
+  "doi:10.1145/3349801.3357138",
+  "doi:10.2139/ssrn.4248596",
+  "doi:10.22541/au.174625404.45775198/v1",
+  "doi:10.5220/0015286400004981",
+  "title:3d human pose estimation 2d pose estimation matching",
+  "title:comparative analysis of bottom up 2d pose estimation methods for 3d human pose estimation in real world rugby impact scenarios",
   "title:dexforce extracting force informed actions from kinesthetic demonstrations for dexterous manipulation",
+  "title:dual mesh convolutional networks for human shape correspondence",
+  "title:egorayformer ray space stereo refinement for egocentric 3d human pose estimation",
+  "title:generating multi view action data from a monocular camera video by fusing human mesh recovery and 3d scene reconstruction",
+  "title:interaction with virtual objects using human pose and shape estimation",
+  "title:kasportsformer kinematic anatomy enhanced transformer for 3d human pose estimation on short sports scene video",
   "title:mesh guided self assembly of centimeter scale cell derived human dermis",
   "title:morphology consistent humanoid interaction through robot centric video synthesis",
   "title:neural inverse kinematics with invertible neural networks for 3d human pose and shape estimation",
+  "title:posegu 3d human pose estimation with novel human pose generator and unbiased learning",
   "title:proprioceptive visual correspondence enables self other distinction in humanoid robots",
-  "title:training free anonymization of driving data with promptable segmentation and 3d human mesh recovery"
+  "title:training free anonymization of driving data with promptable segmentation and 3d human mesh recovery",
+  "title:unsupervised camera pose estimation through human mesh recovery",
+  "title:unsupervised continuous camera network pose estimation through human mesh recovery"
  ]
 }
