@@ -1,60 +1,66 @@
 # -*- coding: utf-8 -*-
-"""Render README.md from papers.json + config taxonomy.
-
-Groups papers by category (in the taxonomy's order), numbers them within each
-category (so adding a paper never forces a global renumber), and sorts by year
-desc then title. This is the auto-reorganized view the user asked for.
-"""
-import re
+"""Generate a compact, deterministic Awesome List from two JSON indexes."""
 import os
-import json
+import re
 import embodied_index
 
-# Long container-title (as returned by Crossref) -> short acronym.
+# Specific forms first: workshops and findings must not inherit main-track labels.
 _VENUE_ACR = [
     ("computer vision and pattern recognition", "CVPR"),
     ("international conference on computer vision", "ICCV"),
     ("european conference on computer vision", "ECCV"),
+    ("aaai conference on artificial intelligence", "AAAI"),
+    ("association for the advancement of artificial intelligence", "AAAI"),
     ("neural information processing systems", "NeurIPS"),
     ("international conference on learning representations", "ICLR"),
     ("international conference on machine learning", "ICML"),
-    ("association for the advancement of artificial intelligence", "AAAI"),
-    ("acm multimedia", "ACM MM"),
     ("international conference on image processing", "ICIP"),
+    ("winter conference on applications of computer vision", "WACV"),
     ("applications of computer vision", "WACV"),
+    ("international conference on multimedia and expo", "ICME"),
     ("3d vision", "3DV"),
-    ("virtual reality", "ICVR"),
+    ("british machine vision", "BMVC"),
     ("robotics and automation", "ICRA"),
     ("intelligent robots and systems", "IROS"),
+    ("siggraph asia", "SIGGRAPH Asia"),
     ("siggraph", "SIGGRAPH"),
+    ("acm multimedia", "ACM MM"),
+    ("international journal of computer vision", "IJCV"),
     ("pattern analysis and machine intelligence", "TPAMI"),
+    ("ieee transactions on image processing", "TIP"),
+    ("transactions on image processing", "TIP"),
+    ("ieee transactions on multimedia", "TMM"),
+    ("transactions on circuits and systems for video technology", "TCSVT"),
+    ("visual communication and image representation", "JVCIR"),
+    ("signal image and video processing", "SIVP"),
+    ("signal, image and video processing", "SIVP"),
     ("audio, speech", "ICASSP"),
-    ("multimedia", "ACM MM"),
-    ("graphics", "Eurographics"),
 ]
 
 
 def _short_venue(v):
-    """Turn a verbose container-title into a compact label.
-
-    Crossref returns things like "2026 IEEE/CVF Conference on Computer Vision
-    and Pattern Recognition- FINDINGS Track (CVPRF)"; we want "CVPRF".
-    """
+    """Prefer accurate common acronyms; never publish ellipsized venue names."""
     if not v:
         return ""
     s = " ".join(str(v).split())
-    # Drop a leading / trailing bare year so it is not shown twice.
     s = re.sub(r"^(19|20)\d{2}\s+", "", s)
     s = re.sub(r"\s+(19|20)\d{2}$", "", s)
-    # Prefer a trailing parenthesized acronym, e.g. "... (ICRAS)" -> ICRAS.
-    m = re.search(r"\(([A-Z][A-Za-z0-9\-]{1,14})\)\s*$", s)
-    if m:
-        return m.group(1)
+    found = re.search(r"\(([A-Z][A-Za-z0-9\-]{1,14})\)\s*$", s)
+    if found:
+        return found.group(1)
     low = s.lower()
-    for kw, acr in _VENUE_ACR:
-        if kw in low:
-            return acr
-    return s if len(s) <= 30 else s[:28].rstrip() + "..."
+    for phrase, acronym in _VENUE_ACR:
+        if phrase in low:
+            if acronym in ("CVPR", "ICCV") and "workshop" in low:
+                return acronym + "W"
+            if acronym == "CVPR" and ("findings" in low or "finding track" in low):
+                return "CVPR Findings"
+            return acronym
+    if low in ("arxiv", "arxiv.org", "arxiv preprint", "print"):
+        return "arXiv"
+    # An unknown long Crossref journal name is better represented by its
+    # year than by a fabricated abbreviation or a truncated "...".
+    return s if len(s) <= 38 else ""
 
 
 def _anchor(cat):
@@ -62,7 +68,7 @@ def _anchor(cat):
     return re.sub(r"[^a-z0-9 _-]", "", cat.lower()).replace(" ", "-")
 
 
-def format_entry(idx, p):
+def format_entry(p):
     """Compact one-line listing: name, year/venue, and verified links."""
     title = p.get("title") or "Untitled paper"
     venue = _short_venue(p.get("venue") or "")
@@ -107,7 +113,7 @@ def generate(papers, config, readme_path):
             c = config.get("default_category")
         cats.setdefault(c, []).append(p)
 
-    # Curated source is separate from the auto-harvested paper store.
+    # Each collection is independently updated; JSON is the source of truth.
     embodied_lines, embodied_count = load_embodied_section()
 
     lines = []
@@ -145,8 +151,8 @@ def generate(papers, config, readme_path):
             items.sort(key=lambda p: (-(p.get("year") or 0), p["title"].lower()))
             lines.append(f"## {c}")
             lines.append("")
-            for i, p in enumerate(items, 1):
-                lines.append(format_entry(i, p))
+            for p in items:
+                lines.append(format_entry(p))
             lines.append("")
 
     lines.append("## Contributing")
