@@ -9,7 +9,6 @@ import datetime
 import json
 import re
 import urllib.error
-import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -95,13 +94,25 @@ def render(data):
     return "\n".join(lines).rstrip() + "\n"
 
 
+_CODE_CONTEXT = re.compile(
+    r"\b(?:source code|official code|code(?:s)?(?: and (?:data|models|"
+    r"weights|checkpoints))?|implementation|codebase)\b"
+    r".{0,70}\b(?:available|released|published|at|on|here|:)\b"
+    r"|\b(?:code|implementation|repository)\s*:\s*$",
+    re.IGNORECASE | re.DOTALL,
+)
+
+
 def _github_candidates(candidate):
-    """Only explicit GitHub URLs supplied by a primary research record."""
-    sources = (candidate.get("comment"), candidate.get("abstract"),
-               candidate.get("code_url"))
+    """Author-declared code only: never mistake cited dependencies for our code."""
     found = []
-    for source in sources:
-        text = str(source or "")
+
+    # Explicitly structured author-supplied code metadata is direct evidence.
+    sources = [(str(candidate.get("code_url") or ""), True)]
+    # Generic URLs in an abstract/comment are *not* proof of official code.
+    sources += [(str(candidate.get(field) or ""), False)
+                for field in ("comment", "abstract")]
+    for text, explicit in sources:
         for match in re.finditer(
             r"https?://(?:www\.)?github\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)",
             text, flags=re.I,
@@ -110,10 +121,14 @@ def _github_candidates(candidate):
             name = name.rstrip(".,:;])}")
             if owner.lower() in ("features", "topics", "orgs", "users", "search"):
                 continue
+            prefix = text[max(0, match.start() - 150):match.start()]
+            # Require an explicit release statement in the same sentence,
+            # e.g. "Our code is available at https://github.com/...".
+            # A bare GitHub URL or a citation to another model is not enough.
+            phrase = re.split(r"[.!?;\n]", prefix)[-1]
+            if not explicit and not _CODE_CONTEXT.search(phrase):
+                continue
             url = f"https://github.com/{owner}/{name}"
-            # A research group may publish a paper within a large monorepo.
-            # Retain the author's exact tree path instead of linking only to
-            # the repository root (e.g. noah-research/tree/master/CLIFF).
             suffix = re.match(
                 r"/tree/[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*",
                 text[match.end():],
@@ -168,56 +183,30 @@ def discover_code(item, candidate, *, verify=True):
 
 
 def classify(candidate):
-    text = (str(candidate.get("title") or "") + " " +
-            str(candidate.get("abstract") or "")).lower()
+    """Use the subject of the paper title for the two broad robot tracks."""
     title = str(candidate.get("title") or "").lower()
+    abstract = str(candidate.get("abstract") or "").lower()
+    if re.search(r"\b(hand|dexterous|grasp|bimanual|hand.object)\b", title):
+        return GROUPS[1]
     if re.search(r"\b(humanoid|whole.body|full.body|locomotion)\b", title):
-        group = GROUPS[0]
-    elif re.search(r"\b(hand|dexterous|grasp|manipulation|bimanual)\b", text):
-        group = GROUPS[1]
-    else:
-        group = GROUPS[0]
-    visual = bool(re.search(r"\b(video|rgb|vision|monocular|egocentric|visual)\b", text))
-    execution = bool(re.search(
-        r"\b(retarget|retargeting|robot control|robot policy|tracking|"
-        r"imitation|teleoperation|manipulation)\b", text
-    ))
-    if visual and execution:
-        role = "Vision → Robot"
-    elif re.search(r"\b(teleoperation|teleoperated|xr|vr headset)\b", title):
-        role = "Teleoperation"
-    elif re.search(r"\b(retarget|retargeting)\b", title):
-        role = "Retargeting"
-    elif re.search(r"\b(track|tracking|policy|control)\b", title):
-        role = "Tracking / control"
-    else:
-        role = "Recovery / retargeting"
-    return group, role
+        return GROUPS[0]
+    if re.search(r"\b(hand|dexterous|bimanual)\b", abstract):
+        return GROUPS[1]
+    return GROUPS[0]
 
 
 def new_paper(candidate, *, today):
-    group, role = classify(candidate)
-    year = candidate.get("year") or today.year
+    """Minimal metadata; no invented publication year or unused summaries."""
+    group = classify(candidate)
+    arxiv_id = candidate.get("arxiv_id")
+    year = candidate.get("year")
+    if not year and arxiv_id and re.match(r"^\d{4}\.\d{4,5}$", str(arxiv_id)):
+        year = 2000 + int(str(arxiv_id)[:2])
     venue = _strip(candidate.get("venue"))
     real_venue = venue and venue.lower() not in ("arxiv", "arxiv.org", "print")
-    publication = f"{venue} {year}" if real_venue else str(year)
-    abstract = str(candidate.get("abstract") or "").lower()
-    if re.search(r"\b(monocular|single.camera)\b", abstract):
-        modality = "monocular video"
-    elif re.search(r"\b(egocentric|first.person)\b", abstract):
-        modality = "egocentric video"
-    elif re.search(r"\b(video|rgb|visual)\b", abstract):
-        modality = "video"
-    elif re.search(r"\b(mocap|motion capture)\b", abstract):
-        modality = "human motion capture"
-    else:
-        modality = "human motion / interaction"
-    output = ("humanoid robot motion" if group == GROUPS[0]
-              else "dexterous hand / robot interaction")
-    summary = ""
-    arxiv_id = candidate.get("arxiv_id")
-    paper_url = (f"https://arxiv.org/abs/{arxiv_id}" if arxiv_id else
-                 candidate.get("url"))
+    publication = " ".join(str(x) for x in (venue, year) if x) if real_venue else ""
+    paper_url = (f"https://arxiv.org/abs/{arxiv_id}" if arxiv_id
+                 else candidate.get("url"))
     return {
         "title": _strip(candidate.get("title")),
         "group": group,
@@ -226,12 +215,8 @@ def new_paper(candidate, *, today):
         "publication_status": "venue-listed" if real_venue else "preprint",
         "arxiv_id": arxiv_id,
         "paper_url": paper_url,
-        "role": role,
-        "summary": summary,
         "code_url": None,
         "code_status": "unverified",
-        "project_url": None,
-        "models_url": None,
         "origin": "auto",
         "added": today.isoformat(),
     }
