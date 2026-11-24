@@ -31,7 +31,10 @@ _BIOMEDICAL = re.compile(
 # HMR may be an off-the-shelf component in another task; that is not a new
 # mesh-recovery method. Privacy-constrained *HMR itself* still qualifies.
 _APPLICATION_ONLY = re.compile(
-    r"\b(anonymization|anonymisation|face blurring|license plate)\b"
+    r"\b(anonymization|anonymisation|face blurring|license plate|"
+    r"camera pose estimation|camera network pose estimation|"
+    r"virtual object interaction|interaction with virtual objects|"
+    r"generating multi view action data)\b"
 )
 
 
