@@ -223,6 +223,15 @@ class PresentationTests(unittest.TestCase):
         self.assertIn("[Code (partial release)]", line)
         self.assertNotIn("summary", line)
 
+    def test_monorepo_code_links_keep_official_subdirectories(self):
+        paper = {"comment": "Code and models: "
+                 "https://github.com/huawei-noah/noah-research/tree/master/CLIFF"}
+        urls = embodied_index._github_candidates(paper)
+        self.assertEqual(
+            urls,
+            ["https://github.com/huawei-noah/noah-research/tree/master/CLIFF"],
+        )
+
     def test_unverified_code_not_claimed_closed(self):
         record = {"title": "Preprint", "year": 2026,
                   "publication_status": "preprint", "arxiv_id": "2611.10000",
