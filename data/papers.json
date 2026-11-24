@@ -1826,7 +1826,7 @@
    "category": "Motion & Temporal Recovery",
    "added": "2026-11-09",
    "abstract": "Top-down methods dominate the field of 3D human pose and shape estimation, because they are decoupled from human detection and allow researchers to focus on the core problem. However, cropping, their first step, discards the location information from the very beginning, which makes themselves unable to accurately predict the global rotation in the original camera coordinate system. To address this problem, we propose to Carry Location Information in Full Frames (CLIFF) into this task. Specifically, we feed more holistic features to CLIFF by concatenating the cropped-image feature with its bounding box information. We calculate the 2D reprojection loss with a broader view of the full frame, taking a projection process similar to that of the person projected in the image. Fed and supervised by global-location-aware information, CLIFF directly predicts the global rotation along with more accurate articulated poses. Besides, we propose a pseudo-ground-truth annotator based on CLIFF, which provides high-quality 3D annotations for in-the-wild 2D datasets and offers crucial full supervision for regression-based methods. Extensive experiments on popular benchmarks show that CLIFF outperforms prior arts by a significant margin, and reaches the first place on the AGORA leaderboard (the SMPL-Algorithms track). The code and data are available at https://github.com/huawei-noah/noah-research/tree/master/CLIFF",
-   "code_url": "https://github.com/huawei-noah/noah-research",
+   "code_url": "https://github.com/huawei-noah/noah-research/tree/master/CLIFF",
    "code_status": "repository",
    "code_checked": "2026-11-23"
   },
@@ -2024,7 +2024,10 @@
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
    "added": "2026-11-09",
-   "abstract": "With the progress of 3D human pose and shape estimation, state-of-the-art methods can either be robust to occlusions or obtain pixel-aligned accuracy in non-occlusion cases. However, they cannot obtain robustness and mesh-image alignment at the same time. In this work, we present NIKI (Neural Inverse Kinematics with Invertible Neural Network), which models bi-directional errors to improve the robustness to occlusions and obtain pixel-aligned accuracy. NIKI can learn from both the forward and inverse processes with invertible networks. In the inverse process, the model separates the error from the plausible 3D pose manifold for a robust 3D human pose estimation. In the forward process, we enforce the zero-error boundary conditions to improve the sensitivity to reliable joint positions for better mesh-image alignment. Furthermore, NIKI emulates the analytical inverse kinematics algorithms with the twist-and-swing decomposition for better interpretability. Experiments on standard and occlusion-specific benchmarks demonstrate the effectiveness of NIKI, where we exhibit robust and well-aligned results simultaneously. Code is available at https://github.com/Jeff-sjtu/NIKI"
+   "abstract": "With the progress of 3D human pose and shape estimation, state-of-the-art methods can either be robust to occlusions or obtain pixel-aligned accuracy in non-occlusion cases. However, they cannot obtain robustness and mesh-image alignment at the same time. In this work, we present NIKI (Neural Inverse Kinematics with Invertible Neural Network), which models bi-directional errors to improve the robustness to occlusions and obtain pixel-aligned accuracy. NIKI can learn from both the forward and inverse processes with invertible networks. In the inverse process, the model separates the error from the plausible 3D pose manifold for a robust 3D human pose estimation. In the forward process, we enforce the zero-error boundary conditions to improve the sensitivity to reliable joint positions for better mesh-image alignment. Furthermore, NIKI emulates the analytical inverse kinematics algorithms with the twist-and-swing decomposition for better interpretability. Experiments on standard and occlusion-specific benchmarks demonstrate the effectiveness of NIKI, where we exhibit robust and well-aligned results simultaneously. Code is available at https://github.com/Jeff-sjtu/NIKI",
+   "code_url": "https://github.com/jeffffffli/NIKI",
+   "code_status": "repository",
+   "code_checked": "2026-11-24"
   },
   {
    "title": "MTFT: Multimodal Temporal Fusion Transformer for 3D Human Pose and Shape Estimation",
@@ -2482,17 +2485,6 @@
    "added": "2026-11-09"
   },
   {
-   "title": ": Neural Inverse Kinematics with Invertible Neural Networks for 3D Human Pose and Shape Estimation”",
-   "authors": [],
-   "year": 2023,
-   "venue": "",
-   "url": "https://www.semanticscholar.org/paper/89d9179edc2494b0e0f69da3f04c54d2049e76ef",
-   "arxiv_id": null,
-   "source": "s2",
-   "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-11-09"
-  },
-  {
    "title": "Action-conditioned contrastive learning for 3D human pose and shape estimation in videos",
    "authors": [
     "Inpyo Song",
@@ -2506,32 +2498,6 @@
    "source": "s2",
    "category": "Motion & Temporal Recovery",
    "added": "2026-11-09"
-  },
-  {
-   "title": "Mesh-guided self-assembly of centimeter-scale, cell-derived human dermis",
-   "authors": [
-    "Hang Dong",
-    "Hiroki Yamanaka",
-    "Susumu Saito",
-    "Michiharu Sakamoto",
-    "Yuanjiaozi Li",
-    "Jinya Liu",
-    "Qiannan Zhao",
-    "Koh Ogawa",
-    "Takashi Nakano",
-    "Rie Tatsumi",
-    "Jiro Ono",
-    "Tetsuji Yamaoka",
-    "Naoki Morimoto"
-   ],
-   "year": 2027,
-   "venue": "Bioactive Materials",
-   "url": "https://doi.org/10.1016/j.bioactmat.2026.11.013",
-   "arxiv_id": null,
-   "doi": "10.1016/j.bioactmat.2026.11.013",
-   "source": "crossref",
-   "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-11-23"
   },
   {
    "title": "4D-HOF: Hand-Object Flow Matching for Feed-Forward 4D Interaction Reconstruction",
@@ -3042,27 +3008,6 @@
    "added": "2026-11-23"
   },
   {
-   "title": "Training-Free Anonymization of Driving Data with Promptable Segmentation and 3D Human Mesh Recovery",
-   "authors": [
-    "Max A. Buettner",
-    "Mark Azer",
-    "Fabian B. Flohr"
-   ],
-   "year": 2026,
-   "venue": "arXiv",
-   "url": "https://arxiv.org/abs/2611.20412",
-   "arxiv_id": "2611.20412",
-   "abstract": "Camera recordings for autonomous driving contain faces and license plates that should be anonymized before labeling, sharing, or training. Dedicated detectors can miss small plates and faces behind vehicle glass. We present FM-Anonymize, a training-free anonymization pipeline that combines promptable segmentation, 3D human mesh recovery, and generative replacement. SAM 3 locates people, faces, and vehicles and searches zoomed vehicle crops for plates, occupants, and windows. SAM 3D Body assesses face visibility from head orientation and projects head regions for blurring. Optional diffusion inpainting replaces eligible blurred heads with synthetic faces, guided by estimated pose and keypoints. On PP4AV, the blur pipeline protects 97.8% of faces and 95.5% of plates, the highest privacy recall of all compared methods at their default settings. On our recordings, where the localization thresholds were set, it protects 97.1% of faces and 93.4% of plates, compared with 93.7%/73.0% for UrbanAnonymizer, 42.7%/40.7% for EgoBlur, and 96.6% of faces for deface. Synthetic replacement raises full-body keypoint average precision over blurring from 54.1% to 79.6% on our recordings and from 39.9% to 68.3% on PP4AV. Code and configurations are available on https://github.com/max-a-ai/FM-Anonymize",
-   "comment": "8 pages, 6 figures, 3 tables",
-   "journal_ref": "",
-   "source": "arxiv",
-   "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-11-23",
-   "code_url": "https://github.com/max-a-ai/FM-Anonymize",
-   "code_status": "repository",
-   "code_checked": "2026-11-23"
-  },
-  {
    "title": "UT-HMR: Uncertainty-Guided Temporal Modeling for Robust 3D Human Mesh Recovery",
    "authors": [
     "Zhibo Wang",
@@ -3125,6 +3070,17 @@
    "source": "arxiv",
    "category": "Hand, Face & Expressive Mesh",
    "added": "2026-11-23"
+  },
+  {
+   "title": "HOSt3R: Keypoint-free Hand-Object 3D Reconstruction from RGB images",
+   "authors": [],
+   "year": 2025,
+   "venue": "ICCVW",
+   "url": "https://arxiv.org/abs/2508.16465",
+   "arxiv_id": "2508.16465",
+   "source": "arxiv",
+   "category": "Hand, Face & Expressive Mesh",
+   "added": "2026-11-24"
   }
  ]
 }

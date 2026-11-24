@@ -36,6 +36,61 @@ class AdmissionTests(unittest.TestCase):
              "year": 2026, "venue": "arXiv"}
         self.assertEqual(selection.decide(p, CONFIG, "embodied")[0], "auto")
 
+    def test_biomedical_mesh_is_not_human_mesh_recovery(self):
+        candidate = {
+            "title": "Mesh-guided self-assembly of centimeter-scale, cell-derived human dermis",
+            "year": 2027,
+        }
+        self.assertEqual(selection.decide(candidate, CONFIG, "core")[0], "ignore")
+
+    def test_downstream_anonymization_is_not_a_new_hmr_method(self):
+        candidate = {
+            "title": "Training-Free Anonymization of Driving Data with "
+                     "Promptable Segmentation and 3D Human Mesh Recovery",
+            "year": 2026,
+        }
+        self.assertEqual(selection.decide(candidate, CONFIG, "core")[0], "ignore")
+
+    def test_robot_only_topics_do_not_enter_embodied(self):
+        examples = [
+            {"title": "Proprioceptive-visual correspondence enables "
+                      "self-other distinction in humanoid robots",
+             "abstract": "Supports human-to-robot motion retargeting."},
+            {"title": "DexForce: Extracting Force-informed Actions "
+                      "from Kinesthetic Demonstrations for Dexterous Manipulation",
+             "abstract": "Compared with human-to-robot motion retargeting."},
+            {"title": "Morphology-Consistent Humanoid Interaction "
+                      "through Robot-Centric Video Synthesis",
+             "abstract": "Avoids human-to-robot motion retargeting."},
+        ]
+        for paper in examples:
+            with self.subTest(paper=paper["title"]):
+                self.assertEqual(
+                    selection.decide(paper, CONFIG, "embodied")[0], "ignore"
+                )
+
+    def test_pure_hand_object_reconstruction_routes_to_core(self):
+        p = {"title": "HOSt3R: Keypoint-free Hand-Object 3D Reconstruction "
+                      "from RGB images",
+             "abstract": "Potential downstream applications in human-robot interaction."}
+        self.assertEqual(selection.decide(p, CONFIG, "core")[0], "auto")
+        self.assertEqual(selection.decide(p, CONFIG, "embodied")[0], "ignore")
+
+    def test_real_transfer_related_preprint_still_auto_accepted(self):
+        p = {
+            "title": "From Festival Video to the Stage: A Sim-to-Real Ladder "
+                     "for Whole-Body Dance on a Commercial Humanoid",
+            "abstract": "Recover human motion from video and retarget "
+                        "it onto the humanoid robot.",
+        }
+        self.assertEqual(selection.decide(p, CONFIG, "embodied")[0], "auto")
+        retarget = {
+            "title": "ObjRetarget: An Object-Aware Motion Retargeting Framework "
+                     "with Anthropomorphic Arm Constraints and Hand Modeling",
+            "abstract": "Human demonstrations to robot retargeting.",
+        }
+        self.assertEqual(selection.decide(retarget, CONFIG, "embodied")[0], "auto")
+
     def test_no_generic_vision_to_robotics_false_positive(self):
         p = {"title": "Humanoid Robot Navigation with Language",
              "abstract": "Vision language planning in indoor environments"}
@@ -167,6 +222,15 @@ class PresentationTests(unittest.TestCase):
         self.assertIn("(arXiv 2026)", line)
         self.assertIn("[Code (partial release)]", line)
         self.assertNotIn("summary", line)
+
+    def test_monorepo_code_links_keep_official_subdirectories(self):
+        paper = {"comment": "Code and models: "
+                 "https://github.com/huawei-noah/noah-research/tree/master/CLIFF"}
+        urls = embodied_index._github_candidates(paper)
+        self.assertEqual(
+            urls,
+            ["https://github.com/huawei-noah/noah-research/tree/master/CLIFF"],
+        )
 
     def test_unverified_code_not_claimed_closed(self):
         record = {"title": "Preprint", "year": 2026,

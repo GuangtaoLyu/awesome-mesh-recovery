@@ -1,3 +1,15 @@
 {
- "keys": []
+ "keys": [
+  "arxiv:2501.10356",
+  "arxiv:2603.19709",
+  "arxiv:2606.13222",
+  "arxiv:2611.20412",
+  "doi:10.1016/j.bioactmat.2026.11.013",
+  "title:dexforce extracting force informed actions from kinesthetic demonstrations for dexterous manipulation",
+  "title:mesh guided self assembly of centimeter scale cell derived human dermis",
+  "title:morphology consistent humanoid interaction through robot centric video synthesis",
+  "title:neural inverse kinematics with invertible neural networks for 3d human pose and shape estimation",
+  "title:proprioceptive visual correspondence enables self other distinction in humanoid robots",
+  "title:training free anonymization of driving data with promptable segmentation and 3d human mesh recovery"
+ ]
 }

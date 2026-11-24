@@ -51,6 +51,17 @@ class TestReadmeGeneration(unittest.TestCase):
         self.assertIn("(arXiv 2026)", text)
         self.assertIn("[Code (partial release)]", text)
 
+    def test_no_duplicate_arxiv_between_recovery_and_embodied(self):
+        core = {str(p.get("arxiv_id")).lower() for p in PAPERS if p.get("arxiv_id")}
+        robot = {str(p.get("arxiv_id")).lower() for p in EMBODIED["papers"]
+                 if p.get("arxiv_id")}
+        self.assertEqual(core & robot, set())
+
+    def test_off_topic_biology_removed(self):
+        rendered = render(PAPERS)
+        self.assertNotIn("cell-derived human dermis", rendered)
+        self.assertNotIn("self-other distinction in humanoid robots", rendered)
+
     def test_readme_reproducible(self):
         self.assertEqual(
             (ROOT / "README.md").read_text(encoding="utf-8"),
