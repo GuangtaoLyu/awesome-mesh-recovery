@@ -98,7 +98,7 @@ _CODE_CONTEXT = re.compile(
     r"\b(?:source code|official code|code(?:s)?(?: and (?:data|models|"
     r"weights|checkpoints))?|implementation|codebase)\b"
     r".{0,70}\b(?:available|released|published|at|on|here|:)\b"
-    r"|\b(?:code|implementation|repository)\s*:\s*$",
+    r"|\b(?:code(?: and (?:data|models|weights|checkpoints))?|implementation|repository)\s*:\s*$",
     re.IGNORECASE | re.DOTALL,
 )
 
