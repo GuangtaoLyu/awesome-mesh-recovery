@@ -133,19 +133,6 @@
    "added": "2026-10-20"
   },
   {
-   "title": "KASportsFormer: Kinematic Anatomy Enhanced Transformer for 3D Human Pose Estimation on Short Sports Scene Video",
-   "authors": [
-    "Yin"
-   ],
-   "year": 2025,
-   "venue": "arXiv",
-   "url": "https://arxiv.org/abs/2507.20763",
-   "arxiv_id": "2507.20763",
-   "source": "seed",
-   "category": "Motion & Temporal Recovery",
-   "added": "2026-10-20"
-  },
-  {
    "title": "TokenHMR: Advancing Human Mesh Recovery with a Tokenized Pose Representation",
    "authors": [
     "Dwivedi"
@@ -519,20 +506,6 @@
    "arxiv_id": null,
    "source": "s2",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
-  },
-  {
-   "title": "Generating Multi-View Action Data from a Monocular Camera Video by Fusing Human Mesh Recovery and 3D Scene Reconstruction",
-   "authors": [
-    "Hyunsu Kim",
-    "Yunsik Son"
-   ],
-   "year": 2025,
-   "venue": "Applied Sciences",
-   "url": "https://www.semanticscholar.org/paper/6ad1d0f6972ef9a19319a55f8fa4c268105efa2d",
-   "arxiv_id": null,
-   "source": "s2",
-   "category": "Motion & Temporal Recovery",
    "added": "2026-10-20"
   },
   {
@@ -1106,20 +1079,6 @@
    "added": "2026-10-20"
   },
   {
-   "title": "Unsupervised camera pose estimation through human mesh recovery",
-   "authors": [
-    "Nicola Garau",
-    "Nicola Conci"
-   ],
-   "year": 2019,
-   "venue": "Proceedings of the 13th International Conference on Distributed Smart Cameras",
-   "url": "https://doi.org/10.1145/3349801.3357138",
-   "arxiv_id": null,
-   "source": "crossref",
-   "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
-  },
-  {
    "title": "Egocentric Whole-Body Human Mesh Recovery with Prior-Guided Learning",
    "authors": [
     "Soyeon Na",
@@ -1197,20 +1156,6 @@
    "year": 2021,
    "venue": "2021 International Conference on 3D Vision (3DV)",
    "url": "https://doi.org/10.1109/3dv53792.2021.00065",
-   "arxiv_id": null,
-   "source": "crossref",
-   "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
-  },
-  {
-   "title": "Unsupervised continuous camera network pose estimation through human mesh recovery",
-   "authors": [
-    "Nicola Garau",
-    "Nicola Conci"
-   ],
-   "year": 2019,
-   "venue": "Proceedings of the 13th International Conference on Distributed Smart Cameras",
-   "url": "https://doi.org/10.1145/3349801.3349803",
    "arxiv_id": null,
    "source": "crossref",
    "category": "Full-Body Human Mesh Recovery",
@@ -1355,24 +1300,6 @@
    "arxiv_id": null,
    "source": "crossref",
    "category": "Occlusion & In-the-Wild Recovery",
-   "added": "2026-10-20"
-  },
-  {
-   "title": "Interaction with Virtual Objects using Human Pose and Shape Estimation",
-   "authors": [
-    "Hong Son Nguyen",
-    "DaEun Cheong",
-    "Andrew Chalmers",
-    "Myoung Gon Kim",
-    "Taehyun Rhee",
-    "JungHyun Han"
-   ],
-   "year": 2025,
-   "venue": "",
-   "url": "https://doi.org/10.22541/au.174625404.45775198/v1",
-   "arxiv_id": null,
-   "source": "crossref",
-   "category": "Full-Body Human Mesh Recovery",
    "added": "2026-10-20"
   },
   {
@@ -1571,36 +1498,6 @@
    "added": "2026-10-20"
   },
   {
-   "title": "Posegu: 3d Human Pose Estimation with Novel Human Pose Generator and Unbiased Learning",
-   "authors": [
-    "Shannan GUAN",
-    "Haiyan LU",
-    "Linchao ZHU",
-    "Gengfa FANG"
-   ],
-   "year": 2022,
-   "venue": "",
-   "url": "https://doi.org/10.2139/ssrn.4248596",
-   "arxiv_id": null,
-   "source": "crossref",
-   "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
-  },
-  {
-   "title": "3D Human Pose Estimation = 2D Pose Estimation + Matching",
-   "authors": [
-    "Ching-Hang Chen",
-    "Deva Ramanan"
-   ],
-   "year": 2017,
-   "venue": "2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
-   "url": "https://doi.org/10.1109/cvpr.2017.610",
-   "arxiv_id": null,
-   "source": "crossref",
-   "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20"
-  },
-  {
    "title": "Benchmarking and Analyzing 3D Human Pose and Shape Estimation Beyond Algorithms",
    "authors": [
     "Hui En Pang",
@@ -1645,22 +1542,6 @@
    "arxiv_id": null,
    "source": "crossref",
    "category": "Hand, Face & Expressive Mesh",
-   "added": "2026-10-20"
-  },
-  {
-   "title": "Dual Mesh Convolutional Networks for Human Shape Correspondence",
-   "authors": [
-    "Nitika Verma",
-    "Adnane Boukhayma",
-    "Edmond Boyer",
-    "Jakob Verbeek"
-   ],
-   "year": 2021,
-   "venue": "2021 International Conference on 3D Vision (3DV)",
-   "url": "https://doi.org/10.1109/3dv53792.2021.00039",
-   "arxiv_id": null,
-   "source": "crossref",
-   "category": "Full-Body Human Mesh Recovery",
    "added": "2026-10-20"
   },
   {
@@ -1745,23 +1626,6 @@
    "added": "2026-10-20"
   },
   {
-   "title": "EgoRayFormer: Ray-Space Stereo Refinement for Egocentric 3D Human Pose Estimation",
-   "authors": [
-    "Haozhe Wang",
-    "Songyuan Wu",
-    "Jihai Xu",
-    "Jie Zhao"
-   ],
-   "year": 2026,
-   "venue": "arXiv",
-   "url": "http://arxiv.org/abs/2610.26641v1",
-   "arxiv_id": "2610.26641",
-   "source": "arxiv",
-   "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-10-20",
-   "abstract": "Head-mounted stereo fisheye cameras provide a compact view of the wearer's body, but strong distortion, partial visibility and a short baseline make 3D pose estimation difficult. Existing refinement decoders sample image features independently in each view, without requiring the samples to correspond to a common 3D hypothesis. We introduce EgoRayFormer, a causal pose estimator that couples stereo feature sampling and geometric refinement in ray space. For each joint, the decoder projects shared 3D hypotheses along and around its viewing ray into both images. A geometric branch then corrects the projected joint locations and intersects the resulting rays; a learned gate blends this geometric estimate with a learned pose update. This formulation introduces an explicit stereo constraint while retaining flexibility when the rays provide weak depth constraints. In local evaluations on the official device-relative test splits, EgoRayFormer achieves three-seed mean MPJPEs of 17.64 mm on UnrealEgo2 and 49.55 mm on UnrealEgo-RW, improving to 47.57 mm with UnrealEgo2 pre-training. In paired validation ablations, removing the geometric branch increases MPJPE in all three seeds at both input resolutions. With a common ResNet-18 encoder and input resolution, our system reduces RW test MPJPE by 9.09 mm relative to the device-relative EgoPoseFormer baseline. A separate protocol analysis quantifies the difference between device-relative and oracle-root evaluation"
-  },
-  {
    "title": "Uncertainty-Aware Human Mesh Recovery from Video by Learning Part-Based 3D Dynamics",
    "authors": [
     "Gun-Hee Lee",
@@ -1790,23 +1654,6 @@
    "arxiv_id": null,
    "source": "crossref",
    "category": "Full-Body Human Mesh Recovery",
-   "added": "2026-11-02"
-  },
-  {
-   "title": "Comparative Analysis of Bottom-Up 2D Pose Estimation Methods for 3D Human Pose Estimation in Real-World Rugby Impact Scenarios",
-   "authors": [
-    "Shi Yuchen",
-    "Ozeki Nobutake",
-    "Inaji Motoki",
-    "Yagishita Kazuyoshi",
-    "Miyazaki Yusuke"
-   ],
-   "year": 2026,
-   "venue": "Proceedings of the 14th International Congress on Sport Sciences Research and Technology Support",
-   "url": "https://doi.org/10.5220/0015286400004981",
-   "arxiv_id": null,
-   "source": "crossref",
-   "category": "Occlusion & In-the-Wild Recovery",
    "added": "2026-11-02"
   },
   {
