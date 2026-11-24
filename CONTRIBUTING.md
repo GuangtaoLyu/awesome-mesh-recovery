@@ -31,6 +31,10 @@ section headings.
 | `README.md` | Generated; **never** the paper database |
 
 The automated pipeline searches arXiv, DBLP, Semantic Scholar and Crossref.
+The primary contribution should be human/hand mesh, shape or motion recovery
+(or a concrete human-motion-to-robot pipeline for the embodied section);
+pure pose-only studies, camera calibration, biomedical meshes and papers
+that merely *use* an HMR model for an unrelated application are excluded.
 A paper's publication status does **not** determine eligibility. Instead,
 the title and (when available) abstract must establish relevance to the
 selected track. The narrow "recovery-to-robot" bridge excludes generic VLA
@@ -44,8 +48,9 @@ the new source has consistent year information. Older papers remain indexed.
 ## Code and link policy
 
 - Always link a verifiable primary paper: official arXiv or publisher/DOI.
-- Add `[Code]` only when a GitHub repository can be found in author-supplied
-  paper metadata (abstract/comment) and the repository exists.
+- Add `[Code]` only when a public GitHub repository is explicitly
+  identified as code/implementation in the paper's metadata, and the
+  repository exists. A bare GitHub URL or a cited dependency does not qualify.
 - A repository link **does not mean complete code is released**.
 - Existing explicitly verified `partial` / `demo` labels are preserved;
   new public repositories receive the neutral `Code` label.

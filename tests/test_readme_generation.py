@@ -62,6 +62,27 @@ class TestReadmeGeneration(unittest.TestCase):
         self.assertNotIn("cell-derived human dermis", rendered)
         self.assertNotIn("self-other distinction in humanoid robots", rendered)
 
+    def test_venues_have_no_auto_truncated_labels(self):
+        self.assertEqual(generate_readme._short_venue(
+            "AAAI Conference on Artificial Intelligence"), "AAAI")
+        self.assertEqual(generate_readme._short_venue(
+            "International Journal of Computer Vision"), "IJCV")
+        self.assertEqual(generate_readme._short_venue(
+            "IEEE Transactions on Multimedia"), "TMM")
+        self.assertEqual(generate_readme._short_venue(
+            "Proceedings of the IEEE/CVF International Conference on "
+            "Computer Vision Workshops"), "ICCVW")
+        self.assertEqual(generate_readme._short_venue(
+            "A Very Long Unknown Journal Name of An Unknown Research Field"), "")
+        self.assertNotIn("...", render(PAPERS))
+
+    def test_legacy_out_of_scope_entries_removed(self):
+        titles = [p["title"] for p in PAPERS]
+        self.assertFalse(any("EgoRayFormer" in t or "KASportsFormer" in t
+                             or "Dual Mesh Convolutional Networks" in t
+                             or "Unsupervised camera pose estimation" in t
+                             for t in titles))
+
     def test_readme_reproducible(self):
         self.assertEqual(
             (ROOT / "README.md").read_text(encoding="utf-8"),
