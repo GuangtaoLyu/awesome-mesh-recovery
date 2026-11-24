@@ -288,7 +288,7 @@ class PresentationTests(unittest.TestCase):
         self.assertIsNone(item["year"])
         self.assertNotIn("role", item)
         self.assertNotIn("summary", item)
-        self.assertIn("Preprint", embodied_index.format_paper(item))
+        self.assertIn("Venue unverified", embodied_index.format_paper(item))
         paper = embodied_index.new_paper(
             {"title": "Dexterous Hand Tracking from Human Video",
              "arxiv_id": "2611.12345", "venue": "arXiv"},
