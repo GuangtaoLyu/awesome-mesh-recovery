@@ -214,6 +214,16 @@ class EvidenceAndPublishingTests(unittest.TestCase):
         self.assertEqual(stats["core_added"], 1)
         self.assertEqual(stats["embodied_added"], 0)
 
+    def test_smplx_fullbody_not_misclassified_as_hand(self):
+        from classify import classify
+        paper = {"title": "Human Body Reconstruction using SMPL-X and Multi-view Video"}
+        self.assertEqual(classify(paper), "Full-Body Human Mesh Recovery")
+
+    def test_causal_video_motion_method_classification(self):
+        from classify import classify
+        paper = {"title": "Online Video-Based Temporal Human Mesh Recovery"}
+        self.assertEqual(classify(paper), "Motion & Temporal Recovery")
+
     def test_recency_prefers_updates_to_alphabetic_title(self):
         a = {"title": "AAA Human Mesh Recovery", "year": 2026,
              "submitted_at": "2026-01-02", "updated_at": "2026-01-02"}
