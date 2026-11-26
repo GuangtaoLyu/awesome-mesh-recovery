@@ -368,6 +368,16 @@ def _refresh_ids(papers, embodied, today, limit=30):
     return harvest.arxiv_by_ids(chosen)
 
 
+def discovery_mode(today, *, force_backfill=False):
+    """Use a deep scan on the first scheduled Monday of each calendar month."""
+    if force_backfill or (
+        today.weekday() == 0 and
+        (today - datetime.timedelta(days=7)).month != today.month
+    ):
+        return "backfill"
+    return "weekly"
+
+
 def run(*, render_only=False, backfill=False, today=None):
     today = today or datetime.date.today()
     config = load_json(str(CONFIG), {})
@@ -388,10 +398,7 @@ def run(*, render_only=False, backfill=False, today=None):
 
     papers = dedup_records(store["papers"])
     if not render_only:
-        # First weekly scheduled run of each month expands the scan depth.
-        first_week_of_month = (today.weekday() == 0 and
-                               (today - datetime.timedelta(days=7)).month != today.month)
-        mode = "backfill" if backfill or first_week_of_month else "weekly"
+        mode = discovery_mode(today, force_backfill=backfill)
         batches = {}
         for track in ("core", "embodied"):
             candidates, status = harvest.harvest(config, track=track, today=today, mode=mode)
