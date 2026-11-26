@@ -103,3 +103,23 @@ The search process is deliberately broader than the publication policy:
 
 Routine updates remain fully automatic, including arXiv-only work. Only the
 automatically generated sources and the compact README are published.
+
+
+## Source reliability (no manual work required)
+
+- **arXiv + Crossref** are the main research-discovery feeds.
+- **DBLP** supplements conference metadata. It sometimes serves a bot
+  challenge HTML page with status 200; the client detects non-JSON payloads,
+  retries through one *official DBLP mirror*, and skips that source for the
+  remainder of the update if unavailable.
+- **Semantic Scholar** supplements abstracts and discovery when accessible.
+  Its anonymous rate limit is shared. An HTTP 429 disables further S2
+  requests **for that update only**, so dozens of identical warning messages
+  do not waste the workflow.
+- An optional secret named `SEMANTIC_SCHOLAR_API_KEY` may improve S2 access,
+  but it is **not required** for automatic operation.
+- Every update writes a **Publication-source health** table to the GitHub
+  Actions run summary, showing successful requests, results and degraded
+  providers. An unavailable optional provider never deletes prior papers.
+- A complete core discovery outage or a code/README test failure stops
+  publishing. After the API recovers, the next scheduled run retries.
