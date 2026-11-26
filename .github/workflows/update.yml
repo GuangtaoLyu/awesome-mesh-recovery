@@ -29,6 +29,8 @@ jobs:
     timeout-minutes: 60
     env:
       PYTHONDONTWRITEBYTECODE: "1"
+      # Optional: absent key leaves S2 best-effort and never blocks updates.
+      SEMANTIC_SCHOLAR_API_KEY: ${{ secrets.SEMANTIC_SCHOLAR_API_KEY }}
     steps:
       - uses: actions/checkout@v4
         with:
