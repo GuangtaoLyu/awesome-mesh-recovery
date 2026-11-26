@@ -13,7 +13,10 @@
       "human shape reconstruction",
       "world-grounded human motion recovery",
       "hand object reconstruction",
-      "human video mesh reconstruction"
+      "human video mesh reconstruction",
+      "monocular human reconstruction",
+      "world grounded human motion",
+      "3d hand and object interaction"
     ],
     "dblp": [
       "human mesh recovery",
@@ -47,70 +50,12 @@
   "default_category": "Full-Body Human Mesh Recovery",
   "discovery": {
     "years_back": 3,
-    "new_core_per_run": 30,
-    "new_embodied_per_run": 15
-  },
-  "selection": {
-    "auto_accept_title_phrases": [
-      "human mesh recovery",
-      "human mesh reconstruction",
-      "body mesh recovery",
-      "body mesh reconstruction",
-      "human pose and shape estimation",
-      "human pose and shape recovery",
-      "human shape and pose estimation",
-      "hand mesh recovery",
-      "hand mesh reconstruction",
-      "hand pose and shape estimation",
-      "3d hand pose and shape",
-      "expressive human mesh",
-      "expressive human pose and shape",
-      "whole-body human mesh",
-      "whole body human mesh",
-      "face mesh recovery",
-      "3d face mesh",
-      "human motion recovery",
-      "human motion reconstruction",
-      "human body reconstruction",
-      "hand reconstruction",
-      "hand motion reconstruction",
-      "world-grounded human motion",
-      "human reconstruction",
-      "3d hand mesh",
-      "hand object reconstruction"
-    ],
-    "embodied_title_phrases": [
-      "vision-to-robot",
-      "video-to-robot",
-      "human-to-robot",
-      "human to robot",
-      "humanoid",
-      "dexterous",
-      "retargeting",
-      "teleoperation",
-      "motion tracking",
-      "robot hand",
-      "robotic hand",
-      "robot imitation",
-      "human video",
-      "hand-object",
-      "hand object",
-      "manipulation from human",
-      "visual imitation",
-      "humanoid motion tracking",
-      "humanoid motion control",
-      "humanoid imitation",
-      "dexterous hand tracking",
-      "hand-object reconstruction",
-      "human motion transfer",
-      "video to humanoid",
-      "robot learning from human",
-      "video based robot",
-      "dexterous manipulation",
-      "mocap to robot",
-      "retargeted motion",
-      "motion tracking for humanoid"
-    ]
+    "weekly_query_limit": 75,
+    "backfill_query_limit": 180,
+    "max_new_core_per_run": 100,
+    "max_new_embodied_per_run": 50,
+    "ambiguous_lookup_per_run": 24,
+    "max_pending_candidates": 300
   },
   "embodied_queries": {
     "arxiv": [
@@ -120,7 +65,10 @@
       "visual imitation humanoid",
       "humanoid motion tracking from human",
       "robot hand retargeting from video",
-      "dexterous manipulation human video"
+      "dexterous manipulation human video",
+      "human motion humanoid tracking",
+      "hand to robot retargeting",
+      "video imitation humanoid robot"
     ],
     "dblp": [
       "humanoid retargeting",

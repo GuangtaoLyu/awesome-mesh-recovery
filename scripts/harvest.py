@@ -52,37 +52,67 @@ def _param(url, **params):
     return url + "?" + urllib.parse.urlencode(params)
 
 
-def arxiv(query, since_year, limit):
-    url = _param(
-        "https://export.arxiv.org/api/query",
-        search_query='all:"' + query + '"',
-        sortBy="submittedDate",
-        sortOrder="descending",
-        max_results=limit,
-    )
-    root = ET.fromstring(_get(url))
-    found = []
-    for entry in root.findall("a:entry", ATOM):
-        title = _norm_title(entry.findtext("a:title", default="", namespaces=ATOM))
-        posted = entry.findtext("a:published", default="", namespaces=ATOM)
-        year = int(posted[:4]) if posted[:4].isdigit() else None
-        arxiv_id = _arxiv_id(entry.findtext("a:id", default="", namespaces=ATOM))
-        if not title or not arxiv_id or (year and year < since_year):
-            continue
-        found.append({
-            "title": title,
-            "authors": _authors(e.findtext("a:name", default="", namespaces=ATOM)
-                                for e in entry.findall("a:author", ATOM)),
-            "year": year,
-            "venue": "arXiv",
-            "url": f"https://arxiv.org/abs/{arxiv_id}",
-            "arxiv_id": arxiv_id,
-            "abstract": _norm_title(entry.findtext("a:summary", default="", namespaces=ATOM)),
-            "comment": _norm_title(entry.findtext("arxiv:comment", default="", namespaces=ATOM)),
-            "journal_ref": _norm_title(entry.findtext("arxiv:journal_ref", default="", namespaces=ATOM)),
-            "source": "arxiv",
-        })
-    return found
+# arXiv guidance asks automated clients to space requests, including batches.
+_last_arxiv_request = 0.0
+
+
+def _arxiv_fetch(url):
+    global _last_arxiv_request
+    elapsed = time.monotonic() - _last_arxiv_request
+    if _last_arxiv_request and elapsed < 3.0:
+        time.sleep(3.0 - elapsed)
+    _last_arxiv_request = time.monotonic()
+    return _get(url)
+
+
+def arxiv(query, since_year, limit, *, sort_by="lastUpdatedDate"):
+    """Search a bounded number of arXiv results with pagination.
+
+    Weekly scans sort on lastUpdatedDate to catch revised preprints; monthly
+    backfills use submittedDate to recover previously missed original papers.
+    """
+    out, seen = [], set()
+    page_size = 75
+    for start in range(0, limit, page_size):
+        url = _param(
+            "https://export.arxiv.org/api/query",
+            search_query='all:"' + query + '"',
+            sortBy=sort_by,
+            sortOrder="descending",
+            start=start,
+            max_results=min(page_size, limit - start),
+        )
+        root = ET.fromstring(_arxiv_fetch(url))
+        entries = root.findall("a:entry", ATOM)
+        if not entries:
+            break
+        for entry in entries:
+            title = _norm_title(entry.findtext("a:title", default="", namespaces=ATOM))
+            posted = entry.findtext("a:published", default="", namespaces=ATOM)
+            updated = entry.findtext("a:updated", default="", namespaces=ATOM)
+            year = int(posted[:4]) if posted[:4].isdigit() else None
+            arxiv_id = _arxiv_id(entry.findtext("a:id", default="", namespaces=ATOM))
+            if not title or not arxiv_id or arxiv_id in seen or (year and year < since_year):
+                continue
+            seen.add(arxiv_id)
+            out.append({
+                "title": title,
+                "authors": _authors(e.findtext("a:name", default="", namespaces=ATOM)
+                                    for e in entry.findall("a:author", ATOM)),
+                "year": year,
+                "submitted_at": posted[:10],
+                "updated_at": updated[:10],
+                "venue": "arXiv",
+                "url": f"https://arxiv.org/abs/{arxiv_id}",
+                "arxiv_id": arxiv_id,
+                "abstract": _norm_title(entry.findtext("a:summary", default="", namespaces=ATOM)),
+                "comment": _norm_title(entry.findtext("arxiv:comment", default="", namespaces=ATOM)),
+                "journal_ref": _norm_title(entry.findtext("arxiv:journal_ref", default="", namespaces=ATOM)),
+                "source": "arxiv",
+            })
+        if len(entries) < min(page_size, limit - start):
+            break
+    return out
 
 
 def dblp(query, since_year, limit):
@@ -189,31 +219,57 @@ SOURCES = {
 }
 
 
-def harvest(config, *, track="core", today=None):
-    """Return (candidate list, diagnostics) for one discovery track.
+def harvest(config, *, track="core", today=None, mode="weekly"):
+    """Return candidates and diagnostics, using rotating balanced source scans.
 
-    Empty or failed optional embodied searches do not prevent a successful
-    core update. Calls and data are bounded by the configured recent window.
+    A larger monthly backfill avoids weekly search-rank truncation. Source
+    failures do not block other sources; a complete core outage fails safely.
     """
+    if mode not in ("weekly", "backfill"):
+        raise ValueError(f"Unsupported discovery mode: {mode}")
     today = today or datetime.date.today()
     lookback = int(config.get("discovery", {}).get("years_back", 3))
     since_year = max(int(config.get("year_from", 2015)), today.year - lookback + 1)
     query_map = config["queries" if track == "core" else "embodied_queries"]
+    discovery = config.get("discovery", {})
+    limit = int(discovery.get(
+        "backfill_query_limit" if mode == "backfill" else "weekly_query_limit",
+        180 if mode == "backfill" else 75,
+    ))
     found = []
-    status = {"track": track, "attempted": 0, "succeeded": 0, "failures": []}
+    status = {"track": track, "mode": mode, "attempted": 0,
+              "succeeded": 0, "nonempty": 0, "failures": [],
+              "per_source": {}}
     for name, handler in SOURCES.items():
-        for query in query_map.get(name, []):
+        queries = list(dict.fromkeys(query_map.get(name, [])))
+        if not queries:
+            continue
+        # Do not systematically starve the last query if an API is rate limited.
+        shift = today.isocalendar().week % len(queries)
+        queries = queries[shift:] + queries[:shift]
+        for query in queries:
             status["attempted"] += 1
             try:
-                items = handler(query, since_year, 30)
+                if name == "arxiv" and handler is arxiv:
+                    items = arxiv(
+                        query, since_year, limit,
+                        sort_by=("submittedDate" if mode == "backfill" else "lastUpdatedDate"),
+                    )
+                else:
+                    items = handler(query, since_year, min(limit, 100))
                 found.extend(items)
                 status["succeeded"] += 1
+                if items:
+                    status["nonempty"] += 1
+                info = status["per_source"].setdefault(name, {"queries": 0, "results": 0})
+                info["queries"] += 1
+                info["results"] += len(items)
             except Exception as ex:
-                message = f"{name}: {query}: {type(ex).__name__}: {ex}"
-                status["failures"].append(message)
-                print(f"[harvest] WARNING {message}")
-    if track == "core" and not status["succeeded"]:
-        raise RuntimeError("All core discovery requests failed; existing data left unchanged")
+                msg = f"{name}: {query}: {type(ex).__name__}: {ex}"
+                status["failures"].append(msg)
+                print(f"[harvest] WARNING {msg}")
+    if track == "core" and not status["nonempty"]:
+        raise RuntimeError("All core discovery requests failed or returned no papers")
     return found, status
 
 
@@ -232,7 +288,7 @@ def arxiv_by_ids(ids, *, chunk_size=30):
         try:
             url = _param("https://export.arxiv.org/api/query",
                          id_list=",".join(chunk), max_results=len(chunk))
-            root = ET.fromstring(_get(url))
+            root = ET.fromstring(_arxiv_fetch(url))
             for entry in root.findall("a:entry", ATOM):
                 aid = _arxiv_id(entry.findtext("a:id", default="", namespaces=ATOM))
                 if not aid or aid not in chunk:
@@ -242,6 +298,8 @@ def arxiv_by_ids(ids, *, chunk_size=30):
                     "title": _norm_title(entry.findtext("a:title", default="", namespaces=ATOM)),
                     "arxiv_id": aid,
                     "year": int(pub[:4]) if pub[:4].isdigit() else None,
+                    "submitted_at": pub[:10],
+                    "updated_at": entry.findtext("a:updated", default="", namespaces=ATOM)[:10],
                     "venue": "arXiv",
                     "url": "https://arxiv.org/abs/" + aid,
                     "abstract": _norm_title(entry.findtext("a:summary", default="", namespaces=ATOM)),

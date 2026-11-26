@@ -73,3 +73,33 @@ works do not expire.
 
 Issues and pull requests for corrections are welcome, but **routine maintenance
 requires no human approval or manual review queue**.
+
+
+## Discovery quality and fully automatic evidence checks
+
+The search process is deliberately broader than the publication policy:
+
+1. **Weekly incremental discovery:** arXiv requests are ordered by their
+   last updated timestamp. DBLP, Semantic Scholar and Crossref broaden
+   coverage and fill verified metadata.
+2. **Monthly deep backfill:** the first scheduled Monday in each month runs
+   a larger, submitted-date search across the same 3-year discovery horizon.
+   This is also available as `python scripts/pipeline.py --backfill` and in
+   the manual GitHub Actions form.
+3. **Two-step task evidence:** explicit mesh, shape or motion recovery and
+   direct human/video-to-robot papers publish automatically. Borderline
+   titles are checked against abstracts and an additional bounded arXiv
+   metadata lookup; no editor or LLM approval is needed.
+4. **Machine-only deferral:** inconclusive candidates are retained in
+   `data/pending.json` and automatically re-assessed on later runs; they
+   never appear in README until there is enough evidence.
+5. **No silent paper limits:** unexpected spikes in auto-admission cause
+   the scheduled job to fail safely rather than quietly discard titles
+   late in the alphabet. All JSON/README writes happen after checks.
+6. **Quality regression:** `python scripts/evaluate_selection.py --strict`
+   reports selection precision, recall and category accuracy on a fixed
+   representative offline fixture. This is a regression guard, **not** an
+   unbiased statistical estimate of the accuracy of live weekly searches.
+
+Routine updates remain fully automatic, including arXiv-only work. Only the
+automatically generated sources and the compact README are published.

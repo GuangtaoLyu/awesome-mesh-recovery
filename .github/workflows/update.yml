@@ -11,6 +11,10 @@ on:
         description: "Regenerate README from existing JSON data without API discovery"
         type: boolean
         default: false
+      backfill:
+        description: "Run a deeper search of the last three publication years"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -42,19 +46,24 @@ jobs:
       - name: Discover and render (or render offline)
         env:
           RENDER_ONLY: ${{ inputs.render_only }}
+          BACKFILL: ${{ inputs.backfill }}
         run: |
           if [ "$RENDER_ONLY" = "true" ]; then
             python scripts/pipeline.py --render-only
+          elif [ "$BACKFILL" = "true" ]; then
+            python scripts/pipeline.py --backfill
           else
             python scripts/pipeline.py
           fi
 
       - name: Validate automatic acceptance, deduplication and compact README
-        run: python -m unittest discover -s tests -v
+        run: |
+          python -m unittest discover -s tests -v
+          python scripts/evaluate_selection.py --strict
 
       - name: Commit only changed JSON source data and generated README
         run: |
-          git add -- README.md data/papers.json data/embodied.json
+          git add -- README.md data/papers.json data/embodied.json data/pending.json
           if git diff --cached --quiet; then
             echo "No changes to publish."
             exit 0
