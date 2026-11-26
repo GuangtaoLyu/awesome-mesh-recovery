@@ -26,9 +26,10 @@ _BIOMEDICAL = r"\b(dermis|dermal|fibroblast|collagen|bioprinting|tissue engineer
 _APPLICATION = (
     r"\b(anonymization|anonymisation|license plate|face blurring|"
     r"camera pose estimation|camera network pose estimation|virtual object interaction|"
-    r"interaction with virtual objects|generating multi view action data)\b"
+    r"interaction with virtual objects|generating multi view action data|deepfake|video detection)\b"
 )
 _POSE_ONLY = r"\b(3d human pose estimation|2d pose estimation|human pose detection)\b"
+_NON_RECOVERY = r"\b(pose forecasting|pose prediction|object pose estimation)\b"
 _SHAPE_MESH = (
     r"\b(mesh recovery|mesh reconstruction|pose and shape|shape and pose|"
     r"shape estimation|human shape recovery|3d hand mesh|smpl parameter|"
@@ -60,7 +61,9 @@ _ROBOT = r"\b(robot|robots|robotic|humanoid|dexterous|robot hand|retargeting|tel
 _HUMAN_REF = (
     r"\b(human motion|human videos?|human demonstrations?|human references?|"
     r"human pose|mocap|motion capture|retargeted human|"
-    r"human hand|hand object interaction|egocentric hand)\b"
+    r"human hand|hand object interaction|egocentric hand|"
+    r"human to robot|human (?:[a-z]+ ){0,2}motion|from people|"
+    r"hand object demonstrations?)\b"
 )
 _EXECUTION = r"\b(retarget|retargeting|teleoperation|teleoperated|tracking|imitation|imitate|shadowing|robot control|robot policy|manipulation|transfer)\b"
 
@@ -78,9 +81,11 @@ def assess(paper, config=None, track="core"):
     """
     title = normalize_title(paper.get("title"))
     abstract = normalize_title(paper.get("abstract"))
+    main_abstract = re.split(r"\b(?:prior work|related work|previous work)\b",
+                             abstract, maxsplit=1)[0]
     # Only the opening passage supplies positive "main task" evidence. A long
     # related-work citation late in the abstract should not admit a paper.
-    opening = abstract[:650]
+    opening = main_abstract[:650]
     if len(title) < 14:
         return _result("ignore", "missing or implausibly short title")
 
@@ -89,6 +94,8 @@ def assess(paper, config=None, track="core"):
             return _result("ignore", "biomedical mesh, not body pose/shape")
         if _has(title, _APPLICATION):
             return _result("ignore", "HMR is an application component")
+        if _has(title, _NON_RECOVERY) and not _has(title, _SHAPE_MESH):
+            return _result("ignore", "forecasting/object pose, not body recovery")
         if _has(title, r"\b(shape correspondence|shape matching|point cloud registration)\b"):
             return _result("ignore", "shape correspondence, not recovery")
         if _has(title, _POSE_ONLY) and not _has(title, _SHAPE_MESH):
@@ -137,6 +144,10 @@ def assess(paper, config=None, track="core"):
             return _result("ignore", "robot-only task, not human-to-robot")
         if not _has(title + " " + abstract, _ROBOT):
             return _result("ignore", "no robot execution or retargeting")
+        if _has(opening[:180], r"\b(navigation|language planning|classification)\b") and not _has(
+            title, r"\b(human|video|mocap)\b"
+        ):
+            return _result("ignore", "primary abstract task is unrelated robotics")
         direct = _has(title, _TRANSFER)
         human = _has(title + " " + opening, _HUMAN_REF)
         execution = _has(title + " " + opening, _EXECUTION)
@@ -162,6 +173,12 @@ def assess(paper, config=None, track="core"):
         if _has(title, r"\b(manipulation transfer|motion transfer)\b") and human and execution:
             return _result("auto", "human demonstration transfer to robot",
                            ["title:motion-transfer", "abstract:human-reference"], 4)
+        if title_robot and _has(title, r"\b(data collection|skill collection)\b") and human and execution:
+            return _result("auto", "human-motion collection for humanoid teleoperation",
+                           ["title:robot-data", "abstract:human-reference"], 4)
+        if _has(title, r"\b(manipulation transfer|motion transfer)\b") and human and execution:
+            return _result("auto", "transfer of human manipulation to a robot",
+                           ["title:transfer", "abstract:human-reference"], 4)
         if title_robot and title_tracker and human and execution:
             return _result("auto", "robot tracking of human motion references",
                            ["title:tracking", "abstract:human-reference"], 4)
