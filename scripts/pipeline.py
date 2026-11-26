@@ -310,25 +310,43 @@ def _automated_pending(previous, batches, papers, embodied, blocked, config, tod
     return ranked[:maximum]
 
 
-def _resolve_ambiguous(batches, config):
-    """One bounded arXiv metadata lookup for ambiguous candidates.
+def _resolve_ambiguous(batches, config, today=None):
+    """Bounded, fair automatic metadata follow-up for inconclusive candidates.
 
-    Other sources were already merged during discovery. This optional pass
-    can add a missing abstract to a DBLP/S2 candidate with an arXiv ID.
+    Split lookup capacity between newly discovered and previously deferred
+    papers; rotate old IDs each week so ambiguous work cannot starve forever.
     """
+    today = today or datetime.date.today()
     limit = int(config.get("discovery", {}).get("ambiguous_lookup_per_run", 24))
-    targets = {}
+    targets, old_ids, new_ids = {}, [], []
     for track in ("embodied", "core"):
-        for p in dedup_records(batches.get(track, [])):
-            if _target(p, track, config)[0] == "pending" and p.get("arxiv_id"):
-                targets.setdefault(p["arxiv_id"], set()).add(track)
-    if not targets:
+        for paper in dedup_records(batches.get(track, [])):
+            if _target(paper, track, config)[0] != "pending":
+                continue
+            identifier = paper.get("arxiv_id")
+            if not identifier:
+                continue
+            if identifier not in targets:
+                targets[identifier] = set()
+                (old_ids if paper.get("first_seen") else new_ids).append(identifier)
+            targets[identifier].add(track)
+    if not targets or limit <= 0:
         return 0
-    identifiers = list(targets)[:limit]
-    extra = harvest.arxiv_by_ids(identifiers)
-    for p in extra:
-        for track in targets.get(p.get("arxiv_id"), ()):
-            batches[track].append(p)
+    if old_ids:
+        shift = today.isocalendar().week % len(old_ids)
+        old_ids = old_ids[shift:] + old_ids[:shift]
+    # At least half the budget can discover *new* evidence; unused slots are
+    # automatically filled by the other side of the backlog.
+    old_quota = limit // 2 if new_ids else limit
+    chosen = old_ids[:old_quota]
+    chosen += new_ids[:limit - len(chosen)]
+    if len(chosen) < limit:
+        chosen += [identifier for identifier in old_ids[old_quota:]
+                   if identifier not in chosen][:limit - len(chosen)]
+    extra = harvest.arxiv_by_ids(chosen)
+    for item in extra:
+        for track in targets.get(item.get("arxiv_id"), ()):
+            batches[track].append(item)
     return len(extra)
 
 
@@ -370,7 +388,8 @@ def run(*, render_only=False, backfill=False, today=None):
     papers = dedup_records(store["papers"])
     if not render_only:
         # First weekly scheduled run of each month expands the scan depth.
-        first_week_of_month = (today - datetime.timedelta(days=7)).month != today.month
+        first_week_of_month = (today.weekday() == 0 and
+                               (today - datetime.timedelta(days=7)).month != today.month)
         mode = "backfill" if backfill or first_week_of_month else "weekly"
         batches = {}
         for track in ("core", "embodied"):
@@ -393,7 +412,7 @@ def run(*, render_only=False, backfill=False, today=None):
             batches["embodied" if any(
                 item.get("arxiv_id") == x.get("arxiv_id") for x in embodied["papers"]
             ) else "core"].append(item)
-        filled = _resolve_ambiguous(batches, config)
+        filled = _resolve_ambiguous(batches, config, today=today)
         papers, embodied, stats = process_candidates(
             papers, embodied, ignored["keys"], batches, config, today
         )
