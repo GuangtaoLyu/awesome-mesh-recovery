@@ -62,7 +62,7 @@ _HUMAN_REF = (
     r"human pose|mocap|motion capture|retargeted human|"
     r"human hand|hand object interaction|egocentric hand)\b"
 )
-_EXECUTION = r"\b(retarget|retargeting|teleoperation|teleoperated|tracking|imitation|imitate|shadowing|robot control)\b"
+_EXECUTION = r"\b(retarget|retargeting|teleoperation|teleoperated|tracking|imitation|imitate|shadowing|robot control|robot policy|manipulation|transfer)\b"
 
 
 def _result(decision, reason, evidence=(), score=0):
@@ -110,6 +110,11 @@ def assess(paper, config=None, track="core"):
                 _has(opening, _ABSTRACT_MAIN)):
             return _result("auto", "human motion capture confirmed by method abstract",
                            ["title:mocap", "abstract:human-3d-motion"], 4)
+        if _has(title, r"\b(hand motion estimation|hand trajectory estimation)\b") and _has(
+            opening, _ABSTRACT_OUTPUT
+        ):
+            return _result("auto", "hand motion estimation with 3D recovered output",
+                           ["title:hand-motion", "abstract:3d-output"], 4)
         title_subject = _has(title, _SUBJECT)
         title_task = _has(title, _RECOVERY)
         abstract_output = _has(opening, _ABSTRACT_OUTPUT)
@@ -149,6 +154,14 @@ def assess(paper, config=None, track="core"):
         if title_robot and title_visual and human and execution:
             return _result("auto", "vision-conditioned robot execution of human motion",
                            ["title:video-and-robot", "abstract:human-motion"], 4)
+        if title_robot and _has(title, r"\b(data collection|skill acquisition)\b") and human and execution and _has(
+            opening, r"\b(retargeting|teleoperation|human demonstrations?|human motion)\b"
+        ):
+            return _result("auto", "human-motion data collection for robot execution",
+                           ["title:robot-data", "abstract:human-teleoperation"], 4)
+        if _has(title, r"\b(manipulation transfer|motion transfer)\b") and human and execution:
+            return _result("auto", "human demonstration transfer to robot",
+                           ["title:motion-transfer", "abstract:human-reference"], 4)
         if title_robot and title_tracker and human and execution:
             return _result("auto", "robot tracking of human motion references",
                            ["title:tracking", "abstract:human-reference"], 4)
