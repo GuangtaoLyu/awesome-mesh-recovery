@@ -188,7 +188,10 @@ def arxiv(query, since_year, limit, *, sort_by="lastUpdatedDate"):
 def dblp(query, since_year, limit):
     data = _dblp_json(query, limit)
     found = []
-    for result in data.get("result", {}).get("hits", {}).get("hit", []):
+    hits = data.get("result", {}).get("hits", {}).get("hit", [])
+    if isinstance(hits, dict):
+        hits = [hits]
+    for result in hits:
         item = result.get("info", {})
         title = _norm_title(item.get("title"))
         raw_year = item.get("year")
