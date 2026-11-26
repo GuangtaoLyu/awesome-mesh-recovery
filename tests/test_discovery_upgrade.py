@@ -46,6 +46,30 @@ class DiscoveryTests(unittest.TestCase):
         self.assertIn("max_results=75", urls[0])
         self.assertIn("max_results=75", urls[1])
 
+    def test_arxiv_pages_beyond_first_75_results(self):
+        def atom(start, count):
+            entries = [
+                '<entry><id>https://arxiv.org/abs/2611.%05d</id>'
+                '<title>Human Mesh Recovery Method %d</title>'
+                '<published>2026-11-20T00:00:00Z</published>'
+                '<updated>2026-11-25T00:00:00Z</updated></entry>' %
+                (start + i + 10000, start + i) for i in range(count)
+            ]
+            return ('<feed xmlns="http://www.w3.org/2005/Atom">' +
+                    ''.join(entries) + '</feed>').encode("utf-8")
+
+        urls = []
+
+        def fake(url):
+            urls.append(url)
+            return atom(0, 75) if "start=0" in url else atom(75, 1)
+
+        with mock.patch.object(harvest, "_arxiv_fetch", side_effect=fake):
+            data = harvest.arxiv("human mesh recovery", 2024, 100)
+        self.assertEqual(len(data), 76)
+        self.assertEqual(len(urls), 2)
+        self.assertIn("start=75", urls[1])
+
     def test_queries_rotate_across_weeks(self):
         seen = []
 
@@ -80,6 +104,50 @@ class EvidenceAndPublishingTests(unittest.TestCase):
              "year": 2025, "arxiv_id": "2505.00001",
              "paper_url": "https://arxiv.org/abs/2505.00001"}],
             "toolkits": []}
+
+    def test_first_monday_backfill_mode(self):
+        self.assertEqual(
+            pipeline.discovery_mode(datetime.date(2026, 11, 30)), "weekly")
+        self.assertEqual(
+            pipeline.discovery_mode(datetime.date(2026, 12, 7)), "backfill")
+        self.assertEqual(
+            pipeline.discovery_mode(datetime.date(2026, 12, 1)), "weekly")
+        self.assertEqual(
+            pipeline.discovery_mode(datetime.date(2026, 11, 26),
+                                    force_backfill=True), "backfill")
+
+    def test_auto_pending_lookups_rotate(self):
+        config = json.loads(json.dumps(CONFIG))
+        config["discovery"]["ambiguous_lookup_per_run"] = 2
+        papers = [{
+            "title": f"Human Reconstruction in Unknown Scenes {i}",
+            "arxiv_id": f"2611.{45000+i:05d}",
+            "first_seen": "2026-11-01", "year": 2026,
+        } for i in range(6)]
+        calls = []
+        with mock.patch.object(
+            pipeline.harvest, "arxiv_by_ids",
+            side_effect=lambda ids: calls.append(tuple(ids)) or []
+        ):
+            pipeline._resolve_ambiguous(
+                {"core": papers, "embodied": []}, config,
+                today=datetime.date(2026, 11, 23))
+            pipeline._resolve_ambiguous(
+                {"core": papers, "embodied": []}, config,
+                today=datetime.date(2026, 11, 30))
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(len(calls[0]), 2)
+        self.assertNotEqual(calls[0], calls[1])
+
+    def test_pending_first_seen_survives_new_source_enrichment(self):
+        old = {"title": "Human Reconstruction in Unknown Scenes",
+               "arxiv_id": "2611.67891", "first_seen": "2026-11-01",
+               "source": "arxiv"}
+        new = {"title": old["title"], "arxiv_id": old["arxiv_id"],
+               "source": "s2", "year": 2026}
+        merged = pipeline.dedup_records([new, old])
+        self.assertEqual(len(merged), 1)
+        self.assertEqual(merged[0]["first_seen"], "2026-11-01")
 
     def test_alpha_sort_never_silently_discards_papers(self):
         papers = [{"title": f"Human Mesh Recovery Method {i:03d}",
