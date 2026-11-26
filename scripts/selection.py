@@ -53,12 +53,12 @@ _ROBOT_ONLY = (
 _TRANSFER = (
     r"\b(human to robot|video to robot|vision to robot|"
     r"human motion retargeting|human motion transfer|"
-    r"from human video|from human demonstrations|"
+    r"from human videos?|from human demonstrations|"
     r"from human references|human robot imitation)\b"
 )
 _ROBOT = r"\b(robot|robots|robotic|humanoid|dexterous|robot hand|retargeting|teleoperation)\b"
 _HUMAN_REF = (
-    r"\b(human motion|human video|human demonstrations?|human references?|"
+    r"\b(human motion|human videos?|human demonstrations?|human references?|"
     r"human pose|mocap|motion capture|retargeted human|"
     r"human hand|hand object interaction|egocentric hand)\b"
 )
@@ -142,7 +142,7 @@ def assess(paper, config=None, track="core"):
         execution = _has(title + " " + opening, _EXECUTION)
         title_transfer = _has(title, r"\b(retarget|retargeting|teleoperation|teleoperated)\b")
         title_robot = _has(title, r"\b(robot|humanoid|dexterous|robotic)\b")
-        title_visual = _has(title, r"\b(video|monocular|visual|vision|rgb|egocentric)\b")
+        title_visual = _has(title, r"\b(videos?|monocular|visual|vision|rgb|egocentric)\b")
         title_tracker = _has(title, r"\b(tracking|imitation|shadowing|mimic|"
                                     r"human references?|human demonstrations?)\b")
         if direct and (human or execution or _has(title, r"\b(human|video|vision)\b")):
