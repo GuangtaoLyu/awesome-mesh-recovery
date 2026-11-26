@@ -13,7 +13,10 @@
       "human shape reconstruction",
       "world-grounded human motion recovery",
       "hand object reconstruction",
-      "human video mesh reconstruction"
+      "human video mesh reconstruction",
+      "monocular human reconstruction",
+      "world grounded human motion",
+      "3d hand and object interaction"
     ],
     "dblp": [
       "human mesh recovery",
@@ -47,8 +50,12 @@
   "default_category": "Full-Body Human Mesh Recovery",
   "discovery": {
     "years_back": 3,
-    "new_core_per_run": 30,
-    "new_embodied_per_run": 15
+    "weekly_query_limit": 75,
+    "backfill_query_limit": 180,
+    "max_new_core_per_run": 100,
+    "max_new_embodied_per_run": 50,
+    "ambiguous_lookup_per_run": 24,
+    "max_pending_candidates": 300
   },
   "selection": {
     "auto_accept_title_phrases": [
@@ -120,7 +127,10 @@
       "visual imitation humanoid",
       "humanoid motion tracking from human",
       "robot hand retargeting from video",
-      "dexterous manipulation human video"
+      "dexterous manipulation human video",
+      "human motion humanoid tracking",
+      "hand to robot retargeting",
+      "video imitation humanoid robot"
     ],
     "dblp": [
       "humanoid retargeting",
