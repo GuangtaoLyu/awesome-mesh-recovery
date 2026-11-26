@@ -16,12 +16,6 @@ def _has(text, regex):
     return bool(re.search(regex, normalize_title(text)))
 
 
-def _phrase(text, terms):
-    norm = " " + normalize_title(text) + " "
-    return any(" " + normalize_title(term) + " " in norm
-               for term in terms if normalize_title(term))
-
-
 _BIOMEDICAL = r"\b(dermis|dermal|fibroblast|collagen|bioprinting|tissue engineering|cell derived|skin graft)\b"
 _APPLICATION = (
     r"\b(anonymization|anonymisation|license plate|face blurring|"
