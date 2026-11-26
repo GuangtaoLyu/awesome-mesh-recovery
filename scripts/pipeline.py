@@ -77,7 +77,8 @@ def enrich(old, new):
     """Backfill metadata without replacing published title/category or curation."""
     merged = dict(old)
     for field in ("arxiv_id", "doi", "year", "authors", "abstract",
-                  "comment", "journal_ref", "submitted_at", "updated_at"):
+                  "comment", "journal_ref", "submitted_at", "updated_at",
+                  "first_seen"):
         if not merged.get(field) and new.get(field):
             merged[field] = new[field]
     if not merged.get("url") and new.get("url"):
