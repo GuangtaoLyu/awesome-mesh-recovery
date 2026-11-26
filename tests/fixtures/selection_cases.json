@@ -1,0 +1,336 @@
+{
+  "description": "Small fixed offline scope check using representative research tasks, including difficult false positives. Not a statistically representative estimate of live search precision/recall.",
+  "version": 1,
+  "cases": [
+    {
+      "label": "core",
+      "title": "SAM 3D Body: Robust Full-Body Human Mesh Recovery",
+      "abstract": "A framework for body mesh reconstruction from monocular observations.",
+      "category": "Full-Body Human Mesh Recovery"
+    },
+    {
+      "label": "core",
+      "title": "Fast-HaMeR: Boosting Hand Mesh Reconstruction using Knowledge Distillation",
+      "abstract": "We propose a faster hand mesh regressor.",
+      "category": "Hand, Face & Expressive Mesh"
+    },
+    {
+      "label": "core",
+      "title": "OnlineHMR: Video-based Online World-Grounded Human Mesh Recovery",
+      "abstract": "We estimate continuous SMPL body mesh motion from video.",
+      "category": "Motion & Temporal Recovery"
+    },
+    {
+      "label": "core",
+      "title": "GVHMR: World-Grounded Human Motion Recovery via Gravity-View Coordinates",
+      "abstract": "We present SMPL human motion recovery in world coordinates.",
+      "category": "Motion & Temporal Recovery"
+    },
+    {
+      "label": "core",
+      "title": "HOSt3R: Keypoint-free Hand-Object 3D Reconstruction from RGB Images",
+      "abstract": "We reconstruct hands and manipulated objects in 3D from ordinary RGB.",
+      "category": "Hand, Face & Expressive Mesh"
+    },
+    {
+      "label": "core",
+      "title": "Scene and Human in One World: Reconstruction in a Feedforward Pass",
+      "abstract": "We introduce a feedforward human mesh recovery framework to reconstruct the scene and human in metric space.",
+      "category": "Full-Body Human Mesh Recovery"
+    },
+    {
+      "label": "core",
+      "title": "PEAR: Pixel-aligned Expressive Human Mesh Recovery",
+      "abstract": "We infer SMPL-X and facial shape parameters from images.",
+      "category": "Hand, Face & Expressive Mesh"
+    },
+    {
+      "label": "core",
+      "title": "Hand Pose and Shape Estimation from Video",
+      "abstract": "We propose a method that estimates 3D MANO hand meshes over time.",
+      "category": "Hand, Face & Expressive Mesh"
+    },
+    {
+      "label": "core",
+      "title": "RAM: Recover Any 3D Human Motion in-the-Wild",
+      "abstract": "We present a method that reconstructs 3D human motion and SMPL trajectories from internet video.",
+      "category": "Occlusion & In-the-Wild Recovery"
+    },
+    {
+      "label": "core",
+      "title": "OpenMoCap: Rethinking Optical Motion Capture under Real-world Occlusion",
+      "abstract": "We propose a motion-capture method for recovering 3D human motion from sparse markers.",
+      "category": "Occlusion & In-the-Wild Recovery"
+    },
+    {
+      "label": "core",
+      "title": "World-Scale Human Motion Reconstruction from Sparse Wearables",
+      "abstract": "We estimate 3D human motion and body position from wearable sensors.",
+      "category": "Motion & Temporal Recovery"
+    },
+    {
+      "label": "core",
+      "title": "Camera-Aware Hand Reconstruction for Egocentric Videos",
+      "abstract": "We recover 3D MANO hand mesh shapes and pose from egocentric RGB video.",
+      "category": "Hand, Face & Expressive Mesh"
+    },
+    {
+      "label": "core",
+      "title": "3D Facial Mesh Recovery in Low-light Scenes",
+      "abstract": "We propose reconstruction of 3D face meshes from imagery.",
+      "category": "Hand, Face & Expressive Mesh"
+    },
+    {
+      "label": "core",
+      "title": "Human Body Reconstruction using SMPL-X and Multi-view Video",
+      "abstract": "We present a pipeline that recovers parametric human mesh and body shape from multiview images.",
+      "category": "Full-Body Human Mesh Recovery"
+    },
+    {
+      "label": "core",
+      "title": "TokenHMR: Advancing Human Mesh Recovery with a Tokenized Pose Representation",
+      "abstract": "We recover SMPL body parameters from in-the-wild imagery.",
+      "category": "Full-Body Human Mesh Recovery"
+    },
+    {
+      "label": "core",
+      "title": "3D Hand-Object Reconstruction with Contact-aware Priors",
+      "abstract": "We reconstruct 3D hand-object pose and contact with MANO supervision.",
+      "category": "Hand, Face & Expressive Mesh"
+    },
+    {
+      "label": "core",
+      "title": "MINT: World-Space Camera and Hand Motion Estimation",
+      "abstract": "We propose a method that reconstructs 3D hand motion and camera trajectories in world coordinates.",
+      "category": "Hand, Face & Expressive Mesh"
+    },
+    {
+      "label": "core",
+      "title": "Multi-Person Human Pose and Shape Estimation via Model Fitting",
+      "abstract": "We optimize a parametric 3D SMPL body mesh for each person.",
+      "category": "Full-Body Human Mesh Recovery"
+    },
+    {
+      "label": "core",
+      "title": "Streaming 3D Human Mesh Reconstruction Under Occlusion",
+      "abstract": "We reconstruct human SMPL-X meshes over time under partial visibility.",
+      "category": "Occlusion & In-the-Wild Recovery"
+    },
+    {
+      "label": "core",
+      "title": "Self-supervised Hand Mesh Recovery from Sparse Observations",
+      "abstract": "We infer hand shape and pose without paired mesh annotations.",
+      "category": "Hand, Face & Expressive Mesh"
+    },
+    {
+      "label": "embodied",
+      "title": "MoViC: Real-Time Humanoid Whole-Body Control from Monocular Video Streams",
+      "abstract": "We recover human motion from live monocular video, retarget it and control humanoid robots."
+    },
+    {
+      "label": "embodied",
+      "title": "VideoMimic: Visual Imitation Enables Contextual Humanoid Control",
+      "abstract": "We reconstruct human motion and scenes from real videos and train humanoid imitation policies."
+    },
+    {
+      "label": "embodied",
+      "title": "Do as I Do: Dexterous Manipulation Data from Everyday Human Videos",
+      "abstract": "We retarget human videos into dexterous robot-hand demonstrations and manipulation policies."
+    },
+    {
+      "label": "embodied",
+      "title": "GMR: General Motion Retargeting",
+      "abstract": "We propose human motion retargeting from SMPL motion to humanoid robot joint trajectories."
+    },
+    {
+      "label": "embodied",
+      "title": "TWIST: Teleoperated Whole-Body Imitation System",
+      "abstract": "We use human motion capture and teleoperation to control a humanoid robot tracker."
+    },
+    {
+      "label": "embodied",
+      "title": "TWIST2: Scalable, Portable, and Holistic Humanoid Data Collection System",
+      "abstract": "We present human-to-robot teleoperation and motion retargeting using a VR headset."
+    },
+    {
+      "label": "embodied",
+      "title": "AdaDexTrack: Adaptive and Generalizable Dexterous Manipulation Tracking",
+      "abstract": "We track retargeted human hand-object motion references on robotic hands."
+    },
+    {
+      "label": "embodied",
+      "title": "DexTrack: Dexterous Manipulation Tracking from Human References",
+      "abstract": "We train a dexterous robot motion tracker based on retargeted human references."
+    },
+    {
+      "label": "embodied",
+      "title": "HumanPlus: Humanoid Shadowing and Imitation from Humans",
+      "abstract": "We map human motion to a humanoid tracking controller for imitation learning."
+    },
+    {
+      "label": "embodied",
+      "title": "Stereo Hand-Object Reconstruction for Human-to-Robot Handover",
+      "abstract": "We use stereo human demonstration videos to reconstruct object and hand trajectories for handover."
+    },
+    {
+      "label": "embodied",
+      "title": "ManipTrans: Dexterous Bimanual Manipulation Transfer via Residual Learning",
+      "abstract": "We transfer hand-object demonstrations from people onto dexterous robot hands using residual control."
+    },
+    {
+      "label": "embodied",
+      "title": "ObjRetarget: Object-Aware Motion Retargeting with Anthropomorphic Arms",
+      "abstract": "We translate human demonstration motion to robot hands with object-centric constraints."
+    },
+    {
+      "label": "embodied",
+      "title": "From Festival Video to the Stage: Whole-Body Dance on a Commercial Humanoid",
+      "abstract": "We reconstruct human dance motion from a monocular video and retarget it for humanoid execution."
+    },
+    {
+      "label": "embodied",
+      "title": "Real-Time Humanoid Motion Tracking from Human MoCap",
+      "abstract": "We train a tracking controller to execute human motion capture references."
+    },
+    {
+      "label": "embodied",
+      "title": "Visual Dexterous Imitation from Egocentric Human Demonstrations",
+      "abstract": "Our method extracts human hand trajectories from egocentric videos and transfers them to robot policies."
+    },
+    {
+      "label": "embodied",
+      "title": "VideoManip: Dexterous Manipulation Policies from RGB Human Videos",
+      "abstract": "We reconstruct 3D hand-object trajectories and retarget human demonstrations for robot manipulation."
+    },
+    {
+      "label": "ignore",
+      "title": "Mesh-guided self-assembly of centimeter-scale cell-derived human dermis",
+      "abstract": "We culture living dermal cells using tissue-engineering meshes."
+    },
+    {
+      "label": "ignore",
+      "title": "Training-Free Anonymization of Driving Data with Promptable Segmentation and 3D Human Mesh Recovery",
+      "abstract": "We anonymize driving imagery and use an off-the-shelf HMR model to locate humans."
+    },
+    {
+      "label": "ignore",
+      "title": "3D Human Pose Estimation = 2D Pose Estimation + Matching",
+      "abstract": "We estimate 3D keypoints using 2D detections."
+    },
+    {
+      "label": "ignore",
+      "title": "KASportsFormer: Kinematic Anatomy Enhanced Transformer for 3D Human Pose Estimation on Short Sports Scene Video",
+      "abstract": "We estimate 3D human joint keypoints for sports."
+    },
+    {
+      "label": "ignore",
+      "title": "EgoRayFormer: Ray-Space Stereo Refinement for Egocentric 3D Human Pose Estimation",
+      "abstract": "We estimate 3D keypoints under cameras but not body mesh shape."
+    },
+    {
+      "label": "ignore",
+      "title": "Posegu: 3D Human Pose Estimation with Novel Human Pose Generator and Unbiased Learning",
+      "abstract": "We train a human pose regressor without body mesh or shape recovery."
+    },
+    {
+      "label": "ignore",
+      "title": "Proprioceptive-visual Correspondence Enables Self-other Distinction in Humanoid Robots",
+      "abstract": "We train a robot to recognize itself using proprioception and video."
+    },
+    {
+      "label": "ignore",
+      "title": "DexForce: Extracting Force-informed Actions from Kinesthetic Demonstrations for Dexterous Manipulation",
+      "abstract": "We derive force-based robot manipulation actions directly from robot joint demonstrations."
+    },
+    {
+      "label": "ignore",
+      "title": "Morphology-Consistent Humanoid Interaction through Robot-Centric Video Synthesis",
+      "abstract": "We render robot-centric synthetic videos for robot behavior."
+    },
+    {
+      "label": "ignore",
+      "title": "Pose Distance Fields for Humanoid Robots",
+      "abstract": "We build pose distance fields for robot control without human motion references."
+    },
+    {
+      "label": "ignore",
+      "title": "Language-Guided Humanoid Navigation in Indoor Environments",
+      "abstract": "We develop an embodied VLA navigation policy."
+    },
+    {
+      "label": "ignore",
+      "title": "Diffusion Policies for In-hand Pen Spinning",
+      "abstract": "We optimize a dexterous robot hand policy from simulator rewards."
+    },
+    {
+      "label": "ignore",
+      "title": "Human Mesh-Guided Scaffold Manufacturing for Tissue Engineering",
+      "abstract": "We use mesh simulations for bioengineered scaffolds."
+    },
+    {
+      "label": "ignore",
+      "title": "Unsupervised Camera Pose Estimation through Human Mesh Recovery",
+      "abstract": "We use pre-trained mesh recovery to calibrate camera poses."
+    },
+    {
+      "label": "ignore",
+      "title": "Interaction with Virtual Objects using Human Pose and Shape Estimation",
+      "abstract": "Our system uses HMR outputs to render virtual objects."
+    },
+    {
+      "label": "ignore",
+      "title": "Dual Mesh Convolutional Networks for Human Shape Correspondence",
+      "abstract": "We match vertices between two 3D human shape meshes."
+    },
+    {
+      "label": "ignore",
+      "title": "Collaborative Human Pose Forecasting for Sports",
+      "abstract": "We predict joint sequences without 3D body reconstruction."
+    },
+    {
+      "label": "ignore",
+      "title": "Text-to-Motion Generation via Diffusion",
+      "abstract": "We generate novel motions from text prompts without reconstructing observed human motion."
+    },
+    {
+      "label": "ignore",
+      "title": "Hand-Object Affordance Classification from RGB Video",
+      "abstract": "We classify manipulated object categories without recovering hand geometry."
+    },
+    {
+      "label": "ignore",
+      "title": "Camera Pose Estimation through Human Mesh Recovery and Scene Alignment",
+      "abstract": "We use off-the-shelf SMPL to estimate camera trajectories."
+    },
+    {
+      "label": "ignore",
+      "title": "Generic Robot Retargeting Mentioned in Related Work",
+      "abstract": "We propose visual-language navigation. Prior work includes human motion retargeting."
+    },
+    {
+      "label": "ignore",
+      "title": "3D Human Pose Estimation for Gesture Recognition",
+      "abstract": "We estimate wrist and finger joint keypoints but no shape or mesh."
+    },
+    {
+      "label": "ignore",
+      "title": "Pose-Based Deepfake Video Detection using 3D Human Mesh Recovery",
+      "abstract": "We apply an existing HMR estimator to classify edited videos."
+    },
+    {
+      "label": "ignore",
+      "title": "Object Pose Estimation for DexHands without Human References",
+      "abstract": "We estimate object pose and grip, using robot proprioception only."
+    },
+    {
+      "label": "defer",
+      "title": "Human Reconstruction in Unknown Scenes",
+      "abstract": ""
+    },
+    {
+      "label": "defer",
+      "title": "Adaptive Humanoid Motion Control without Task Description",
+      "abstract": ""
+    }
+  ]
+}
