@@ -97,12 +97,19 @@ def assess(paper, config=None, track="core"):
         if _has(title, _SHAPE_MESH) and _has(title, _SUBJECT):
             return _result("auto", "explicit mesh/pose-and-shape research task",
                            ["title:mesh-or-shape", "title:human-or-hand"], 5)
-        if _has(title, r"\b(human|body|hand|hand object|face)\b") and _has(
+        if (_has(title, r"\b(hand object|human|body|hand|face)\b") and _has(
             title, r"\b(motion recovery|motion reconstruction|mesh estimation|"
                    r"3d reconstruction|hand object reconstruction)\b"
-        ):
+        )) or (_has(title, r"\bhand object\b") and _has(
+            title, r"\b(3d|4d|mesh|reconstruction)\b"
+        )):
             return _result("auto", "explicit 3D human/hand motion reconstruction",
                            ["title:motion-recovery"], 5)
+        if (_has(title, r"\b(mocap|motion capture)\b") and
+                _has(opening, r"\b(human motion|3d human|3d body)\b") and
+                _has(opening, _ABSTRACT_MAIN)):
+            return _result("auto", "human motion capture confirmed by method abstract",
+                           ["title:mocap", "abstract:human-3d-motion"], 4)
         title_subject = _has(title, _SUBJECT)
         title_task = _has(title, _RECOVERY)
         abstract_output = _has(opening, _ABSTRACT_OUTPUT)
