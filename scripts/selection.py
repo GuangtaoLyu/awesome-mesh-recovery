@@ -1,114 +1,159 @@
 # -*- coding: utf-8 -*-
-"""Conservative automatic topic gate: method relevance, never venue prestige.
+"""Title-first research-task assessment with abstract evidence for borderline work.
 
-An arXiv preprint is eligible just like a conference paper. We use the TITLE
-to establish the main contribution; abstracts can confirm a video-to-robot
-pipeline but must not turn a passing related-work mention into admission.
+The admission decision is independent of conference acceptance or public code.
+"verify" means *automatic metadata enrichment*, never human approval. Low-
+evidence papers remain unpublished and are retried by future broad searches.
 """
 import re
 
 
-def normalize_title(title):
-    return " ".join(re.sub(r"[^a-z0-9]+", " ", (title or "").lower()).split())
+def normalize_title(value):
+    return " ".join(re.sub(r"[^a-z0-9]+", " ", str(value or "").lower()).split())
 
 
-def _has_phrase(text, phrases):
-    normalized = " " + normalize_title(text) + " "
-    return any(
-        " " + normalize_title(p) + " " in normalized
-        for p in phrases if normalize_title(p)
-    )
+def _has(text, regex):
+    return bool(re.search(regex, normalize_title(text)))
 
 
-def _matches(text, pattern):
-    return bool(re.search(pattern, normalize_title(text)))
+def _phrase(text, terms):
+    norm = " " + normalize_title(text) + " "
+    return any(" " + normalize_title(term) + " " in norm
+               for term in terms if normalize_title(term))
 
 
-_BIOMEDICAL = re.compile(
-    r"\b(dermis|dermal|fibroblast|collagen|bioprinting|"
-    r"tissue engineering|cell derived|cartilage|skin graft)\b"
+_BIOMEDICAL = r"\b(dermis|dermal|fibroblast|collagen|bioprinting|tissue engineering|cell derived|skin graft)\b"
+_APPLICATION = (
+    r"\b(anonymization|anonymisation|license plate|face blurring|"
+    r"camera pose estimation|camera network pose estimation|virtual object interaction|"
+    r"interaction with virtual objects|generating multi view action data)\b"
 )
-# HMR may be an off-the-shelf component in another task; that is not a new
-# mesh-recovery method. Privacy-constrained *HMR itself* still qualifies.
-_APPLICATION_ONLY = re.compile(
-    r"\b(anonymization|anonymisation|face blurring|license plate|"
-    r"camera pose estimation|camera network pose estimation|"
-    r"virtual object interaction|interaction with virtual objects|"
-    r"generating multi view action data)\b"
+_POSE_ONLY = r"\b(3d human pose estimation|2d pose estimation|human pose detection)\b"
+_SHAPE_MESH = (
+    r"\b(mesh recovery|mesh reconstruction|pose and shape|shape and pose|"
+    r"shape estimation|human shape recovery|3d hand mesh|smpl parameter|"
+    r"mano parameter|parametric human mesh)\b"
 )
+_SUBJECT = r"\b(human|humans|body|bodies|hand|hands|face|facial|smpl|mano|hmr)\b"
+_RECOVERY = r"\b(recovery|recover|reconstruction|reconstruct|motion capture|mocap)\b"
+_ABSTRACT_OUTPUT = (
+    r"\b(smpl|smpl x|mano|parametric human|parametric body|"
+    r"mesh vertices|human mesh|hand mesh|3d body shape|"
+    r"3d human motion|3d hand motion|world space hand|"
+    r"reconstructed human motion|hand object trajectories)\b"
+)
+_ABSTRACT_MAIN = (
+    r"\b(we propose|we present|we introduce|this paper presents|"
+    r"our method|our framework|we develop|we reconstruct|we estimate)\b"
+)
+_ROBOT_ONLY = (
+    r"\b(self other distinction|kinesthetic demonstrations|"
+    r"robot centric video synthesis|robot navigation|robot morphology optimization)\b"
+)
+_TRANSFER = (
+    r"\b(human to robot|video to robot|vision to robot|"
+    r"human motion retargeting|human motion transfer|"
+    r"from human video|from human demonstrations|"
+    r"from human references|human robot imitation)\b"
+)
+_ROBOT = r"\b(robot|robots|robotic|humanoid|dexterous|robot hand|retargeting|teleoperation)\b"
+_HUMAN_REF = (
+    r"\b(human motion|human video|human demonstrations?|human references?|"
+    r"human pose|mocap|motion capture|retargeted human|"
+    r"human hand|hand object interaction|egocentric hand)\b"
+)
+_EXECUTION = r"\b(retarget|retargeting|teleoperation|teleoperated|tracking|imitation|imitate|shadowing|robot control)\b"
+
+
+def _result(decision, reason, evidence=(), score=0):
+    return {"decision": decision, "reason": reason,
+            "evidence": list(evidence), "score": score}
+
+
+def assess(paper, config=None, track="core"):
+    """Return an interpretable decision, evidence and *ordinal* evidence score.
+
+    The score is not a calibrated statistical probability. Its purpose is to
+    distinguish enough primary-task evidence from a mere keyword mention.
+    """
+    title = normalize_title(paper.get("title"))
+    abstract = normalize_title(paper.get("abstract"))
+    # Only the opening passage supplies positive "main task" evidence. A long
+    # related-work citation late in the abstract should not admit a paper.
+    opening = abstract[:650]
+    if len(title) < 14:
+        return _result("ignore", "missing or implausibly short title")
+
+    if track == "core":
+        if _has(title, _BIOMEDICAL):
+            return _result("ignore", "biomedical mesh, not body pose/shape")
+        if _has(title, _APPLICATION):
+            return _result("ignore", "HMR is an application component")
+        if _has(title, r"\b(shape correspondence|shape matching|point cloud registration)\b"):
+            return _result("ignore", "shape correspondence, not recovery")
+        if _has(title, _POSE_ONLY) and not _has(title, _SHAPE_MESH):
+            # A standalone 3D pose estimator is not a mesh/shape estimator.
+            return _result("ignore", "pose-only estimation")
+        if _has(title, _SHAPE_MESH) and _has(title, _SUBJECT):
+            return _result("auto", "explicit mesh/pose-and-shape research task",
+                           ["title:mesh-or-shape", "title:human-or-hand"], 5)
+        if _has(title, r"\b(human|body|hand|hand object|face)\b") and _has(
+            title, r"\b(motion recovery|motion reconstruction|mesh estimation|"
+                   r"3d reconstruction|hand object reconstruction)\b"
+        ):
+            return _result("auto", "explicit 3D human/hand motion reconstruction",
+                           ["title:motion-recovery"], 5)
+        title_subject = _has(title, _SUBJECT)
+        title_task = _has(title, _RECOVERY)
+        abstract_output = _has(opening, _ABSTRACT_OUTPUT)
+        abstract_claim = _has(opening, _ABSTRACT_MAIN)
+        if title_subject and title_task and abstract_output:
+            return _result("auto", "recovery title confirmed by 3D output",
+                           ["title:subject-and-recovery", "abstract:3d-output"], 4)
+        if (title_subject and (title_task or _has(title, r"\b(pose|mesh|shape)\b"))):
+            return _result("verify", "recovery task lacks specific shape/3D evidence",
+                           ["title:plausible-recovery"], 2)
+        if abstract_output and abstract_claim and _has(
+            title, r"\b(hmr|smpl|reconstruction|human|hand|body)\b"
+        ):
+            return _result("verify", "abstract suggests recovery but title is broad",
+                           ["abstract:task-evidence"], 2)
+        return _result("ignore", "not primarily human/hand recovery")
+
+    if track == "embodied":
+        if _has(title, _ROBOT_ONLY):
+            return _result("ignore", "robot-only task, not human-to-robot")
+        if not _has(title + " " + abstract, _ROBOT):
+            return _result("ignore", "no robot execution or retargeting")
+        direct = _has(title, _TRANSFER)
+        human = _has(title + " " + opening, _HUMAN_REF)
+        execution = _has(title + " " + opening, _EXECUTION)
+        title_transfer = _has(title, r"\b(retarget|retargeting|teleoperation|teleoperated)\b")
+        title_robot = _has(title, r"\b(robot|humanoid|dexterous|robotic)\b")
+        title_visual = _has(title, r"\b(video|monocular|visual|vision|rgb|egocentric)\b")
+        title_tracker = _has(title, r"\b(tracking|imitation|shadowing|mimic|"
+                                    r"human references?|human demonstrations?)\b")
+        if direct and (human or execution or _has(title, r"\b(human|video|vision)\b")):
+            return _result("auto", "explicit human/video-to-robot in title",
+                           ["title:transfer", "human:reference"], 5)
+        if title_transfer and human and execution:
+            return _result("auto", "retargeting/teleoperation of human motion",
+                           ["title:transfer", "abstract:human-reference"], 5)
+        if title_robot and title_visual and human and execution:
+            return _result("auto", "vision-conditioned robot execution of human motion",
+                           ["title:video-and-robot", "abstract:human-motion"], 4)
+        if title_robot and title_tracker and human and execution:
+            return _result("auto", "robot tracking of human motion references",
+                           ["title:tracking", "abstract:human-reference"], 4)
+        if title_transfer or (title_robot and (title_visual or title_tracker)):
+            return _result("verify", "robotics title, human reference not yet established",
+                           ["title:possible-robot-bridge"], 2)
+        return _result("ignore", "no primary human-motion-to-robot pipeline")
+
+    raise ValueError(f"Unknown research track: {track}")
 
 
 def decide(paper, config, track="core"):
-    """Return (auto | ignore, reason); no acceptance or manual-review gate."""
-    title = paper.get("title") or ""
-    abstract = paper.get("abstract") or ""
-    norm = normalize_title(title)
-    if len(norm) < 14:
-        return "ignore", "missing or implausibly short title"
-
-    if track == "core":
-        if _BIOMEDICAL.search(norm):
-            return "ignore", "biomedical mesh is not a human pose/shape model"
-        if _APPLICATION_ONLY.search(norm):
-            return "ignore", "uses mesh recovery for another primary task"
-        if _has_phrase(title, config["selection"]["auto_accept_title_phrases"]):
-            return "auto", "specific mesh or motion recovery title"
-        # For newer terminology such as scene-human reconstruction, require
-        # an actual *reconstruction/recovery* task in the title. The word
-        # "mesh" by itself is not sufficient: a tissue-engineering mesh is
-        # not a recovered human body surface.
-        subject = _matches(title, r"\b(human|body|hand|hands|face|smpl|mano)\b")
-        reconstruction = _matches(
-            title, r"\b(recovery|reconstruction|reconstruct|"
-                   r"pose and shape|shape estimation|motion capture)\b"
-        )
-        if subject and reconstruction:
-            return "auto", "human/hand reconstruction title pattern"
-        return "ignore", "outside human/hand recovery primary contributions"
-
-    if track == "embodied":
-        combined = title + " " + abstract
-        # These tasks can mention retargeting as an application/background
-        # without recovering any human motion or using human demonstrations.
-        if _matches(
-            title, r"\b(self other distinction|kinesthetic demonstrations|"
-                   r"robot centric video synthesis)\b"
-        ):
-            return "ignore", "robotics method without human-video recovery bridge"
-        robot = _matches(
-            combined, r"\b(robot|robots|robotic|humanoid|dexterous|"
-                      r"retargeting|teleoperation)\b"
-        )
-        human = _matches(
-            combined, r"\b(human|hand|hands|body|video|monocular|"
-                      r"egocentric|mocap|motion|demonstration)\b"
-        )
-        if not robot or not human:
-            return "ignore", "no grounded human-to-robot connection"
-
-        title_robot = _matches(title, r"\b(robot|robots|robotic|humanoid|dexterous)\b")
-        direct_transfer = _matches(
-            title, r"\b(human to robot|video to robot|vision to robot|"
-                   r"robot from human|human video|human motion retargeting)\b"
-        )
-        transfer = _matches(title, r"\b(retarget|retargeting|teleoperation|"
-                                  r"teleoperated|human imitation|visual imitation)\b")
-        video_robot = title_robot and _matches(
-            title, r"\b(video|monocular|egocentric|rgb|vision)\b"
-        ) and _matches(
-            combined, r"\b(human motion|human video|human demonstration|"
-                          r"human pose|human body|video to robot|"
-                          r"motion retargeting|imitation)\b"
-        )
-        imitation_tracking = title_robot and _matches(
-            title, r"\b(imitation|mimic|human references|"
-                   r"human demonstration|motion tracking)\b"
-        ) and _matches(
-            combined, r"\b(human|mocap|retargeted|video|demonstration)\b"
-        )
-
-        if direct_transfer or transfer or video_robot or imitation_tracking:
-            return "auto", "explicit human motion to robot pipeline"
-        return "ignore", "robotics/background match without primary recovery bridge"
-
-    raise ValueError(f"Unknown discovery track: {track}")
+    """Compatibility interface used by the existing pipeline/tests."""
+    result = assess(paper, config, track)
+    return result["decision"], result["reason"]
