@@ -378,6 +378,49 @@ def discovery_mode(today, *, force_backfill=False):
     return "weekly"
 
 
+def _report_provider_health(reports, blocked):
+    """Make partial provider failures visible in GitHub Actions job summaries."""
+    labels = {"arxiv": "arXiv", "crossref": "Crossref",
+              "dblp": "DBLP", "s2": "Semantic Scholar"}
+    lines = ["### Publication-source health",
+             "",
+             "| Provider | Successful queries | Results | Status |",
+             "| --- | ---: | ---: | --- |"]
+    for provider, label in labels.items():
+        successes = sum(
+            item["per_source"].get(provider, {}).get("succeeded", 0)
+            for item in reports
+        )
+        results = sum(
+            item["per_source"].get(provider, {}).get("results", 0)
+            for item in reports
+        )
+        if provider in blocked:
+            reason = blocked[provider]
+            state = f"Degraded: {reason}"
+            print(f"[source-health] {label}: DEGRADED ({reason}); "
+                  f"{successes} successful queries, {results} records")
+            # At most one warning per source, not a warning for every query.
+            safe = reason.replace("\n", " ")[:180]
+            print(f"::warning title={label} source degraded::{safe}")
+        else:
+            state = "OK" if successes else "Not queried"
+            print(f"[source-health] {label}: {state}; {successes} queries, "
+                  f"{results} records")
+        lines.append(f"| {label} | {successes} | {results} | {state} |")
+    lines += [
+        "",
+        "Optional sources may be throttled. arXiv and Crossref remain the "
+        "primary discovery providers; an optional-source outage does not "
+        "erase the current bibliography.",
+        "",
+    ]
+    destination = os.environ.get("GITHUB_STEP_SUMMARY")
+    if destination:
+        with open(destination, "a", encoding="utf-8") as file:
+            file.write("\n".join(lines) + "\n")
+
+
 def run(*, render_only=False, backfill=False, today=None):
     today = today or datetime.date.today()
     config = load_json(str(CONFIG), {})
@@ -400,14 +443,20 @@ def run(*, render_only=False, backfill=False, today=None):
     if not render_only:
         mode = discovery_mode(today, force_backfill=backfill)
         batches = {}
+        source_health, source_reports = {}, []
         for track in ("core", "embodied"):
-            candidates, status = harvest.harvest(config, track=track, today=today, mode=mode)
+            candidates, status = harvest.harvest(
+                config, track=track, today=today, mode=mode,
+                health=source_health
+            )
             batches[track] = candidates
+            source_reports.append(status)
             print(f"[discover:{track}] {mode}: {status['succeeded']}/"
                   f"{status['attempted']} requests succeeded, "
                   f"{status['nonempty']} nonempty; {len(candidates)} raw papers")
             if status["failures"]:
                 print(f"[discover:{track}] {len(status['failures'])} failed requests")
+        _report_provider_health(source_reports, source_health)
         # A pending entry is a *machine-only* recheck target, never a
         # requirement for someone to review or click Approve.
         for item in pending_store["candidates"]:

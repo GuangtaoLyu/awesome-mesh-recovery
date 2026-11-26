@@ -7,6 +7,7 @@ as a successful update. Each query is retried and bounded; no paid APIs.
 """
 import datetime
 import json
+import os
 import re
 import time
 import urllib.error
@@ -18,21 +19,90 @@ ATOM = {"a": "http://www.w3.org/2005/Atom",
         "arxiv": "http://arxiv.org/schemas/atom"}
 
 
+class BadSourceResponse(RuntimeError):
+    """Provider served a challenge/error page or malformed structured data."""
+
+
+def _json_response(body, provider):
+    """Explicitly recognize 200/HTML bot challenges instead of generic JSON errors."""
+    stripped = body.lstrip()
+    if not stripped or stripped[:1] not in (b"{", b"["):
+        kind = "HTML/challenge page" if stripped.startswith((b"<", b"<!")) else "empty/non-JSON response"
+        raise BadSourceResponse(f"{provider}: {kind} instead of JSON")
+    try:
+        parsed = json.loads(stripped)
+    except (UnicodeDecodeError, json.JSONDecodeError) as ex:
+        raise BadSourceResponse(f"{provider}: invalid JSON payload") from ex
+    if not isinstance(parsed, dict):
+        raise BadSourceResponse(f"{provider}: unexpected JSON document type")
+    return parsed
+
+
+# dblp recommends pausing between requests to avoid temporary blocking.
+_last_dblp_request = 0.0
+
+
+def _dblp_json(query, limit):
+    """Try canonical dblp and one official mirror, not an arbitrary proxy.
+
+    A genuine 429/403 is a request to stop; do not use mirrors to evade a
+    provider's explicit throttling/access restrictions.
+    """
+    global _last_dblp_request
+    failures = []
+    for host in ("https://dblp.org", "https://dblp.dagstuhl.de"):
+        url = _param(host + "/search/publ/api", q=query, format="json", h=limit)
+        elapsed = time.monotonic() - _last_dblp_request
+        if _last_dblp_request and elapsed < 2.0:
+            time.sleep(2.0 - elapsed)
+        _last_dblp_request = time.monotonic()
+        try:
+            obj = _json_response(_get(url, retries=0, timeout=12), "dblp")
+            if "result" not in obj:
+                raise BadSourceResponse("dblp: JSON did not contain search results")
+            return obj
+        except urllib.error.HTTPError as ex:
+            if ex.code in (401, 403, 429):
+                raise
+            failures.append(f"{host}: HTTP {ex.code}")
+        except (BadSourceResponse, urllib.error.URLError, TimeoutError) as ex:
+            failures.append(f"{host}: {type(ex).__name__}: {ex}")
+    raise BadSourceResponse("dblp could not return valid JSON from its official hosts: " +
+                            "; ".join(failures))
+
+
+
 def _get(url, *, retries=2, timeout=20):
-    req = urllib.request.Request(
-        url, headers={"User-Agent": "awesome-mesh-recovery/2.0 (GitHub literature index)"}
-    )
+    headers = {"User-Agent": "awesome-mesh-recovery/3.1 (GitHub paper index)",
+               "Accept": "application/json, application/atom+xml, */*"}
+    if "api.semanticscholar.org" in url:
+        key = os.environ.get("SEMANTIC_SCHOLAR_API_KEY", "").strip()
+        if key:
+            headers["x-api-key"] = key
+    req = urllib.request.Request(url, headers=headers)
     for attempt in range(retries + 1):
         try:
             with urllib.request.urlopen(req, timeout=timeout) as response:
                 return response.read()
         except urllib.error.HTTPError as error:
+            # Shared unauthenticated Semantic Scholar quota is often saturated.
+            # A 429 should stop this run, not trigger 13 more queries.
+            if error.code in (401, 403, 429) and "api.semanticscholar.org" in url:
+                raise
             if error.code not in (429, 500, 502, 503, 504) or attempt == retries:
                 raise
+            delay = min(12, 2 * (attempt + 1))
+            if error.code == 429:
+                try:
+                    delay = min(12, max(delay, int(error.headers.get("Retry-After", "0"))))
+                except (TypeError, ValueError):
+                    pass
+            time.sleep(delay)
         except (urllib.error.URLError, TimeoutError):
             if attempt == retries:
                 raise
-        time.sleep(2 * (attempt + 1))
+            time.sleep(2 * (attempt + 1))
+
 
 
 def _norm_title(text):
@@ -116,10 +186,12 @@ def arxiv(query, since_year, limit, *, sort_by="lastUpdatedDate"):
 
 
 def dblp(query, since_year, limit):
-    url = _param("https://dblp.org/search/publ/api", q=query, format="json", h=limit)
-    data = json.loads(_get(url))
+    data = _dblp_json(query, limit)
     found = []
-    for result in data.get("result", {}).get("hits", {}).get("hit", []):
+    hits = data.get("result", {}).get("hits", {}).get("hit", [])
+    if isinstance(hits, dict):
+        hits = [hits]
+    for result in hits:
         item = result.get("info", {})
         title = _norm_title(item.get("title"))
         raw_year = item.get("year")
@@ -148,7 +220,7 @@ def semantic_scholar(query, since_year, limit):
         query=query, fields="title,authors,year,venue,externalIds,url,abstract",
         limit=min(limit, 100),
     )
-    data = json.loads(_get(url))
+    data = _json_response(_get(url, retries=0), "s2")
     found = []
     for item in data.get("data", []):
         title = _norm_title(item.get("title"))
@@ -183,7 +255,7 @@ def crossref(query, since_year, limit):
             "rows": limit,
         },
     )
-    data = json.loads(_get(url))
+    data = _json_response(_get(url), "crossref")
     found = []
     for item in data.get("message", {}).get("items", []):
         titles = item.get("title") or []
@@ -219,11 +291,11 @@ SOURCES = {
 }
 
 
-def harvest(config, *, track="core", today=None, mode="weekly"):
-    """Return candidates and diagnostics, using rotating balanced source scans.
+def harvest(config, *, track="core", today=None, mode="weekly", health=None):
+    """Search sources independently; stop querying providers that throttle/block.
 
-    A larger monthly backfill avoids weekly search-rank truncation. Source
-    failures do not block other sources; a complete core outage fails safely.
+    health is shared by core + embodied scans in the same process so a provider
+    that returned 429 or an HTML challenge is not hammered by the other track.
     """
     if mode not in ("weekly", "backfill"):
         raise ValueError(f"Unsupported discovery mode: {mode}")
@@ -236,19 +308,26 @@ def harvest(config, *, track="core", today=None, mode="weekly"):
         "backfill_query_limit" if mode == "backfill" else "weekly_query_limit",
         180 if mode == "backfill" else 75,
     ))
+    health = {} if health is None else health
     found = []
     status = {"track": track, "mode": mode, "attempted": 0,
               "succeeded": 0, "nonempty": 0, "failures": [],
-              "per_source": {}}
+              "per_source": {}, "skipped": {}}
     for name, handler in SOURCES.items():
         queries = list(dict.fromkeys(query_map.get(name, [])))
         if not queries:
             continue
-        # Do not systematically starve the last query if an API is rate limited.
+        info = status["per_source"].setdefault(
+            name, {"attempted": 0, "succeeded": 0, "results": 0}
+        )
+        if name in health:
+            status["skipped"][name] = len(queries)
+            continue
         shift = today.isocalendar().week % len(queries)
         queries = queries[shift:] + queries[:shift]
-        for query in queries:
+        for position, query in enumerate(queries):
             status["attempted"] += 1
+            info["attempted"] += 1
             try:
                 if name == "arxiv" and handler is arxiv:
                     items = arxiv(
@@ -259,15 +338,28 @@ def harvest(config, *, track="core", today=None, mode="weekly"):
                     items = handler(query, since_year, min(limit, 100))
                 found.extend(items)
                 status["succeeded"] += 1
+                info["succeeded"] += 1
+                info["results"] += len(items)
                 if items:
                     status["nonempty"] += 1
-                info = status["per_source"].setdefault(name, {"queries": 0, "results": 0})
-                info["queries"] += 1
-                info["results"] += len(items)
             except Exception as ex:
-                msg = f"{name}: {query}: {type(ex).__name__}: {ex}"
-                status["failures"].append(msg)
-                print(f"[harvest] WARNING {msg}")
+                message = f"{name}: {query}: {type(ex).__name__}: {ex}"
+                status["failures"].append(message)
+                print(f"[harvest] WARNING {message}")
+                blocked = (
+                    isinstance(ex, BadSourceResponse) or
+                    isinstance(ex, urllib.error.HTTPError) and ex.code in (401, 403, 429)
+                )
+                if blocked:
+                    reason = (
+                        f"HTTP {ex.code}" if isinstance(ex, urllib.error.HTTPError)
+                        else str(ex)
+                    )
+                    health[name] = reason
+                    status["skipped"][name] = len(queries) - position - 1
+                    print(f"[harvest] {name} is unavailable ({reason}); "
+                          "skipping remaining requests this run")
+                    break
     if track == "core" and not status["nonempty"]:
         raise RuntimeError("All core discovery requests failed or returned no papers")
     return found, status
